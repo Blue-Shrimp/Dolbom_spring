@@ -1,0 +1,131 @@
+	*{
+      box-sizing: border-box;
+   }
+   body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, form, fieldset , button, pre {
+       margin: 0;
+       padding: 0;
+       font-size: 14px;
+       color: #111;
+       font-family: 'Noto Sans KR';
+       font-weight: 400;
+   }
+	.wrap {
+	    width: 100%;
+	}
+	.login {
+	    overflow: hidden;
+	    position: relative;
+	    background-color: #f1f1f1;
+	    min-height: 937px;
+	}
+	.login-content {
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    z-index: 1;
+	    width: 1140px;
+	    margin: -393px 0 0 -570px;
+	}
+	.login h1 {
+	    overflow: hidden;
+	    margin-bottom: 40px;
+	}
+	.login h1 img {
+	    float: right;
+	}
+	.login-alert-text {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    color: #333;
+	    font-size: 17px;
+	    font-weight: 500;
+	}
+	.login-alert-text strong {
+	    padding-left: 27px;
+	    color: #df3030;
+	    font-weight: 700;
+	    
+	}
+	.login-content-inner {
+	    overflow: hidden;
+	    margin: 24px 0 36px;
+	    border-radius: 9px;
+	    box-shadow: 1px 1px 14px -10px #000;
+	}
+	.login-content-inner .left-section {
+	    float: left;
+	    width: 430px;
+	    height: 580px;
+	    padding: 52px 0 0 48px;
+	    
+	}
+	.login-content-inner h2 {
+	    color: #fff;
+	    font-size: 41px;
+	    font-weight: 300;
+	    line-height: 52px;
+	}
+	.login-content-inner h2 strong {
+	    font-weight: 700;
+	}
+	.login-content-inner .left-section p {
+	    margin-top: 25px;
+	    color: #fff;
+	    line-height: 25px;
+	}
+	.login-content-inner .right-section {
+	    float: right;
+	    position: relative;
+	    width: 710px;
+	    height: 580px;
+	    padding: 15px 105px;
+	    background-color: #fff;
+	}
+	.login-info-desc {
+	    position: absolute;
+	    top: 30px;
+	    left: 50%;
+	    min-width: 604px;
+	    padding: 10px 0 15px;
+	    border-radius: 20px;
+	    font-size: 24px;
+	    font-weight: 500;
+	    text-align: center;
+	    background-color: #f3f6f9;
+	    transform: translateX(-50%);
+	}
+	.login-info-desc strong {
+	    color: #df3030;
+	    font-weight: bold;
+	}
+	.login-content-inner .right-section .certificate-login {
+	    margin-top: 200px;
+	}
+	.login-content-inner .right-section .loginForm {
+	    background-color: #fff;
+	}
+	.login-content-inner .right-section .loginForm li {
+	    list-style: none;
+	    margin-bottom: 8px;
+	    text-align: center;
+	}
+	.login-content-inner .right-section .loginForm li input {
+	    width : 500px;
+	    height: 50px;
+	}
+	.login-content-inner .right-section .loginForm li button {
+	    width : 500px;
+	    height: 50px;
+	    border-color: #1c5a94;
+	    color: #fff;
+	    background-color: #1c5a94;
+	    font-size: 16px;
+	    font-weight: bold;
+	    cursor: pointer;
+	}
+	.login-content-inner .right-section .loginForm li a {
+	    color: #777;
+    	text-decoration: none;
+    	padding-right:10px;
+	}
