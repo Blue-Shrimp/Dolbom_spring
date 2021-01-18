@@ -42,7 +42,7 @@
 										</li>
 										<li>
 											<c:if test="${msg == false }">
-												<div style="color:#f00">아이디 혹은 비밀번호가 틀렸습니다.</div>
+												<div style="color:#f00">아이디 혹은 비밀번호가 틀렸습니다!</div>
 											</c:if>
 										</li>
 										<li>
