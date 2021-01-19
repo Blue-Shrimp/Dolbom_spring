@@ -49,8 +49,8 @@
 											<button type="button" id="btnLogin">로그인</button>
 										</li>
 										<li>
-											<a href="#"><span>아이디 찾기</span></a>
-											<a href="#"><span>패스워드 찾기</span></a>
+											<a href="login/findId"><span>아이디 찾기</span></a>
+											<a href="login/findPass"><span>패스워드 찾기</span></a>
 											<a href="join/join"><span>회원가입</span></a>
 										</li>
 									</ul>

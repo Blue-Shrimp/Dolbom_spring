@@ -42,5 +42,15 @@ public class LoginController {
 		
 		return result;
 	}
+	
+	@RequestMapping(value="/login/findId", method=RequestMethod.GET)
+	public String findId() {
+		return "login/findId";
+	}
+	
+	@RequestMapping(value="/login/findPass", method=RequestMethod.GET)
+	public String findPass() {
+		return "login/findPass";
+	}
 
 }

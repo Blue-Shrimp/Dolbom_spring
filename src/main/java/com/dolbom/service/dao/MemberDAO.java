@@ -88,6 +88,27 @@ public class MemberDAO implements MemberService {
 		
 		return svo;
 	}
+	@Override
+	/*아이디 중복 체크 */
+	public int getIdCheck(String did) throws ClassNotFoundException, SQLException {
+		int result = 0;
+		String sql ="select count(*) from dmember where did=?";
+		
+		Connection con = dataSource.getConnection();
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, did);
+		ResultSet rs = st.executeQuery();
+		
+		while(rs.next()) {
+			result = rs.getInt(1);
+		}
+		
+		rs.close();
+		st.close();
+		con.close();
+		
+		return result;
+	}
 	
 	@Override
 	/* 회원 상세 정보 */
