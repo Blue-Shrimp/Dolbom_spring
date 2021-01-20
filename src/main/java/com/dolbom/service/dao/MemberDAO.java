@@ -49,15 +49,26 @@ public class MemberDAO implements MemberService {
 	@Override
 	/* 회원가입 */
 	public boolean insertMember(MemberVO vo) throws ClassNotFoundException, SQLException  {
-		String sql = "";
+		String sql = "insert into dmember values(?,?,?,?,?,?,?,sysdate)";
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement st = con.prepareStatement(sql);
-		ResultSet rs = st.executeQuery();
+		st.setString(1, vo.getDid());
+		st.setString(2, vo.getDpass());
+		st.setString(3, vo.getDname());
+		st.setString(4, vo.getDphone());
+		st.setString(5, vo.getDemail());
+		st.setString(6, vo.getDarea());
+		st.setString(7, vo.getDchildren());
 		
 		boolean result = false;
 		
-		rs.close();
+		int val = st.executeUpdate();
+		
+		if(val != 0) {
+			result = true;
+		}
+		
 		st.close();
 		con.close();
 		
@@ -108,6 +119,53 @@ public class MemberDAO implements MemberService {
 		con.close();
 		
 		return result;
+	}
+	
+	@Override
+	/*아이디 찾기 */
+	public String getFindId(MemberVO vo) throws ClassNotFoundException, SQLException {
+		String id = "";
+		String sql ="select did from dmember where dname=? and dphone=?";
+		
+		Connection con = dataSource.getConnection();
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, vo.getDname());
+		st.setString(2, vo.getDphone());
+		ResultSet rs = st.executeQuery();
+		
+		while(rs.next()) {
+			id = rs.getString(1);
+		}
+		
+		rs.close();
+		st.close();
+		con.close();
+		
+		return id;
+	}
+	
+	@Override
+	/*비밀번호 찾기 */
+	public String getFindPass(MemberVO vo) throws ClassNotFoundException, SQLException {
+		String id = "";
+		String sql ="select dpass from dmember where did=? and dname=? and dphone=?";
+		
+		Connection con = dataSource.getConnection();
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, vo.getDid());
+		st.setString(2, vo.getDname());
+		st.setString(3, vo.getDphone());
+		ResultSet rs = st.executeQuery();
+		
+		while(rs.next()) {
+			id = rs.getString(1);
+		}
+		
+		rs.close();
+		st.close();
+		con.close();
+		
+		return id;
 	}
 	
 	@Override

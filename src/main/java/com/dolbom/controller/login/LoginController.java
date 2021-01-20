@@ -33,8 +33,13 @@ public class LoginController {
 		String result = "";
 		
 		if(svo.getResult() != 0) {
-			session.setAttribute("svo", svo);
-			result = "redirect:/index";
+			if(vo.getDid().equals("admin")) {
+				session.setAttribute("svo", svo);
+				result = "redirect:/admin/index";	
+			} else {
+				session.setAttribute("svo", svo);
+				result = "redirect:/index";				
+			}
 		}else {
 			rttr.addFlashAttribute("msg", false);
 			result = "redirect:/login";
@@ -48,9 +53,51 @@ public class LoginController {
 		return "login/findId";
 	}
 	
+	@RequestMapping(value="/login/findId_proc.do", method=RequestMethod.POST)
+	public String findId_proc(MemberVO vo, Model model, RedirectAttributes rttr, HttpSession session) throws ClassNotFoundException, SQLException {
+		String id = memberService.getFindId(vo);
+		String result = "";
+		
+		if(id.equals("")) {
+			rttr.addFlashAttribute("msg", true);
+			result = "redirect:/login/findId";				
+		}else {
+			model.addAttribute("id", id);
+			result = "login/findId_success";
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value="/login/findId_success", method=RequestMethod.GET)
+	public String findId_success() {
+		return "login/findId_success";
+	}
+	
 	@RequestMapping(value="/login/findPass", method=RequestMethod.GET)
 	public String findPass() {
 		return "login/findPass";
+	}
+	
+	@RequestMapping(value="/login/findPass_proc.do", method=RequestMethod.POST)
+	public String findPass_proc(MemberVO vo, Model model, RedirectAttributes rttr, HttpSession session) throws ClassNotFoundException, SQLException {
+		String pass = memberService.getFindPass(vo);
+		String result = "";
+		
+		if(pass.equals("")) {
+			rttr.addFlashAttribute("msg", true);
+			result = "redirect:/login/findPass";				
+		}else {
+			model.addAttribute("pass", pass);
+			result = "login/findPass_success";
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value="/login/findPass_success", method=RequestMethod.GET)
+	public String findPass_success() {
+		return "login/findPass_success";
 	}
 
 }

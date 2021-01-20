@@ -7,9 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>돌봄 신청 시스템</title>
+<link rel="shortcut icon" type="image/png" href="images/favicon.png">
 <link rel="stylesheet" href="css/login.css">
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/login.js"></script>
+<script>
+	if("${msg}"){
+		alert("회원가입이 완료되었습니다.");	
+	}
+</script>
 </head>
 <body>
 	<div class="wrap">
@@ -50,7 +56,7 @@
 										</li>
 										<li>
 											<a href="login/findId"><span>아이디 찾기</span></a>
-											<a href="login/findPass"><span>패스워드 찾기</span></a>
+											<a href="login/findPass"><span>비밀번호 찾기</span></a>
 											<a href="join/join"><span>회원가입</span></a>
 										</li>
 									</ul>
