@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
-<link rel="shortcut icon" type="image/png" href="../images/favicon.png">
 <link rel="stylesheet" href="../css/find.css">
 <script src="../js/jquery-3.5.1.min.js"></script>
 <script src="../js/find.js"></script>

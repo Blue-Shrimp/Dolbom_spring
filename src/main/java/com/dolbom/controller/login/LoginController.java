@@ -48,6 +48,23 @@ public class LoginController {
 		return result;
 	}
 	
+	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
+	public String logout(HttpSession session, RedirectAttributes rttr) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		String result = "";
+		
+		if(svo != null) {
+			session.invalidate();
+			rttr.addFlashAttribute("msg2", true);
+			result = "redirect:/login";
+		}else {
+			rttr.addFlashAttribute("msg1", true);
+			result = "redirect:/index";
+		}
+		
+		return result;
+	}
+	
 	@RequestMapping(value="/login/findId", method=RequestMethod.GET)
 	public String findId() {
 		return "login/findId";

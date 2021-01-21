@@ -1,22 +1,22 @@
-package com.dolbom.controller.facility;
+package com.dolbom.controller.mypage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.dolbom.service.FacilityService;
+import com.dolbom.service.MemberService;
 
 @Controller
-@RequestMapping("/customer/facility/")
-public class FacilityController {
+@RequestMapping("/customer/mypage/")
+public class MypageController {
 	
 	@Autowired
-	private FacilityService facilityService;
+	private MemberService memberService;
 	
-	@RequestMapping(value="list", method=RequestMethod.GET)
+	@RequestMapping(value="detail", method=RequestMethod.GET)
 	public String list() {
-		return "customer/facility/list";
+		return "customer/myapply/detail";
 	}
 
 }

@@ -7,13 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>돌봄 신청 시스템</title>
-<link rel="shortcut icon" type="image/png" href="images/favicon.png">
 <link rel="stylesheet" href="css/login.css">
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/login.js"></script>
 <script>
-	if("${msg}"){
+	if("${msg1}"){
 		alert("회원가입이 완료되었습니다.");	
+	} else if("${msg2}"){
+		alert("로그아웃 되었습니다.");	
 	}
 </script>
 </head>

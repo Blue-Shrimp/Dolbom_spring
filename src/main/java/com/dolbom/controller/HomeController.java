@@ -20,10 +20,12 @@ public class HomeController {
 	
 	@RequestMapping("index")
 	public String index(Model model) throws ClassNotFoundException, SQLException {
-		ArrayList<MemberVO> list = indexService.getList();
-		model.addAttribute("list", list);
-		
 		return "index";
+	}
+	
+	@RequestMapping("customer/service/introduce")
+	public String introduce() {
+		return "customer/service/introduce";
 	}
 
 	//@Override

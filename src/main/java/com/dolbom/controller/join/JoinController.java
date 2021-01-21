@@ -39,7 +39,7 @@ public class JoinController {
 		String result = "";
 		
 		if(join_result) {
-			rttr.addFlashAttribute("msg", true);
+			rttr.addFlashAttribute("msg1", true);
 			result = "redirect:/login";
 		} else {
 			rttr.addFlashAttribute("msg", true);

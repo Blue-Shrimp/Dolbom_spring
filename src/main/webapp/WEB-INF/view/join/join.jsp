@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<link rel="shortcut icon" type="image/png" href="../images/favicon.png">
 <link rel="stylesheet" href="../css/join.css">
 <script src="../js/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
