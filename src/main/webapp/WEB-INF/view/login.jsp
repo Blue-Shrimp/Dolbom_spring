@@ -22,7 +22,7 @@
 	<div class="wrap">
 		<div class="login">
 			<div class="login-content">
-				<h1><img src="images/24.png" alt="정부24"></h1>
+				<h1><img src="images/logo_remove_bg.png"></h1>
 				<p class="login-alert-text"><strong style="background: url(images/alert_icon.png) 0 50% no-repeat;">꼭 확인하세요!</strong><br>회원가입하셔야 정상적인 서비스 이용이 가능합니다!</p>
 				<div class="tab-cont">
 					<div class="login-content-inner">

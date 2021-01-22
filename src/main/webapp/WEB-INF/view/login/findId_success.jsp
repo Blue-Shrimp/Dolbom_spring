@@ -15,7 +15,7 @@
 	<div class="wrap">
 		<div class="find">
 			<div class="find-content">
-				<h1><img src="../images/24.png" alt="정부24"></h1>
+				<h1><img src="../images/logo_remove_bg.png"></h1>
 				<div class="title">
 			        <h1>아이디 찾기</h1>
 			    </div>

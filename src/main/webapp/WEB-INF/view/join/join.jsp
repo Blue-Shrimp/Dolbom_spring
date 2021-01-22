@@ -24,7 +24,7 @@
 	<div class="wrap">
 		<div class="join">
 			<div class="join-content">
-				<h1><img src="../images/24.png" alt="정부24"></h1>
+				<h1><img src="../images/logo_remove_bg.png"></h1>
 				<div class="title">
 			        <h1>회원가입</h1>
 			    </div>
