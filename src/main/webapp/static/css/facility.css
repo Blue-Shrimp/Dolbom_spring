@@ -1,0 +1,256 @@
+	*{
+      box-sizing: border-box;
+   }
+   body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, form, fieldset , button, pre {
+       margin: 0;
+       padding: 0;
+       font-size: 14px;
+       color: #111;
+       font-family: 'Noto Sans KR';
+       font-weight: 400;
+   }
+   a {
+	    text-decoration: none;
+	}
+	ul, ol {
+	    list-style: none;
+	}
+	
+	/* 바디 */
+	#f_container {
+	    position: relative;
+	    width: 1100px;
+	    margin: 0 auto;
+	}
+	#f_container .main {
+	    position: relative;
+	    background: #fff;
+	    margin-right: 50px;
+	}
+	.main .contents {
+	    min-height: 600px;
+	    padding-bottom: 50px;
+	}
+	.contents .subHeader {
+	    border-bottom: 1px solid #ddd;
+	    margin-bottom: 20px;
+	    width: 100%;
+	    box-sizing: border-box;
+	    padding: 25px 0 35px;
+	    text-align: center;
+	    position: relative;
+	}
+	.contents .subHeader h3 {
+	    font-size: 32px;
+	    color: #333;
+	    font-weight: bold;
+	}
+	.unified-search {
+	    border-top: 0px;
+	    padding: 0px;
+	}
+	.unified-search .search-box {
+	    margin-bottom: 10px;
+	    margin-top: 10px;
+	    padding: 10px;
+	    text-align: left;
+	    background: rgb(248, 248, 250);
+	    border: 1px solid rgb(232, 233, 238);
+	    position: relative;
+	    height: 62px;
+	}
+	.search-sort {
+	    height: 30px;
+	    min-height: 30px;
+	}
+	.search-sort .search-full {
+	    width: 100%;
+	}
+	.search-sort .sch-rgt {
+	    float: right;
+	}
+	.sch-rgt select {
+	    border: 1px solid rgb(204, 204, 204);
+	    height: 40px;
+	    padding: 0px 0px 0px 10px;
+	    line-height: 40px;
+	}
+	.search-sort .sch-rgt select {
+	    width: auto;
+	    min-width: 200px;
+	}
+	.search-sort .sch-rgt select + input[type="text"] {
+	    padding: 0px 0px 0px 10px;
+	    width: calc(100% - 500px);
+	    border: 1px solid rgb(204, 204, 204);
+	    height: 40px;
+	    line-height: 40px;
+	}
+	.sch-rgt .ibtn.navy {
+	    margin-right: 0px;
+	    border-color: rgb(14, 59, 100);
+	}
+	.sch-rgt .ibtn.form * {
+	    height: 38px;
+	    line-height: 38px;
+	}
+	.ibtn button {
+	    font-weight: bold;
+	    font-size: 14px;
+	    width: 100%;
+	    min-width: 70px;
+    	padding: 0px;
+	}
+	.ibtn.form {
+	    padding: 0px;
+	}
+	.search-box .ibtn {
+	    margin-left: 10px;
+	}
+	.search-box .ibtn {
+	    width: auto !important;
+	}
+	.ibtn.navy {
+	    background: rgb(14, 59, 100);
+	}
+	.ibtn * {
+	    cursor: pointer;
+	    margin: 0px;
+	    background: transparent;
+	    border: 0px;
+	}
+	.ibtn, .ibtn * {
+	    position: relative;
+	    margin: 0px;
+	    padding: 0px;
+	    display: inline-block;
+	    border: 0px;
+	    font-size: 12px;
+	    white-space: nowrap;
+	    vertical-align: top;
+	    overflow: visible;
+	    color: rgb(255, 255, 255);
+	    text-align: center;
+	    text-decoration: none !important;
+	}
+	.facilityList {
+	    position: relative;
+	    margin-top: 10px;
+	    margin-bottom: 10px;
+	    width: 100%;
+	    border-top: 2px solid #666;
+	    margin-bottom: 30px !important;
+	}
+	.facilityList table {
+	    width: 100%;
+	    table-layout: fixed;
+	}
+	.facilityList table thead th:first-child, .facilityList table tbody td:first-child {
+	    border-left: 0;
+	}
+	.facilityList table thead th {
+	    padding: 10px 0;
+	    height: 25px;
+	    background: #fafafa;
+	    vertical-align: middle;
+	    color: #111;
+	    font-weight: bold;
+	    border-bottom: 1px solid #e2e2e2;
+	    border-left: 1px solid #e2e2e2;
+	    text-align: center;
+	}
+	.facilityList table tbody td {
+	    padding: 9px 10px;
+	    height: 50px;
+	    background: #fff;
+	    vertical-align: middle;
+	    border-bottom: 1px solid #e2e2e2;
+	    border-left: 1px solid #e2e2e2;
+	    line-height: 100%;
+	    text-align: center;
+	    letter-spacing: -1px;
+	    word-break: break-word;
+	    white-space: normal;
+	}
+	.w55 {
+	    width: 55px !important;
+	}
+	.w80 {
+	  width: 80px !important;
+	}
+	.w250 {
+	    width: 250px !important;
+	}
+	.w400 {
+	    width: 400px !important;
+	}
+	.w140 {
+	    width: 140px !important;
+	}
+	.w80 {
+	    width: 80px !important;
+	}
+	.paging {
+	    padding-top: 10px;
+	    margin-bottom: 45px;
+	    width: 100%;
+	    text-align: center;
+	}
+	.paging a {
+	    display: inline-block;
+	    vertical-align: middle;
+	    min-width: 36px;
+	    height: 36px;
+	    border-radius: 5px;
+	    background: #fff;
+	    box-shadow: none;
+	    font-size: 15px;
+	    line-height: 36px;
+	    text-align: center;
+	    text-decoration: none;
+	    color: #555;
+	}
+	.paging a.linkFirstPrevPage {
+	    display: inline-block;
+	    width: 36px;
+	    height: 34px;
+	    box-shadow: 0px 2px 0px #d6d6d6;
+	    border: 1px solid #ccc;
+	}
+	.paging a.linkPrevPage {
+	    display: inline-block;
+	    width: 36px;
+	    height: 34px;
+	    box-shadow: 0px 2px 0px #d6d6d6;
+	    border: 1px solid #ccc;
+	}
+	.paging strong {
+	    display: inline-block;
+	    vertical-align: middle;
+	    min-width: 36px;
+	    height: 36px;
+	    border-radius: 5px;
+	    background: rgb(14, 59, 100);
+	    box-shadow: 0px 2px 0px #d6d6d6;
+	    font-size: 15px;
+	    font-weight: bold;
+	    line-height: 36px;
+	    text-align: center;
+	    text-decoration: none;
+	    color: #fff;
+	}
+	.paging a.linkNextPage {
+	    display: inline-block;
+	    width: 36px;
+	    height: 34px;
+	    box-shadow: 0px 2px 0px #d6d6d6;
+	    border: 1px solid #ccc;
+	}
+	.paging a.linkLastNextPage {
+	    display: inline-block;
+	    width: 36px;
+	    height: 34px;
+	    background: url(/dolbomi/images/board/btn_lastNext.png) no-repeat 50% 50%;
+	    box-shadow: 0px 2px 0px #d6d6d6;
+	    border: 1px solid #ccc;
+	}
