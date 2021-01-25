@@ -172,14 +172,23 @@
 	    word-break: break-word;
 	    white-space: normal;
 	}
-	.w55 {
-	    width: 55px !important;
+	.facilityList table tbody td a {
+		color: #333;
 	}
-	.w80 {
-	  width: 80px !important;
+	.facilityList table tbody td a:hover {
+		text-decoration: underline;
 	}
-	.w250 {
-	    width: 250px !important;
+	.facilityList table tbody td:nth-child(3) {
+	    text-align: left;
+	}
+	.w40 {
+	    width: 40px !important;
+	}
+	.w100 {
+	  width: 100px !important;
+	}
+	.w300 {
+	    width: 300px !important;
 	}
 	.w400 {
 	    width: 400px !important;
@@ -189,6 +198,12 @@
 	}
 	.w80 {
 	    width: 80px !important;
+	}
+	.w210 {
+	    width: 210px !important;
+	}
+	.w830 {
+	    width: 830px !important;
 	}
 	.paging {
 	    padding-top: 10px;
@@ -210,21 +225,7 @@
 	    text-decoration: none;
 	    color: #555;
 	}
-	.paging a.linkFirstPrevPage {
-	    display: inline-block;
-	    width: 36px;
-	    height: 34px;
-	    box-shadow: 0px 2px 0px #d6d6d6;
-	    border: 1px solid #ccc;
-	}
-	.paging a.linkPrevPage {
-	    display: inline-block;
-	    width: 36px;
-	    height: 34px;
-	    box-shadow: 0px 2px 0px #d6d6d6;
-	    border: 1px solid #ccc;
-	}
-	.paging strong {
+	.paging b {
 	    display: inline-block;
 	    vertical-align: middle;
 	    min-width: 36px;
@@ -238,6 +239,20 @@
 	    text-align: center;
 	    text-decoration: none;
 	    color: #fff;
+	}
+	.paging a.linkFirstPrevPage {
+	    display: inline-block;
+	    width: 36px;
+	    height: 34px;
+	    box-shadow: 0px 2px 0px #d6d6d6;
+	    border: 1px solid #ccc;
+	}
+	.paging a.linkPrevPage {
+	    display: inline-block;
+	    width: 36px;
+	    height: 34px;
+	    box-shadow: 0px 2px 0px #d6d6d6;
+	    border: 1px solid #ccc;
 	}
 	.paging a.linkNextPage {
 	    display: inline-block;
@@ -253,4 +268,90 @@
 	    background: url(/dolbomi/images/board/btn_lastNext.png) no-repeat 50% 50%;
 	    box-shadow: 0px 2px 0px #d6d6d6;
 	    border: 1px solid #ccc;
+	}
+	
+	/* 시설 상세페이지 */
+	.subTitle01 {
+	    padding-top: 15px;
+	    color: #444;
+	    font-size: 24px;
+	    font-weight: bold;
+	}
+	.facilityDetail {
+	    position: relative;
+	    margin-top: 10px;
+	    border-top: 2px solid #666;
+	}
+	.facilityDetail tbody th {
+	    vertical-align: middle;
+	    box-sizing: border-box;
+	    background: #f9f9f9;
+	    text-align: left;
+	    padding: 15px 5px 15px 20px;
+	    border-bottom: 1px solid #e2e2e2;
+	    font-size: 16px;
+	    color: #111;
+	}
+	.facilityDetail tbody td {
+	    box-sizing: border-box;
+	    background: #fff;
+	    border-bottom: 1px solid #e2e2e2;
+	    padding: 9px 20px;
+	    font-size: 16px;
+	    color: #000;
+	    line-height: 34px;
+	    word-break: break-word;
+	    white-space: normal;
+	}
+	.btn_apply  {
+		position: relative;
+	    text-align: center;
+	    min-height: 56px;
+	    margin: 40px auto 50px;
+	    vertical-align: top;
+	    overflow: hidden;
+	    padding-bottom: 3px;
+	}
+	.ibtn {
+	    width: 100px;
+	    height: 40px;
+	    border-color: #1c5a94;
+	    color: #fff;
+	    background-color: #1c5a94;
+	    font-size: 16px;
+	    font-weight: bold;
+	    cursor: pointer;
+	}
+	.rightBtn {
+	    position: absolute;
+	    right: 0;
+	    top: 0;
+	}
+	.btnWhite {
+		display: inline-block;
+	    background: #fff;
+	    color: #1c5a94;
+	    font-size: 16px;
+	    height: 40px;
+	    width: 100px;
+	    border: 1px solid #bababa;
+	    font-weight: bold;
+	    padding-top: 5px;
+	}
+	.navyBtn {
+	    position: relative;
+	    margin: 0;
+	    display: inline-block;
+	    text-decoration: none !important;
+	    vertical-align: top;
+	    color: #fff;
+	    text-align: center;
+	    margin-right: 4px;
+	    border: 1px solid #ddd;
+	    background: #1c5a94;
+	    margin-left: 5px;
+	    cursor: pointer;
+	    line-height: 28px;
+	    padding: 0 10px;
+	    min-width: 60px;
 	}

@@ -21,31 +21,6 @@ public class MemberDAO implements MemberService {
 	@Autowired
 	private DataSource dataSource;
 	
-	@Override // 예시 지우기
-	public ArrayList<MemberVO> getList() throws ClassNotFoundException, SQLException {
-		String sql = "select * from dmember";
-		
-		Connection con = dataSource.getConnection();
-		PreparedStatement st = con.prepareStatement(sql);
-		ResultSet rs = st.executeQuery();
-		
-		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
-		while(rs.next()) {
-			MemberVO index = new MemberVO();
-			
-			index.setDid(rs.getString(1));
-			index.setDname(rs.getString(2));
-			
-			list.add(index);
-		}
-		
-		rs.close();
-		st.close();
-		con.close();
-		
-		return list;
-	}
-	
 	@Override
 	/* 회원가입 */
 	public boolean insertMember(MemberVO vo) throws ClassNotFoundException, SQLException  {
@@ -80,7 +55,7 @@ public class MemberDAO implements MemberService {
 	public SessionVO getLogin(MemberVO vo) throws ClassNotFoundException, SQLException  {
 		SessionVO svo = new SessionVO();
 		
-		String sql = "select count(*), dname from dmember where did=? and dpass=? group by dname";
+		String sql = "select count(*), dname, did from dmember where did=? and dpass=? group by dname, did";
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement st = con.prepareStatement(sql);
@@ -91,6 +66,7 @@ public class MemberDAO implements MemberService {
 		while(rs.next()) {
 			svo.setResult(rs.getInt(1));
 			svo.setName(rs.getString(2));
+			svo.setId(rs.getString(3));
 		}
 		
 		rs.close();

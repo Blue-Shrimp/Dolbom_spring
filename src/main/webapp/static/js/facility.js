@@ -20,11 +20,11 @@ $(document).ready(function(){
  
 		 $("select[name^=sido]").each(function() {
 		  $selsido = $(this);
-		  $selsido.append("<option value='"+" "+"'>시/도 전체</option>");
+		  $selsido.append("<option value=''>시/도 전체</option>");
 		  $.each(eval(area0), function() {
 		   $selsido.append("<option value='"+this+"'>"+this+"</option>");
 		  });
-		  $selsido.next().append("<option value='"+" "+"'>시/구/군 전체</option>");
+		  $selsido.next().append("<option value=''>시/구/군 전체</option>");
 		 });
 
 		 $("select[name^=sido]").change(function() {
@@ -33,9 +33,9 @@ $(document).ready(function(){
 		  $("option",$gugun).remove(); 
 
 		  if(area == "area0")
-		   $gugun.append("<option value='"+" "+"'>시/구/군 전체</option>");
+		   $gugun.append("<option value=''>시/구/군 전체</option>");
 		  else {
-		   $gugun.append("<option value='"+" "+"'>시/구/군 전체</option>");
+		   $gugun.append("<option value=''>시/구/군 전체</option>");
 		   $.each(eval(area), function() {
 		    $gugun.append("<option value='"+this+"'>"+this+"</option>");
 		   });

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +21,7 @@
 					<h3 id="srcTopTitle">돌봄 시설조회</h3>
 				</div>
 				<div class="unified-search">
-					<form id="detailSearchForm">
+					<form id="detailSearchForm" name="detailSearchForm" method="post" action="list">
 						<div class="search-box search-input">
 							<div class="search-sort">
 								<div class="sch-rgt search-full" id="location">
@@ -27,9 +29,9 @@
 									</select>
 									<select name="gugun" id="gugun" class="org_s">
 									</select>
-									<input type="text" id="searchKeyword" placeholder="시설명을 입력해주세요">
+									<input type="text" name="keyword" id="keyword" value="${keyword }" placeholder="시설명을 입력해주세요">
 									<span class="ibtn form navy" id="lifecycleAreaSearchBtn">
-										<button type="button" id="btnSearch">검색</button>
+										<button type="submit" id="btnSearch">검색</button>
 									</span>
 								</div>
 							</div>
@@ -39,9 +41,8 @@
 				<div class="facilityList">
 					<table>
 						<colgroup>
-							<col class="w55">
-							<col class="w80">
-							<col class="w250">
+							<col class="w40">
+							<col class="w300">
 							<col class="w400">
 							<col class="w140">							
 							<col class="w80">
@@ -49,7 +50,6 @@
 						<thead>
 							<tr>
 								<th scope="col">번호</th>
-								<th scope="col">모집상태</th>
 								<th scope="col">시설명</th>
 								<th scope="col">주소</th>
 								<th scope="col">모집현황</th>
@@ -57,106 +57,35 @@
 							</tr>
 						</thead>
 						<tbody>
+							<c:forEach var="n" items="${list}">
 							<tr>
-								<td>10</td>
-								<td>신청가능</td>
-								<td><a href="">서울시립수서청소년센터 (꿈나래)</a></td>
-								<td>서울특별시 강남구 광평로 144 (수서동) 서울시립수서청소년센터</td>
-								<td>현원 38명 / 정원 40명</td>
-								<td>★ 4.8</td>
+								<td>${n.rno }</td>
+								<td><a href="detail?fid=${n.fid }">${n.fpname }</a></td>
+								<td>${n.flocation }</td>
+								<td>현원 ${n.fcnt }명 / 정원 ${n.fpeople }명</td>
+								<td>★ ${n.fservice }</td>
 							</tr>
-							<tr>
-								<td>9</td>
-								<td>신청가능</td>
-								<td><a href="">서울시립수서청소년센터 (꿈나래)</a></td>
-								<td>서울특별시 강남구 광평로 144 (수서동) 서울시립수서청소년센터</td>
-								<td>현원 38명 / 정원 40명</td>
-								<td>★ 4.8</td>
-							</tr>
-							<tr>
-								<td>8</td>
-								<td>신청가능</td>
-								<td><a href="">서울시립수서청소년센터 (꿈나래)</a></td>
-								<td>서울특별시 강남구 광평로 144 (수서동) 서울시립수서청소년센터</td>
-								<td>현원 38명 / 정원 40명</td>
-								<td>★ 4.8</td>
-							</tr>
-							<tr>
-								<td>7</td>
-								<td>신청가능</td>
-								<td><a href="">서울시립수서청소년센터 (꿈나래)</a></td>
-								<td>서울특별시 강남구 광평로 144 (수서동) 서울시립수서청소년센터</td>
-								<td>현원 38명 / 정원 40명</td>
-								<td>★ 4.8</td>
-							</tr>
-							<tr>
-								<td>6</td>
-								<td>신청가능</td>
-								<td><a href="">서울시립수서청소년센터 (꿈나래)</a></td>
-								<td>서울특별시 강남구 광평로 144 (수서동) 서울시립수서청소년센터</td>
-								<td>현원 38명 / 정원 40명</td>
-								<td>★ 4.8</td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>신청가능</td>
-								<td><a href="">서울시립수서청소년센터 (꿈나래)</a></td>
-								<td>서울특별시 강남구 광평로 144 (수서동) 서울시립수서청소년센터</td>
-								<td>현원 38명 / 정원 40명</td>
-								<td>★ 4.8</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>신청가능</td>
-								<td><a href="">서울시립수서청소년센터 (꿈나래)</a></td>
-								<td>서울특별시 강남구 광평로 144 (수서동) 서울시립수서청소년센터</td>
-								<td>현원 38명 / 정원 40명</td>
-								<td>★ 4.8</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>신청가능</td>
-								<td><a href="">서울시립수서청소년센터 (꿈나래)</a></td>
-								<td>서울특별시 강남구 광평로 144 (수서동) 서울시립수서청소년센터</td>
-								<td>현원 38명 / 정원 40명</td>
-								<td>★ 4.8</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>신청가능</td>
-								<td><a href="">서울시립수서청소년센터 (꿈나래)</a></td>
-								<td>서울특별시 강남구 광평로 144 (수서동) 서울시립수서청소년센터</td>
-								<td>현원 38명 / 정원 40명</td>
-								<td>★ 4.8</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>신청가능</td>
-								<td><a href="">서울시립수서청소년센터 (꿈나래)</a></td>
-								<td>서울특별시 강남구 광평로 144 (수서동) 서울시립수서청소년센터</td>
-								<td>현원 38명 / 정원 40명</td>
-								<td>★ 4.8</td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
-				<div id="pagingNav" class="paging">
-					<div class="paging">
-						<a href="" class="linkFirstPrevPage" style="visibility:hidden; background: url(../../images/btn_firstPrev.png) no-repeat 50% 50%;"></a>
-						<a href="" class="linkPrevPage" style="visibility:hidden; background: url(../../images/btn_prev.png) no-repeat 50% 50%;"></a>
-						<strong>1</strong>
-						<a href="">2</a>
-						<a href="">3</a>
-						<a href="">4</a>
-						<a href="">5</a>
-						<a href="">6</a>
-						<a href="">7</a>
-						<a href="">8</a>
-						<a href="">9</a>
-						<a href="">10</a>
-						<a href="" class="linkNextPage" style="background: url(../../images/btn_next.png) no-repeat 50% 50%;"></a>
-						<a href="" class="linkLastNextPage" style="background: url(../../images/btn_lastNext.png) no-repeat 50% 50%;"></a>
-					</div>
+				<div id="pagingNav" class="paging">		
+					<c:if test="${paging.startPage != 1 }">
+						<a href="list?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}" class="linkPrevPage" style="background: url(../../images/btn_prev.png) no-repeat 50% 50%;"></a>
+					</c:if>
+					<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+						<c:choose>
+							<c:when test="${p == paging.nowPage }">
+								<b>${p }</b>
+							</c:when>
+							<c:when test="${p != paging.nowPage }">
+								<a href="list?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+							</c:when>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${paging.endPage != paging.lastPage}">
+						<a href="list?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}" class="linkNextPage" style="background: url(../../images/btn_next.png) no-repeat 50% 50%;"></a>
+					</c:if>
 				</div>
 			</div>
 		</div>

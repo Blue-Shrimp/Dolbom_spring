@@ -1,13 +1,53 @@
 package com.dolbom.vo;
 
 public class FacilityVO {
-	private String fid, fname, fpname, fphone, flocation, fsdate, fedate, fstime, fetime, fweek, fgrade, fprogram, fimg, fsimg;
-	private int fpeople;
+	private String fid, fname, fpname, fphone, fsido, fgugun, flocation, fsdate, fedate, fstime, fetime, fweek, fprogram, fimg, fsimg;
+	private int rno, fpeople, fcnt;
+	private float fservice;
 	
+
 	public FacilityVO() {
 		
 	}
 	
+	public int getFcnt() {
+		return fcnt;
+	}
+
+	public void setFcnt(int fcnt) {
+		this.fcnt = fcnt;
+	}
+
+	public float getFservice() {
+		return fservice;
+	}
+
+	public void setFservice(float fservice) {
+		this.fservice = fservice;
+	}
+
+	public int getRno() {
+		return rno;
+	}
+	
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
+	public String getFsido() {
+		return fsido;
+	}
+	
+	public void setFsido(String fsido) {
+		this.fsido = fsido;
+	}
+	
+	public String getFgugun() {
+		return fgugun;
+	}
+	
+	public void setFgugun(String fgugun) {
+		this.fgugun = fgugun;
+	}
 	public String getFid() {
 		return fid;
 	}
@@ -67,12 +107,6 @@ public class FacilityVO {
 	}
 	public void setFweek(String fweek) {
 		this.fweek = fweek;
-	}
-	public String getFgrade() {
-		return fgrade;
-	}
-	public void setFgrade(String fgrade) {
-		this.fgrade = fgrade;
 	}
 	public String getFprogram() {
 		return fprogram;
