@@ -1,13 +1,20 @@
 package com.dolbom.vo;
 
 public class ReviewVO {
-	private String rid, fid, did, rcontent, rdate;
+	private String rid, fid, did, rcontent, rdate, dname;
 	private int rservice, rstatus;
 	
 	public ReviewVO() {
 		
 	}
 	
+	public String getDname() {
+		return dname;
+	}
+	
+	public void setDname(String dname) {
+		this.dname = dname;
+	}
 	public String getRid() {
 		return rid;
 	}

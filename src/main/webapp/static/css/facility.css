@@ -303,6 +303,11 @@
 	    word-break: break-word;
 	    white-space: normal;
 	}
+	.facilityDetail tbody td img {
+	    width: 400px;
+	    height: 250px;
+	    margin-right: 30px;
+	}
 	.btn_apply  {
 		position: relative;
 	    text-align: center;
@@ -341,7 +346,7 @@
 	.navyBtn {
 	    position: relative;
 	    margin: 0;
-	    display: inline-block;
+	    display: inline;
 	    text-decoration: none !important;
 	    vertical-align: top;
 	    color: #fff;
@@ -354,4 +359,207 @@
 	    line-height: 28px;
 	    padding: 0 10px;
 	    min-width: 60px;
+	}
+	._formStyle-layer-wrap {
+	    overflow-x: hidden;
+	    overflow-y: auto;
+	    position: fixed;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    left: 0;
+	    z-index: 1001;
+	    background: rgba(0, 0, 0, .6);
+	}
+	._formStyle-layer {
+	    position: absolute;
+	    top: 100px;
+	    left: 50%;
+	    z-index: 1002;
+	    width: 740px;
+	    transform: translateX(-50%);
+	}
+	._formStyle-layer-inner {
+	    position: relative;
+	}
+	._formStyle-layer-title {
+	    display: block;
+	    padding: 15px 85px 15px 30px;
+	    color: #fff;
+	    font-size: 20px;
+	    font-weight: 500;
+	    background-color: #013763;
+	}
+	.os-care-review-group {
+	    background-color: #fff;
+	}
+	.os-care-review {
+	    padding: 30px 30px 0;
+	    border-bottom: 1px solid #e5e5e5;
+	}
+	.os-care-review-title {
+	    overflow: hidden;
+	    margin-bottom: 15px;
+	}
+	.os-care-review-title strong {
+	    font-size: 19px;
+	    font-weight: bold;
+	}
+	.os-rating {
+		float: right;
+	    display: inline-block;
+	    overflow: hidden;
+	    vertical-align: middle;
+	}
+	.os-rating-medium {
+	    position: relative;
+	    width: 120px;
+	    height: 20px;
+	}
+	.os-rating-medium-inner {
+	    width: 0;
+	    height: 20px;
+	}
+	.os-rating .os-rating-select {
+	    overflow: hidden;
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	}
+	.os-rating .os-rating-select li {
+	    float: left;
+	    width: 20%;
+	}
+	.os-rating .os-rating-select li button {
+	    display: block;
+	    overflow: hidden;
+	    width: 100%;
+	    height: 20px;
+	    color: transparent;
+	    text-indent: 100%;
+	    white-space: nowrap;
+	    background: none;
+	    cursor: pointer;
+	    border: 0;
+	}
+	.os-care-review-write {
+	    position: relative;
+	    margin-bottom: 30px;
+	    padding-right: 70px;
+	}
+	.os-care-review-write input[type='text'] {
+	    box-sizing: border-box;
+	    width: 100%;
+	    height: 40px;
+	    padding: 0 10px;
+	    border: 1px solid #ddd;
+	}
+	.os-care-review-write button {
+	    position: absolute;
+	    top: 0;
+	    right: 0;
+	    width: 64px;
+	    height: 40px;
+	    color: #fff;
+	    font-size: 13px;
+	    background-color: #344c7a;
+	}
+	.os-care-review-average {
+	    overflow: hidden;
+	    padding: 16px 30px 15px;
+	    border-top: 5px solid #f1f1f1;
+	}
+	.os-care-review-average .os-care-review-total {
+	    float: left;
+	    margin-top: 5px;
+	}
+	.os-care-review-average .os-care-review-total strong {
+	    font-weight: bold;
+	}
+	.os-rating span {
+	    display: inline-block;
+	    vertical-align: middle;
+	    margin-left: 4px;
+	}
+	.os-rating em {
+	    vertical-align: middle;
+	    padding-right: 8px;
+	    color: #555;
+	    font-size: 13px;
+	    font-style: normal;
+	}
+	.os-rating span strong {
+	    vertical-align: middle;
+	    color: #333;
+	    font-size: 19px;
+	}
+	._formStyle-layer-close {
+	    overflow: hidden;
+	    position: absolute;
+	    top: 15px;
+	    right: 27px;
+	    width: 30px;
+	    height: 30px;
+	    color: transparent;
+	    text-indent: 100%;
+	    white-space: nowrap;
+	    cursor: pointer;
+	}
+	.os-care-review-cont-wrap {
+	    overflow-y: auto;
+	    padding: 0 30px;
+	    height:330px;
+	}
+	.os-care-review-cont {
+	    margin-bottom: 15px;
+	    padding: 20px 28px 28px;
+	    border: 1px solid #ddd;
+	    border-radius: 10px;
+	    background-color: #f8f8fa;
+	}
+	.os-care-review-cont .os-care-review-console {
+	    position: relative;
+	    margin-bottom: 15px;
+	    padding: 0 50px 12px 0;
+	    border-bottom: 1px dashed #ddd;
+	}
+	.os-care-review-cont .os-care-review-console .os-care-register {
+	    vertical-align: middle;
+	    margin-right: 14px;
+	    font-weight: bold;
+	}
+	.os-rating {
+	    display: inline-block;
+	    overflow: hidden;
+	    vertical-align: middle;
+	}
+	.os-rating-small {
+	    width: 80px;
+	    height: 14px;
+	}
+	.os-rating-small-inner {
+	    overflow: hidden;
+	    width: 0;
+	    height: 14px;
+	    color: transparent;
+	    text-indent: 100%;
+	    white-space: nowrap;
+	}
+	.os-care-review-cont .os-care-report-date {
+	    display: block;
+	    margin-top: 15px;
+	    color: #777;
+	}
+	.os-care-layer-map {
+	    width: 540px;
+	}
+	strong._formStyle-layer-title.oni {
+	    padding-right: 60px;
+	    font-size: 13px;
+	}
+	._formStyle-layer-title .pop_title {
+	    font-size: 20px;
+	}
+	._formStyle-layer-map{
+		height:440px;
 	}

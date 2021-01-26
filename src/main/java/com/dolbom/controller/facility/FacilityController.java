@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dolbom.service.FacilityService;
+import com.dolbom.service.ReviewService;
 import com.dolbom.utils.PagingVO;
 import com.dolbom.vo.FacilityVO;
+import com.dolbom.vo.ReviewVO;
 import com.dolbom.vo.SessionVO;
 
 @Controller
@@ -25,6 +27,9 @@ public class FacilityController {
 	
 	@Autowired
 	private FacilityService facilityService;
+	
+	@Autowired
+	private ReviewService reviewService;
 	
 	@RequestMapping(value="list", method= {RequestMethod.GET, RequestMethod.POST})
 	public String list(PagingVO pvo, Model model, 
@@ -79,10 +84,39 @@ public class FacilityController {
 			result = "redirect:/login";
 		} else {
 			FacilityVO vo = facilityService.getFacilityContent(fid);
+			ArrayList<ReviewVO> review_list = reviewService.getReviewList(fid);
+			int review_cnt = reviewService.getReviewCnt(fid);
+			double review_score = reviewService.getReviewScore(fid);
+			
+			model.addAttribute("cnt", review_cnt);
+			model.addAttribute("score", review_score);
+			model.addAttribute("list", review_list);
 			model.addAttribute("detail", vo);
 			model.addAttribute("fid", fid);
 			model.addAttribute("did", svo.getId());
 			result = "customer/facility/detail";
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value="application", method= {RequestMethod.GET, RequestMethod.POST})
+	public String application(@RequestParam(value = "fid") String fid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		
+		SessionVO svo = (SessionVO) obj;
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else {
+			
+			model.addAttribute("fid", fid);
+			model.addAttribute("did", svo.getId());
+			result = "customer/facility/application";
 		}
 		
 		return result;

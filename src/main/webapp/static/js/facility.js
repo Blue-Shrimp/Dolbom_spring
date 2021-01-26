@@ -42,5 +42,27 @@ $(document).ready(function(){
 		  }
 		 });
 		 
+		 $("#btnReview").click(function(){
+			$("#osCareReview").css('display','block');
+		 });
+		 $("#btnReviewClose").click(function(){
+			$("#osCareReview").css('display','none');
+		 });
+		 
+		 $("#btnLocation").click(function(){
+			$("#osCareMap").css('display','block');
+		 });
+		 $("#btnLocationClose").click(function(){
+			$("#osCareMap").css('display','none');
+		 });
+		 
+		 
+		 
 });
 
+function relayout() {    
+	setTimeout(function(){ 
+		map.relayout();
+		map.setCenter(new kakao.maps.LatLng(y,x));
+		}, 0);
+}

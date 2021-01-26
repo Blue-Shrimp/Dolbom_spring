@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import com.dolbom.vo.ReviewVO;
 
 public interface ReviewService {
+	int getReviewCnt(String fid) throws ClassNotFoundException, SQLException;
 	double getReviewScore(String fid) throws ClassNotFoundException, SQLException;
-	ArrayList<ReviewVO> getReviewList() throws ClassNotFoundException, SQLException;
+	ArrayList<ReviewVO> getReviewList(String fid) throws ClassNotFoundException, SQLException;
 	ReviewVO getReviewContent(String rid) throws ClassNotFoundException, SQLException;
 	boolean hideReivew(String rid) throws ClassNotFoundException, SQLException;
 	boolean insertReview(ReviewVO vo) throws ClassNotFoundException, SQLException;
