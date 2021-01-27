@@ -239,7 +239,15 @@ public class MemberVO {
 	}
 
 	public String getDphone() {
-		return dphone1+"-"+dphone2+"-"+dphone3;
+		String str = "";
+		
+		if(dphone1 != null) {
+			str = dphone1+"-"+dphone2+"-"+dphone3;
+		} else {
+			str = dphone;
+		}
+		
+		return str;
 	}
 
 	public void setDphone(String dphone) {
@@ -270,15 +278,21 @@ public class MemberVO {
 		String child3 = cname3 + "/" + cyear3 + "." + cmonth3 + "." + cday3 + "/" + cgender3;
 		String child4 = cname4 + "/" + cyear4 + "." + cmonth4 + "." + cday4 + "/" + cgender4;
 		
-		if(cgender2 == null) {
-			result = child1;
-		} else if(cgender3 == null) {
-			result = child1 + "," + child2;
-		} else if(cgender4 == null) {
-			result = child1 + "," + child2 + "," + child3;
+		if(cgender != null) {
+			if(cgender2 == null) {
+				result = child1;
+			} else if(cgender3 == null) {
+				result = child1 + "," + child2;
+			} else if(cgender4 == null) {
+				result = child1 + "," + child2 + "," + child3;
+			} else {
+				result = child1 + "," + child2 + "," + child3 + "," + child4;
+			}
+			 
 		} else {
-			result = child1 + "," + child2 + "," + child3 + "," + child4;
+			result = dchildren;
 		}
+		
 		
 		return result;
 	}

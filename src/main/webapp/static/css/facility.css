@@ -563,3 +563,13 @@
 	._formStyle-layer-map{
 		height:440px;
 	}
+	
+	
+	/* 시설 신청 페이지*/
+	.applySubTitle{
+		font-size: 18px;
+		font-weight: bold;
+	}
+	.fapplication table tbody td:nth-child(3) {
+	    text-align: center;
+	}

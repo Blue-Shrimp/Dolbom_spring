@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dolbom.service.ApplyMemberService;
 import com.dolbom.service.FacilityService;
+import com.dolbom.service.MemberService;
 import com.dolbom.service.ReviewService;
 import com.dolbom.utils.PagingVO;
+import com.dolbom.vo.ApplyMemberVO;
 import com.dolbom.vo.FacilityVO;
+import com.dolbom.vo.MemberVO;
 import com.dolbom.vo.ReviewVO;
 import com.dolbom.vo.SessionVO;
 
@@ -30,6 +34,12 @@ public class FacilityController {
 	
 	@Autowired
 	private ReviewService reviewService;
+
+	@Autowired
+	private ApplyMemberService applyMemberService;
+
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping(value="list", method= {RequestMethod.GET, RequestMethod.POST})
 	public String list(PagingVO pvo, Model model, 
@@ -113,10 +123,51 @@ public class FacilityController {
 			rttr.addFlashAttribute("msg3", true);
 			result = "redirect:/login";
 		} else {
+			FacilityVO vo = facilityService.getFacilityContent(fid);
+			int acnt = applyMemberService.getApplyPeople(fid);
+			MemberVO mvo = memberService.getMemberContent(svo.getId());
 			
-			model.addAttribute("fid", fid);
-			model.addAttribute("did", svo.getId());
-			result = "customer/facility/application";
+			if(vo.getFpeople() == acnt) {
+				rttr.addFlashAttribute("msg1", true);
+				String referer = request.getHeader("Referer");
+				
+				result = "redirect:" + referer;
+			} else {
+				model.addAttribute("member", mvo);
+				model.addAttribute("facility", vo);
+				model.addAttribute("fid", fid);
+				model.addAttribute("did", svo.getId());
+				result = "customer/facility/application";
+				
+			}
+			
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value="/apply_proc.do", method= RequestMethod.POST)
+	public String apply_proc(ApplyMemberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else {
+			boolean apply_result = applyMemberService.insertApply(vo);
+			
+			if(apply_result) {
+				rttr.addFlashAttribute("msg1", true);
+				result = "redirect:/customer/myapply/list";				
+			} else { 
+				rttr.addFlashAttribute("msg1", true); String referer =
+				request.getHeader("Referer");
+				result = "redirect:" + referer; 
+			}
+				 
 		}
 		
 		return result;

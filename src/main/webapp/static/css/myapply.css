@@ -1,0 +1,132 @@
+	*{
+      box-sizing: border-box;
+   }
+   body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, form, fieldset , button, pre {
+       margin: 0;
+       padding: 0;
+       font-size: 14px;
+       color: #111;
+       font-family: 'Noto Sans KR';
+       font-weight: 400;
+   }
+   a {
+	    text-decoration: none;
+	}
+	ul, ol {
+	    list-style: none;
+	}
+	
+	/* 리스트 */
+	#a_container {
+	    position: relative;
+	    width: 1100px;
+	    margin: 0 auto;
+	}
+	#a_container .main {
+	    position: relative;
+	    background: #fff;
+	    margin-right: 50px;
+	}
+	.main .contents {
+	    min-height: 600px;
+	    padding-bottom: 50px;
+	}
+	.contents .subHeader {
+	    border-bottom: 1px solid #ddd;
+	    margin-bottom: 20px;
+	    width: 100%;
+	    box-sizing: border-box;
+	    padding: 25px 0 35px;
+	    text-align: center;
+	    position: relative;
+	}
+	.contents .subHeader h3 {
+	    font-size: 32px;
+	    color: #333;
+	    font-weight: bold;
+	}
+	.applyList {
+	    position: relative;
+	    margin-top: 10px;
+	    margin-bottom: 10px;
+	    width: 100%;
+	    border-top: 2px solid #666;
+	    margin-bottom: 30px !important;
+	}
+	.applyList table {
+	    width: 100%;
+	    table-layout: fixed;
+	}
+	.w40 {
+	    width: 40px !important;
+	}
+	.w100 {
+	  width: 100px !important;
+	}
+	.w300 {
+	    width: 300px !important;
+	}
+	.w350 {
+	    width: 350px !important;
+	}
+	.w140 {
+	    width: 140px !important;
+	}
+	.w80 {
+	    width: 80px !important;
+	}
+	.w210 {
+	    width: 210px !important;
+	}
+	.w830 {
+	    width: 830px !important;
+	}
+	.applyList table thead th {
+	    padding: 10px 0;
+	    height: 25px;
+	    background: #fafafa;
+	    vertical-align: middle;
+	    color: #111;
+	    font-weight: bold;
+	    border-bottom: 1px solid #e2e2e2;
+	    border-left: 1px solid #e2e2e2;
+	    text-align: center;
+	}
+	.applyList table thead th:first-child, .applyList table tbody td:first-child {
+	    border-left: 0;
+	}
+	.applyList table tbody td {
+	    padding: 9px 10px;
+	    height: 50px;
+	    background: #fff;
+	    vertical-align: middle;
+	    border-bottom: 1px solid #e2e2e2;
+	    border-left: 1px solid #e2e2e2;
+	    line-height: 100%;
+	    text-align: center;
+	    letter-spacing: -1px;
+	    word-break: break-word;
+	    white-space: normal;
+	}
+	.applyList table tbody td a {
+	    color: #333;
+	}
+	.applyList table tbody td a:hover {
+		text-decoration: underline;
+	}
+	.navyBtn {
+	    position: relative;
+	    margin: 0;
+	    display: inline;
+	    text-decoration: none !important;
+	    vertical-align: top;
+	    color: #fff;
+	    text-align: center;
+	    border: 1px solid #ddd;
+	    background: #1c5a94;
+	    margin-left: 5px;
+	    cursor: pointer;
+	    line-height: 28px;
+	    padding: 0 10px;
+	    min-width: 60px;
+	}

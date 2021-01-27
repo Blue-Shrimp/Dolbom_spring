@@ -182,7 +182,7 @@ public class FacilityDAO implements FacilityService {
 	@Override
 	/* 시설 상세 정보 */
 	public FacilityVO getFacilityContent(String fid) throws ClassNotFoundException, SQLException  {
-		String sql = "select fpname, rservice, fname, flocation, fphone, fstime, fetime, fweek, fprogram, fimg, fsimg"
+		String sql = "select fpname, rservice, fname, flocation, fphone, fstime, fetime, fweek, fprogram, fimg, fsimg, fpeople"
 				+ " from facility f, (select fid, round(avg(rservice),1) rservice from review group by fid) r"
 				+ " where f.fid=r.fid(+) and f.fid=?";
 		
@@ -205,7 +205,7 @@ public class FacilityDAO implements FacilityService {
 			vo.setFprogram(rs.getString(9));
 			vo.setFimg(rs.getString(10));
 			vo.setFsimg(rs.getString(11));
-			
+			vo.setFpeople(rs.getInt(12));
 		}
 		
 		rs.close();

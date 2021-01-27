@@ -23,13 +23,19 @@ public class ApplyMemberDAO implements ApplyMemberService {
 	@Override
 	/* 각 시설의 신청한 사람의 수 */
 	public int getApplyPeople(String fid) throws ClassNotFoundException, SQLException {
-		String sql = "";
+		String sql = "select count(*) cnt"
+				+ " from apply_member"
+				+ " where astatus=1 and fid=?";
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, fid);
 		ResultSet rs = st.executeQuery();
 		
 		int cnt = 0;
+		while(rs.next()) {
+			cnt = rs.getInt(1);
+		}
 		
 		rs.close();
 		st.close();
@@ -41,15 +47,22 @@ public class ApplyMemberDAO implements ApplyMemberService {
 	@Override
 	/* 돌봄 신청 등록 */
 	public boolean insertApply(ApplyMemberVO vo) throws ClassNotFoundException, SQLException {
-		String sql = "";
+		String sql = "insert into apply_member"
+				+ " values('A_'|| seq_apply_member.nextval,?,?,?,0,sysdate)";
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement st = con.prepareStatement(sql);
-		ResultSet rs = st.executeQuery();
+		st.setString(1, vo.getFid());
+		st.setString(2, vo.getDid());
+		st.setString(3, vo.getAperson());
 		
 		boolean result = false;
 		
-		rs.close();
+		int val = st.executeUpdate();
+		if(val != 0) {
+			result = true;
+		}
+		
 		st.close();
 		con.close();
 		

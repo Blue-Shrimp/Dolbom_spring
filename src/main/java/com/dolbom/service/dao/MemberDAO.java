@@ -147,13 +147,26 @@ public class MemberDAO implements MemberService {
 	@Override
 	/* 회원 상세 정보 */
 	public MemberVO getMemberContent(String did) throws ClassNotFoundException, SQLException  {
-		String sql = "";
+		String sql = "select did, dpass, dname, dphone, demail, darea, dchildren, to_char(ddate, 'yyyy.mm.dd') ddate"
+				+ " from dmember"
+				+ " where did=?";
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, did);
 		ResultSet rs = st.executeQuery();
 		
 		MemberVO vo = new MemberVO();
+		while(rs.next()) {
+			vo.setDid(rs.getString(1));
+			vo.setDpass(rs.getString(2));
+			vo.setDname(rs.getString(3));
+			vo.setDphone(rs.getString(4));
+			vo.setDemail(rs.getString(5));
+			vo.setDarea(rs.getString(6));
+			vo.setDchildren(rs.getString(7));
+			vo.setDdate(rs.getString(8));
+		}
 		
 		rs.close();
 		st.close();
