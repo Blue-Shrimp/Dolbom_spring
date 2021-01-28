@@ -141,15 +141,23 @@ public class ReviewDAO implements ReviewService {
 	@Override
 	/* 리뷰 등록 */
 	public boolean insertReview(ReviewVO vo) throws ClassNotFoundException, SQLException {
-		String sql = "";
+		String sql = "insert into review"
+				+ " values('R_'|| seq_review.nextval,?,?,?,?,1,sysdate)";
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement st = con.prepareStatement(sql);
-		ResultSet rs = st.executeQuery();
+		st.setString(1, vo.getFid());
+		st.setString(2, vo.getDid());
+		st.setInt(3, vo.getRservice());
+		st.setString(4, vo.getRcontent());
 		
 		boolean result = false;
 		
-		rs.close();
+		int val = st.executeUpdate();
+		if(val != 0) {
+			result = true;
+		}
+		
 		st.close();
 		con.close();
 		
@@ -159,13 +167,29 @@ public class ReviewDAO implements ReviewService {
 	@Override
 	/* 내가 쓴 리뷰 */
 	public ArrayList<ReviewVO> getMyReviewList(String did) throws ClassNotFoundException, SQLException {
-		String sql = "";
+		String sql = "select rid, fid, dname, r.did, rservice, rcontent, to_char(rdate, 'yyyy.mm.dd') rdate"
+				+ " from review r, dmember d"
+				+ " where d.did = r.did and r.did=?";
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, did);
 		ResultSet rs = st.executeQuery();
 		
 		ArrayList<ReviewVO> list_review =  new ArrayList<ReviewVO>();
+		while(rs.next()) {
+			ReviewVO vo = new ReviewVO();
+			
+			vo.setRid(rs.getString(1));
+			vo.setFid(rs.getString(2));
+			vo.setDname(rs.getString(3));
+			vo.setDid(rs.getString(4));
+			vo.setRservice(rs.getInt(5));
+			vo.setRcontent(rs.getString(6));
+			vo.setRdate(rs.getString(7));
+			
+			list_review.add(vo);
+		}
 		
 		rs.close();
 		st.close();
@@ -176,16 +200,24 @@ public class ReviewDAO implements ReviewService {
 	
 	@Override
 	/* 리뷰 수정 */
-	public boolean updateReview(String rcontent, String rid) throws ClassNotFoundException, SQLException {
-		String sql = "";
+	public boolean updateReview(ReviewVO vo) throws ClassNotFoundException, SQLException {
+		String sql = "update review"
+				+ " set rservice=?, rcontent=?"
+				+ " where rid=?";
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement st = con.prepareStatement(sql);
-		ResultSet rs = st.executeQuery();
+		st.setInt(1, vo.getRservice());
+		st.setString(2, vo.getRcontent());
+		st.setString(3, vo.getRid());
 		
 		boolean result = false;
 		
-		rs.close();
+		int val = st.executeUpdate();
+		if(val != 0) {
+			result = true;
+		}
+		
 		st.close();
 		con.close();
 		
@@ -195,15 +227,19 @@ public class ReviewDAO implements ReviewService {
 	@Override
 	/* 리뷰 삭제하기 */
 	public boolean deleteReview(String rid) throws ClassNotFoundException, SQLException {
-		String sql = "";
+		String sql = "delete from review where rid=?";
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement st = con.prepareStatement(sql);
-		ResultSet rs = st.executeQuery();
+		st.setString(1, rid);
 		
 		boolean result = false;
 		
-		rs.close();
+		int val = st.executeUpdate();
+		if(val != 0) {
+			result = true;
+		}
+		
 		st.close();
 		con.close();
 		

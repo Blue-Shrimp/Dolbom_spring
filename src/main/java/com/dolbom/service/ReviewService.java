@@ -13,7 +13,7 @@ public interface ReviewService {
 	boolean hideReivew(String rid) throws ClassNotFoundException, SQLException;
 	boolean insertReview(ReviewVO vo) throws ClassNotFoundException, SQLException;
 	ArrayList<ReviewVO> getMyReviewList(String did) throws ClassNotFoundException, SQLException;
-	boolean updateReview(String rcontent, String rid) throws ClassNotFoundException, SQLException;
+	boolean updateReview(ReviewVO vo) throws ClassNotFoundException, SQLException;
 	boolean deleteReview(String rid) throws ClassNotFoundException, SQLException;
 	
 }

@@ -1,13 +1,61 @@
 package com.dolbom.vo;
 
 public class ApplyMemberVO {
-	private String aid, fid, did, aperson, adate;
+	private String aid, fid, did, aperson, adate, fpname, fstime, fetime, fweek, dname, rid;
 	private int astatus;
 	
 	public ApplyMemberVO() {
 
 	}
 	
+	public String getRid() {
+		return rid;
+	}
+
+	public void setRid(String rid) {
+		this.rid = rid;
+	}
+
+	public String getFpname() {
+		return fpname;
+	}
+
+	public void setFpname(String fpname) {
+		this.fpname = fpname;
+	}
+
+	public String getFstime() {
+		return fstime;
+	}
+
+	public void setFstime(String fstime) {
+		this.fstime = fstime;
+	}
+
+	public String getFetime() {
+		return fetime;
+	}
+
+	public void setFetime(String fetime) {
+		this.fetime = fetime;
+	}
+
+	public String getFweek() {
+		return fweek;
+	}
+
+	public void setFweek(String fweek) {
+		this.fweek = fweek;
+	}
+
+	public String getDname() {
+		return dname;
+	}
+
+	public void setDname(String dname) {
+		this.dname = dname;
+	}
+
 	public String getAid() {
 		return aid;
 	}

@@ -72,13 +72,33 @@ public class ApplyMemberDAO implements ApplyMemberService {
 	@Override
 	/* 돌봄 신청 내역 */
 	public ArrayList<ApplyMemberVO> getMyApplyList(String did) throws ClassNotFoundException, SQLException {
-		String sql = "";
+		String sql = "select aid, to_char(adate, 'yyyy.mm.dd hh24:mi:ss') adate, fpname, fstime, fetime, fweek, astatus, rid, a.fid"
+				+ " from apply_member a, facility f, (select rid, fid, did from review r where did=?) r"
+				+ " where a.fid = f.fid and a.did = ? and r.fid(+) = a.fid"
+				+ " order by adate desc";
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, did);
+		st.setString(2, did);
 		ResultSet rs = st.executeQuery();
 		
 		ArrayList<ApplyMemberVO> list_apply = new ArrayList<ApplyMemberVO>();
+		while(rs.next()) {
+			ApplyMemberVO vo = new ApplyMemberVO();
+			
+			vo.setAid(rs.getString(1));
+			vo.setAdate(rs.getString(2));
+			vo.setFpname(rs.getString(3));
+			vo.setFstime(rs.getString(4));
+			vo.setFetime(rs.getString(5));
+			vo.setFweek(rs.getString(6));
+			vo.setAstatus(rs.getInt(7));
+			vo.setRid(rs.getString(8));
+			vo.setFid(rs.getString(9));
+			
+			list_apply.add(vo);
+		}
 		
 		rs.close();
 		st.close();

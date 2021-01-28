@@ -39,7 +39,7 @@
 								<td class="w830">${detail.fpname }</td>
 								<th scope="row" class="w210">평점</th>
 								<td class="w300">
-									★${detail.fservice }
+									★${score }
 									<button class="navyBtn" type="button" id="btnReview">이용후기</button>
 								</td>
 							</tr>

@@ -163,8 +163,8 @@ public class FacilityController {
 				rttr.addFlashAttribute("msg1", true);
 				result = "redirect:/customer/myapply/list";				
 			} else { 
-				rttr.addFlashAttribute("msg1", true); String referer =
-				request.getHeader("Referer");
+				rttr.addFlashAttribute("msg1", true); 
+				String referer = request.getHeader("Referer");
 				result = "redirect:" + referer; 
 			}
 				 
