@@ -255,7 +255,15 @@ public class MemberVO {
 	}
 
 	public String getDemail() {
-		return demail1 + "@" + demail3;
+		String str = "";
+		
+		if(demail1 != null) {
+			str = demail1 + "@" + demail3;
+		} else {
+			str = demail;
+		}
+		
+		return str;
 	}
 
 	public void setDemail(String demail) {

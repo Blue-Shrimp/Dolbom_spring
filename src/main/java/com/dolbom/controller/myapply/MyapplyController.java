@@ -150,10 +150,39 @@ public class MyapplyController {
 			rttr.addFlashAttribute("msg3", true);
 			result = "redirect:/login";
 		} else {
+			ApplyMemberVO vo = applyMemberService.getApplyContent(aid);
 			
+			model.addAttribute("vo", vo);
 			model.addAttribute("aid", aid);
 			model.addAttribute("did", svo.getId());
 			result = "customer/myapply/detail";
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value="/applyDelete_proc.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String applyDelete_proc(@RequestParam(value = "aid") String aid, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else {
+			boolean delete_result = applyMemberService.deleteApply(aid);
+			
+			if(delete_result) {
+				rttr.addFlashAttribute("msg8", true);
+				result = "redirect:/customer/myapply/list";				
+			} else { 
+				rttr.addFlashAttribute("msg9", true); 
+				String referer = request.getHeader("Referer");
+				result = "redirect:" + referer; 
+			}
+				 
 		}
 		
 		return result;

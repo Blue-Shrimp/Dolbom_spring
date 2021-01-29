@@ -1,0 +1,341 @@
+	*{
+      box-sizing: border-box;
+   }
+   body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, form, fieldset , button, pre {
+       margin: 0;
+       padding: 0;
+       font-size: 14px;
+       color: #111;
+       font-family: 'Noto Sans KR';
+       font-weight: 400;
+   }
+   a {
+	    text-decoration: none;
+	}
+	ul, ol {
+	    list-style: none;
+	}
+	
+	/* 리스트 */
+	#m_container {
+	    position: relative;
+	    width: 1100px;
+	    margin: 0 auto;
+	}
+	#m_container .main {
+	    position: relative;
+	    background: #fff;
+	    margin-right: 50px;
+	}
+	.main .contents {
+	    min-height: 600px;
+	    padding-bottom: 50px;
+	}
+	.contents .subHeader {
+	    border-bottom: 1px solid #ddd;
+	    margin-bottom: 20px;
+	    width: 100%;
+	    box-sizing: border-box;
+	    padding: 25px 0 35px;
+	    text-align: center;
+	    position: relative;
+	}
+	.contents .subHeader h3 {
+	    font-size: 32px;
+	    color: #333;
+	    font-weight: bold;
+	}
+	.mypageDetail {
+	    position: relative;
+	    margin-top: 10px;
+	    border-top: 2px solid #666;
+	}
+	.w210 {
+	    width: 210px !important;
+	}
+	.w250 {
+	    width: 250px !important;
+	}
+	.w875 {
+	    width: 875px !important;
+	}
+	.mypageDetail tbody th {
+	    vertical-align: middle;
+	    box-sizing: border-box;
+	    background: #f9f9f9;
+	    text-align: left;
+	    padding: 15px 5px 15px 20px;
+	    border-bottom: 1px solid #e2e2e2;
+	    font-size: 16px;
+	    color: #111;
+	}
+	.mypageDetail tbody td {
+	    box-sizing: border-box;
+	    background: #fff;
+	    border-bottom: 1px solid #e2e2e2;
+	    padding: 9px 20px;
+	    font-size: 16px;
+	    color: #000;
+	    line-height: 34px;
+	    word-break: break-word;
+	    white-space: normal;
+	}
+	.childTable table thead th:first-child, .childTable table tbody td:first-child {
+	    border-left: 0;
+	}
+	.childTable table thead th {
+	    padding: 10px 0;
+	    height: 25px;
+	    background: #fafafa;
+	    vertical-align: middle;
+	    color: #111;
+	    font-weight: bold;
+	    border-bottom: 1px solid #e2e2e2;
+	    border-left: 1px solid #e2e2e2;
+	    text-align: center;
+	}
+	.childTable table tbody td {
+	    padding: 9px 10px;
+	    height: 50px;
+	    background: #fff;
+	    vertical-align: middle;
+	    border-bottom: 1px solid #e2e2e2;
+	    border-left: 1px solid #e2e2e2;
+	    line-height: 100%;
+	    text-align: center;
+	    letter-spacing: -1px;
+	    word-break: break-word;
+	    white-space: normal;
+	}
+	.btn_apply {
+	    position: relative;
+	    text-align: center;
+	    min-height: 56px;
+	    vertical-align: top;
+	    overflow: hidden;
+	    padding-bottom: 3px;
+	}
+	.memberDelte {
+		text-align: right;
+	}
+	.memberDelte a {
+		color: #333;
+		text-decoration: underline; 
+	}
+	.ibtn {
+	    width: 100px;
+	    height: 40px;
+	    border-color: #1c5a94;
+	    color: #fff;
+	    background-color: #1c5a94;
+	    font-size: 16px;
+	    font-weight: bold;
+	    cursor: pointer;
+	}
+	
+	/* 회원 탈퇴 */
+	.memberDeleteForm {
+	    text-align: center;	
+	}
+	.tb_exit {
+	    margin-bottom: 28px;
+	    margin-left: 400px;
+	}
+	.tb_exit tr {
+	    text-align: left;
+	}
+	.tb_exit th {
+	    position: relative;
+	    padding: 18px 0px;
+	    padding-left: 14px;
+	    font-weight: 500;
+	    font-size: 20px;
+	    line-height: 42px;
+	    color: #000;
+	    vertical-align: top;
+	    width: 195px;
+	}
+	.tb_exit th::before {
+	    content: '';
+	    position: absolute;
+	    left: 0;
+	    top: 36px;
+	    width: 4px;
+	    height: 4px;
+	    border-radius: 50%;
+	    margin-right: 10px;
+	    background-color: #000;
+	}
+	.tb_exit td {
+	    width: 478px;
+	    padding: 18px 0px;
+	    font-weight: 500;
+	    font-size: 20px;
+	    line-height: 42px;
+	    color: #000;
+	}
+	
+	/* 비밀번호 변경 */
+	.main_box {
+	    width: 50%;
+	    margin: 0 auto;
+	    margin-top: 20px;
+	    padding-top: 10px;
+	}
+	.main_box .input_box {
+	    width: 90%;
+	    height: 40px;
+	    margin: 0 auto;
+	    margin-top: 20px;
+	}
+	.main_box .input_box .left_box2 {
+	    width: 27%;
+	    float: left;
+	    margin-top: 10px;
+	    font-weight: 600;
+	    color: black;
+	    letter-spacing: 1px;
+	}
+	.main_box .input_box .right_box {
+	    width: 65%;
+	    float: left;
+	    font-weight: 600;
+	    color: black;
+	    letter-spacing: 1px;
+	}
+	.main_box .input_box .right_box .pw_blank {
+	    width: 95%;
+	    height: 30px;
+	    background-color: rgba(241, 241, 241, 0.43);
+	    padding-left: 5%;
+	    border: 1px solid #999;
+	    font-size: 16px;
+	    font-weight: 600;
+	    border-radius: 7px;
+	}
+	.main_box3 {
+	    width: 50%;
+	    margin: 0 auto;
+	    text-align: center;
+	    margin-top: 20px;
+	}
+	
+	/* 회원정보수정 */
+	.tbl-list {
+	    border-top: 1px solid #3b3b3b;
+	    border-bottom: 1px solid #3b3b3b;
+	    margin-top: 10px;
+	}
+	.tbl-list.form tbody th, .tbl-list.form tbody td {
+	    padding-left: 20px;
+	    padding-right: 20px;
+	    text-align: left;
+	}
+	.tbl-list th {
+	    color: #333;
+	    padding: 9px 0;
+	    background: #f5f5f5;
+	    border-bottom: 1px solid #d3d3d3;
+	}
+	.tbl-list td {
+	    border-top: 1px solid #e9e9e9;
+	    padding: 7px 0;
+	    background: #fff;
+	    border-bottom: 1px solid #d3d3d3;
+	}
+	.tbl-list.form td .inbox {
+	    width: 190px;
+	}
+	.inbox, input[type=text].inbox {
+	    font-size: 14px;
+	    margin: 0;
+	    padding: 0 5px 0 5px;
+	    border: 1px solid #898989;
+	    background: #fff;
+	    color: #333;
+	    line-height: 30px;
+	    height: 30px;
+	    box-sizing: border-box;
+	}
+	.tbl-list.form tbody td.input-num.type1 .inbox {
+	    width: 89px;
+	}
+	.tbl-list.form tbody td.input-num.type2 .inbox {
+	    width: 150px;
+	}
+	.tbl-list.form tbody td.input-num select + span, .tbl-list.form tbody td.input-num .inbox + span, .tbl-list.form tbody td.input-email select + span, .tbl-list.form tbody td.input-email .inbox + span {
+	    display: inline-block;
+	    width: 20px;
+	    text-align: center;
+	}
+	.tbl-list.form tbody td.input-num.input-email p {
+	    display: inline-block;
+	    width: 165px;
+	    margin-left: 5px;
+	}
+	select:disabled, .inbox:disabled, input[type=text].inbox:disabled, textarea.inbox:disabled {
+	    color: #aaa;
+	    border: 1px solid #d3d3d3;
+	    background-color: #f8f8f8;
+	}
+	select {
+	    height: 30px;
+	    padding: 4px 5px 4px 5px;
+	    font-family: inherit;
+	    border: 1px solid #898989;
+	    border-radius: 0px;
+	}
+	.tbl-list.form tbody td.input-num.input-email p select {
+	    width: 100%;
+	}
+	.tbl-list.form td.addr .inbox {
+	    width: 500px;
+	}
+	.graybtn {
+	    position: relative;
+	    margin: 0;
+	    display: inline-block;
+	    text-decoration: none !important;
+	    vertical-align: top;
+	    color: #fff;
+	    text-align: center;
+	    margin-right: 4px;
+	    border: 1px solid #ddd;
+	    background: #616161;
+	    margin-left: 5px;
+	    cursor: pointer;
+	    line-height: 28px;
+	    padding: 0 10px;
+	    min-width: 60px;
+	}
+	.tbl-list.form .child-info {
+	    margin-bottom: 10px;
+	}
+	.tbl-list.form .ctitle {
+	    font-size: 15px;
+	    font-weight: bold;
+	    border-bottom: 1px solid #898989;
+	    margin-bottom: 10px;
+	}
+	.tbl-list.form .ctitle span {
+	    padding-right: 100px;
+	    padding-left: 100px;
+	}
+	.tbl-list.form .input-child input:nth-child(1) {
+	    margin-right: 90px;
+	    margin-left: 75px;
+	    width: 89px;
+	}
+	.tbl-list.form .input-child select:nth-child(4) {
+	    margin-right: 70px;
+	}
+	.tbl-list.form .child-plus {
+	    text-align: center;
+	}
+	.join_btn {
+	    margin-top: 10px;
+	    text-align: center;
+	}
+	.tbl-list.form .childTable table th, .tbl-list.form .childTable table tbody td {
+	    text-align: center;
+	}

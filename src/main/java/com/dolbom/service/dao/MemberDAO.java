@@ -178,15 +178,74 @@ public class MemberDAO implements MemberService {
 	@Override
 	/* 회원 정보 수정 */
 	public boolean updateMember(MemberVO vo) throws ClassNotFoundException, SQLException  {
-		String sql = "";
+		String sql = "update dmember"
+				+ " set dname=?, dphone=?, demail=?, darea=?, dchildren=?"
+				+ " where did=?";
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement st = con.prepareStatement(sql);
-		ResultSet rs = st.executeQuery();
+		st.setString(1, vo.getDname());
+		st.setString(2, vo.getDphone());
+		st.setString(3, vo.getDemail());
+		st.setString(4, vo.getDarea());
+		st.setString(5, vo.getDchildren());
+		st.setString(6, vo.getDid());
 		
 		boolean result = false;
 		
-		rs.close();
+		int val = st.executeUpdate();
+		
+		if(val != 0) {
+			result = true;
+		}
+		
+		st.close();
+		con.close();
+		
+		return result;
+	}
+	
+	@Override
+	/* 회원 탈퇴 */
+	public boolean deleteMember(String did) throws ClassNotFoundException, SQLException  {
+		String sql = "delete from dmember where did=?";
+		
+		Connection con = dataSource.getConnection();
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, did);
+		
+		boolean result = false;
+		
+		int val = st.executeUpdate();
+		
+		if(val != 0) {
+			result = true;
+		}
+		
+		st.close();
+		con.close();
+		
+		return result;
+	}
+	
+	@Override
+	/* 비밀번호 변경 */
+	public boolean passEdit(MemberVO vo) throws ClassNotFoundException, SQLException  {
+		String sql = "update dmember set dpass=? where did=?";
+		
+		Connection con = dataSource.getConnection();
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, vo.getDpass());
+		st.setString(2, vo.getDid());
+		
+		boolean result = false;
+		
+		int val = st.executeUpdate();
+		
+		if(val != 0) {
+			result = true;
+		}
+		
 		st.close();
 		con.close();
 		

@@ -14,5 +14,7 @@ public interface MemberService {
 	String getFindPass(MemberVO vo) throws ClassNotFoundException, SQLException;
 	MemberVO getMemberContent(String did)  throws ClassNotFoundException, SQLException;
 	boolean updateMember(MemberVO vo)  throws ClassNotFoundException, SQLException;
+	boolean deleteMember(String did) throws ClassNotFoundException, SQLException;
+	boolean passEdit(MemberVO vo) throws ClassNotFoundException, SQLException;
 	
 }

@@ -108,6 +108,28 @@ public class ApplyMemberDAO implements ApplyMemberService {
 	}
 	
 	@Override
+	/* 돌봄 신청 아동 승인 */
+	public boolean deleteApply(String aid) throws ClassNotFoundException, SQLException {
+		String sql = "delete from apply_member where aid=?";
+		
+		Connection con = dataSource.getConnection();
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, aid);
+		
+		boolean result = false;
+		
+		int val = st.executeUpdate();
+		if(val != 0) {
+			result = true;
+		}
+		
+		st.close();
+		con.close();
+		
+		return result;
+	}
+	
+	@Override
 	/* 돌봄 신청 아동 목록 */
 	public ArrayList<ApplyMemberVO> getApplyList() throws ClassNotFoundException, SQLException {
 		String sql = "";
@@ -164,13 +186,26 @@ public class ApplyMemberDAO implements ApplyMemberService {
 	@Override
 	/* 돌봄 신청 상세 정보 */
 	public ApplyMemberVO getApplyContent(String aid) throws ClassNotFoundException, SQLException {
-		String sql = "";
+		String sql = "select to_char(adate, 'yyyy.mm.dd hh24:mi:ss') adate, aid, dname, fpname, fstime, fetime, astatus, aperson"
+				+ " from apply_member a, dmember d, facility f"
+				+ " where a.did=d.did and a.fid=f.fid and aid=?";
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, aid);
 		ResultSet rs = st.executeQuery();
 		
 		ApplyMemberVO vo = new ApplyMemberVO();
+		while(rs.next()) {
+			vo.setAdate(rs.getString(1));
+			vo.setAid(rs.getString(2));
+			vo.setDname(rs.getString(3));
+			vo.setFpname(rs.getString(4));
+			vo.setFstime(rs.getString(5));
+			vo.setFetime(rs.getString(6));
+			vo.setAstatus(rs.getInt(7));
+			vo.setAperson(rs.getString(8));
+		}
 		
 		rs.close();
 		st.close();

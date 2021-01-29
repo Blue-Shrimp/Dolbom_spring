@@ -18,7 +18,9 @@
 	} else if("${msg3}"){
 		alert("로그인이 필요한 서비스입니다.");	
 	} else if("${msg4}"){
-		alert("괸라자만 이용할수 있습니다.");	
+		alert("관리자만 이용할수 있습니다.");	
+	} else if("${msg5}"){
+		alert("회원탈퇴가 완료되었습니다.");	
 	}
 </script>
 </head>

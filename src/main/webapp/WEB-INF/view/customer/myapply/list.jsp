@@ -25,6 +25,10 @@
 		alert("후기가 수정되었습니다.")
 	} else if("${msg7}"){
 		alert("후기 수정에 실패하였습니다.")
+	} else if("${msg8}"){
+		alert("신청이 취소되었습니다.")
+	} else if("${msg9}"){
+		alert("신청 취소가 실패하였습니다.")
 	}
 </script>
 </head>

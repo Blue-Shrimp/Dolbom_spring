@@ -81,6 +81,9 @@
 	.w830 {
 	    width: 830px !important;
 	}
+	.w415 {
+	    width: 415px !important;
+	}
 	.applyList table thead th {
 	    padding: 10px 0;
 	    height: 25px;
@@ -289,4 +292,67 @@
 	}
 	.wrapBtn{
 		text-align: right;
+	}
+	
+	/* 신청 상세정보 */
+	.applySubTitle {
+	    font-size: 18px;
+	    font-weight: bold;
+	}
+	.applyDetail {
+	    position: relative;
+	    margin-top: 10px;
+	    border-top: 2px solid #666;
+	    margin-bottom: 20px;
+	}
+	.applyDetail tbody th {
+	    vertical-align: middle;
+	    box-sizing: border-box;
+	    background: #f9f9f9;
+	    text-align: left;
+	    padding: 15px 5px 15px 20px;
+	    border-bottom: 1px solid #e2e2e2;
+	    font-size: 16px;
+	    color: #111;
+	}
+	.applyDetail tbody td {
+	    box-sizing: border-box;
+	    background: #fff;
+	    border-bottom: 1px solid #e2e2e2;
+	    padding: 9px 20px;
+	    font-size: 16px;
+	    color: #000;
+	    line-height: 34px;
+	    word-break: break-word;
+	    white-space: normal;
+	}
+	.btn_apply {
+	    position: relative;
+	    text-align: right;
+	    min-height: 56px;
+	    margin: 40px auto 50px;
+	    vertical-align: top;
+	    overflow: hidden;
+	    padding-bottom: 3px;
+	}
+	.ibtn {
+	    width: 100px;
+	    height: 40px;
+	    border-color: #1c5a94;
+	    color: #fff;
+	    background-color: #1c5a94;
+	    font-size: 16px;
+	    font-weight: bold;
+	    cursor: pointer;
+	}
+	.btnWhite {
+	    display: inline-block;
+	    background: #fff;
+	    color: #1c5a94;
+	    font-size: 16px;
+	    height: 40px;
+	    width: 100px;
+	    border: 1px solid #bababa;
+	    font-weight: bold;
+	    cursor: pointer;
 	}

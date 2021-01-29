@@ -10,6 +10,7 @@ public interface ApplyMemberService {
 	boolean insertApply(ApplyMemberVO vo) throws ClassNotFoundException, SQLException;
 	ArrayList<ApplyMemberVO> getMyApplyList(String did) throws ClassNotFoundException, SQLException;
 	ArrayList<ApplyMemberVO> getApplyList() throws ClassNotFoundException, SQLException;
+	boolean deleteApply(String aid) throws ClassNotFoundException, SQLException;
 	boolean approvalApply(String aid) throws ClassNotFoundException, SQLException;
 	boolean rejectApply(String aid) throws ClassNotFoundException, SQLException;
 	ApplyMemberVO getApplyContent(String aid) throws ClassNotFoundException, SQLException;
