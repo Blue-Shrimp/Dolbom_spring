@@ -1,55 +1,47 @@
-package com.dolbom.service.dao;
+package com.dolbom.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dolbom.vo.NoticeVO;
 
 @Service
-public class NoticeDAO {
-
+public class NoticeServiceImpl implements NoticeService {
+	
 	@Autowired
-	private SqlSessionTemplate sqlSession; 
-	
-	private static String namespace = "mapper.notice";
-	
-	/* 공지사항 목록 */
+	private NoticeService noticeService;
+
+	@Override
 	public ArrayList<NoticeVO> getNoticeList() throws ClassNotFoundException, SQLException {
-		ArrayList<NoticeVO> list_board = new ArrayList<NoticeVO>();
-		
-		return list_board;
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	/* 공지사항 상세 내용 */
+
+	@Override
 	public NoticeVO getNoticeContent(String bid) throws ClassNotFoundException, SQLException {
-		NoticeVO vo = new NoticeVO();
-		
-		return vo;
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	/* 공지사항 등록 */
+
+	@Override
 	public boolean insertNotice(NoticeVO vo) throws ClassNotFoundException, SQLException {
-		boolean result = false;
-		
-		return result;
+		// TODO Auto-generated method stub
+		return false;
 	}
-	
-	/* 공지사항 수정 */
+
+	@Override
 	public boolean updateNotice(NoticeVO vo) throws ClassNotFoundException, SQLException {
-		boolean result = false;
-		
-		return result;
+		// TODO Auto-generated method stub
+		return false;
 	}
-	
-	/* 공지사항 삭제 */
+
+	@Override
 	public boolean deleteNotice(String bid) throws ClassNotFoundException, SQLException {
-		boolean result = false;
-		
-		return result;
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

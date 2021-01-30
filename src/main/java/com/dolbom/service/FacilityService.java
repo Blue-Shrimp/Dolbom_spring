@@ -1,18 +1,25 @@
 package com.dolbom.service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dolbom.utils.PagingVO;
 import com.dolbom.vo.FacilityVO;
 
 public interface FacilityService {
-	ArrayList<FacilityVO> getFacilityList() throws ClassNotFoundException, SQLException;
-	ArrayList<FacilityVO> getFacilityList(PagingVO vo) throws ClassNotFoundException, SQLException;
-	ArrayList<FacilityVO> getFacilityList(String sido, String gugun, String keyword, PagingVO vo) throws ClassNotFoundException, SQLException;
-	int getCountFacility() throws ClassNotFoundException, SQLException;
-	int getCountFacility(String sido, String gugun, String keyword) throws ClassNotFoundException, SQLException;
-	FacilityVO getFacilityContent(String fid) throws ClassNotFoundException, SQLException;
+	String getFacilityList(PagingVO pvo, Model model, 
+			@RequestParam(defaultValue = "")String sido,
+			@RequestParam(defaultValue = "")String gugun,
+			@RequestParam(defaultValue = "")String keyword,
+			@RequestParam(value="nowPage", required=false)String nowPage,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage, 
+			HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
+	String getFacilityContent(@RequestParam(value = "fid") String fid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
 	boolean insertFacility(FacilityVO vo) throws ClassNotFoundException, SQLException;
 	boolean updateFacility(FacilityVO vo) throws ClassNotFoundException, SQLException;
 	boolean deleteFacility(String fid) throws ClassNotFoundException, SQLException;

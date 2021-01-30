@@ -30,7 +30,7 @@
 			    </div>
 			    <div class="contentsWrap">
 			    	<div class="contents">
-			    		<form name="joinForm" action="join_proc.do" method="post" class="join">
+			    		<form name="joinForm" action="join_proc.do" method="post">
 			    			<div class="jtitle"><span class="red">*</span>표시 항목은 필수 입력 항목 입니다.</div>
 			    			<div class="tbl-list form">
 			                    <table>

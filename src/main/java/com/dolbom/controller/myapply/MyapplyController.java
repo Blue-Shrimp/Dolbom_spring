@@ -1,10 +1,8 @@
 package com.dolbom.controller.myapply;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dolbom.service.ApplyMemberService;
 import com.dolbom.service.ReviewService;
-import com.dolbom.vo.ApplyMemberVO;
-import com.dolbom.vo.FacilityVO;
 import com.dolbom.vo.ReviewVO;
-import com.dolbom.vo.SessionVO;
 
 @Controller
 @RequestMapping("/customer/myapply/")
@@ -33,159 +28,32 @@ public class MyapplyController {
 	
 	@RequestMapping(value="list", method=RequestMethod.GET)
 	public String list(Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
-		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("svo");
-		
-		SessionVO svo = (SessionVO) obj;
-		
-		String result = "";
-		
-		if (obj == null) {
-			rttr.addFlashAttribute("msg3", true);
-			result = "redirect:/login";
-		} else {
-			ArrayList<ApplyMemberVO> apply_list = applyMemberService.getMyApplyList(svo.getId());
-			ArrayList<ReviewVO> review_list = reviewService.getMyReviewList(svo.getId());
-			
-			model.addAttribute("review_list", review_list);
-			model.addAttribute("did",svo.getId());
-			model.addAttribute("list", apply_list);
-			result = "customer/myapply/list";
-		}
-		
-		return result;
+		return applyMemberService.getMyApplyList(model, request, rttr);
 	}
 	
 	@RequestMapping(value="/reviewInsert_proc.do", method= RequestMethod.POST)
 	public String reviewInsert_proc(ReviewVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
-		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("svo");
-		
-		String result = "";
-		
-		if (obj == null) {
-			rttr.addFlashAttribute("msg3", true);
-			result = "redirect:/login";
-		} else {
-			boolean insert_result = reviewService.insertReview(vo);
-			
-			if(insert_result) {
-				rttr.addFlashAttribute("msg2", true);
-				result = "redirect:/customer/myapply/list";				
-			} else { 
-				rttr.addFlashAttribute("msg3", true); 
-				String referer = request.getHeader("Referer");
-				result = "redirect:" + referer; 
-			}
-				 
-		}
-		
-		return result;
+		return reviewService.insertReview(vo, request, rttr);
 	}
 	
 	@RequestMapping(value="/reviewDelete_proc.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String reviewDelete_proc(@RequestParam(value = "rid") String rid, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
-		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("svo");
-		
-		String result = "";
-		
-		if (obj == null) {
-			rttr.addFlashAttribute("msg3", true);
-			result = "redirect:/login";
-		} else {
-			boolean delete_result = reviewService.deleteReview(rid);
-			
-			if(delete_result) {
-				rttr.addFlashAttribute("msg4", true);
-				result = "redirect:/customer/myapply/list";				
-			} else { 
-				rttr.addFlashAttribute("msg5", true); 
-				String referer = request.getHeader("Referer");
-				result = "redirect:" + referer; 
-			}
-				 
-		}
-		
-		return result;
+		return reviewService.deleteReview(rid, request, rttr);
 	}
 	
 	@RequestMapping(value="/reviewUpdate_proc.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String reviewUpate_proc(ReviewVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
-		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("svo");
-		
-		String result = "";
-		
-		if (obj == null) {
-			rttr.addFlashAttribute("msg3", true);
-			result = "redirect:/login";
-		} else {
-			boolean update_result = reviewService.updateReview(vo);
-			
-			if(update_result) {
-				rttr.addFlashAttribute("msg6", true);
-				result = "redirect:/customer/myapply/list";				
-			} else { 
-				rttr.addFlashAttribute("msg7", true); 
-				String referer = request.getHeader("Referer");
-				result = "redirect:" + referer; 
-			}
-				 
-		}
-		
-		return result;
+		return reviewService.updateReview(vo, request, rttr);
 	}
 	
 	@RequestMapping(value="detail", method= RequestMethod.GET)
 	public String detail(@RequestParam(value = "aid") String aid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
-		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("svo");
-		
-		SessionVO svo = (SessionVO) obj;
-		
-		String result = "";
-		
-		if (obj == null) {
-			rttr.addFlashAttribute("msg3", true);
-			result = "redirect:/login";
-		} else {
-			ApplyMemberVO vo = applyMemberService.getApplyContent(aid);
-			
-			model.addAttribute("vo", vo);
-			model.addAttribute("aid", aid);
-			model.addAttribute("did", svo.getId());
-			result = "customer/myapply/detail";
-		}
-		
-		return result;
+		return applyMemberService.getApplyContent(aid, model, request, rttr);
 	}
 	
 	@RequestMapping(value="/applyDelete_proc.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String applyDelete_proc(@RequestParam(value = "aid") String aid, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
-		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("svo");
-		
-		String result = "";
-		
-		if (obj == null) {
-			rttr.addFlashAttribute("msg3", true);
-			result = "redirect:/login";
-		} else {
-			boolean delete_result = applyMemberService.deleteApply(aid);
-			
-			if(delete_result) {
-				rttr.addFlashAttribute("msg8", true);
-				result = "redirect:/customer/myapply/list";				
-			} else { 
-				rttr.addFlashAttribute("msg9", true); 
-				String referer = request.getHeader("Referer");
-				result = "redirect:" + referer; 
-			}
-				 
-		}
-		
-		return result;
+		return applyMemberService.deleteApply(aid, request, rttr);
 	}
 
 }

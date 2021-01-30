@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="mapper.applyMember">
+    <select id="applyPeople" 
+    	parameterType="java.lang.String" 
+		resultType="int"> 
+		select count(*) cnt
+		from apply_member
+		where astatus=1 and fid=#{fid}
+	</select>
+	
+	<insert id="insertApply" 
+		parameterType="com.dolbom.vo.ApplyMemberVO"> 
+		insert into apply_member
+		values('A_'|| seq_apply_member.nextval,#{fid},#{did},#{aperson},0,sysdate)
+	</insert>
+	
+	<select id="myApplyList" 
+    	parameterType="java.lang.String" 
+		resultType="com.dolbom.vo.ApplyMemberVO"> 
+		select aid, to_char(adate, 'yyyy.mm.dd hh24:mi:ss') adate, fpname, fstime, fetime, fweek, astatus, rid, a.fid fid
+		from apply_member a, facility f, (select rid, fid, did from review r where did=#{did}) r
+		where a.fid = f.fid and a.did = #{did} and r.fid(+) = a.fid
+		order by adate desc
+	</select>
+	
+	<select id="applyContent" 
+    	parameterType="java.lang.String" 
+		resultType="com.dolbom.vo.ApplyMemberVO"> 
+		select to_char(adate, 'yyyy.mm.dd hh24:mi:ss') adate, aid, dname, fpname, fstime, fetime, astatus, aperson
+		from apply_member a, dmember d, facility f
+		where a.did=d.did and a.fid=f.fid and aid=#{aid}
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from apply_member where aid=#{aid}
+	</delete>
+	
+</mapper>
+

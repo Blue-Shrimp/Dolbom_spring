@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="mapper.facility">
+    <select id="list" 
+    	parameterType="map" 
+		resultType="com.dolbom.vo.FacilityVO"> 
+		select *
+		from (select rownum rno, fid, fpname, flocation, fpeople, cnt fcnt, rservice fservice, fsido, fgugun
+		from facility_list
+		where fsido like '%'||#{sido}||'%' and fgugun like '%'||#{gugun}||'%' and fpname like '%'||#{keyword}||'%')
+		where rno between #{start} and #{end}
+	</select>
+	
+	<select id="count" 
+    	parameterType="map" 
+		resultType="int"> 
+		select count(*)
+		from facility_list
+		where fsido like '%'||#{sido}||'%' and fgugun like '%'||#{gugun}||'%' and fpname like '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="content" 
+    	parameterType="java.lang.String" 
+		resultType="com.dolbom.vo.FacilityVO"> 
+		select fpname, rservice fservice, fname, flocation, fphone, fstime, fetime, fweek, fprogram, fimg, fsimg, fpeople
+		from facility f, (select fid, round(avg(rservice),1) rservice from review group by fid) r
+		where f.fid=r.fid(+) and f.fid=#{fid}
+	</select>
+	
+</mapper>
+

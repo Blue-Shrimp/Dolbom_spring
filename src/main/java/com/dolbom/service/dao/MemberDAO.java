@@ -1,254 +1,77 @@
 package com.dolbom.service.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-import javax.sql.DataSource;
-
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dolbom.service.MemberService;
 import com.dolbom.vo.MemberVO;
 import com.dolbom.vo.SessionVO;
 
 @Service
-public class MemberDAO implements MemberService {
-
-	@Autowired
-	private DataSource dataSource;
+public class MemberDAO {
 	
-	@Override
+	@Autowired
+	private SqlSessionTemplate sqlSession; 
+	
+	private static String namespace = "mapper.member";
+	
 	/* 회원가입 */
 	public boolean insertMember(MemberVO vo) throws ClassNotFoundException, SQLException  {
-		String sql = "insert into dmember values(?,?,?,?,?,?,?,sysdate)";
-		
-		Connection con = dataSource.getConnection();
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, vo.getDid());
-		st.setString(2, vo.getDpass());
-		st.setString(3, vo.getDname());
-		st.setString(4, vo.getDphone());
-		st.setString(5, vo.getDemail());
-		st.setString(6, vo.getDarea());
-		st.setString(7, vo.getDchildren());
-		
 		boolean result = false;
-		
-		int val = st.executeUpdate();
-		
-		if(val != 0) {
-			result = true;
-		}
-		
-		st.close();
-		con.close();
-		
-		return result;
+		int value = sqlSession.insert(namespace+".join", vo);
+		if(value != 0) result = true;
+		return result; 
 	}
 	
-	@Override
-	/* 로그인 */
-	public SessionVO getLogin(MemberVO vo) throws ClassNotFoundException, SQLException  {
-		SessionVO svo = new SessionVO();
-		
-		String sql = "select count(*), dname, did from dmember where did=? and dpass=? group by dname, did";
-		
-		Connection con = dataSource.getConnection();
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, vo.getDid());
-		st.setString(2, vo.getDpass());
-		ResultSet rs = st.executeQuery();
-		
-		while(rs.next()) {
-			svo.setResult(rs.getInt(1));
-			svo.setName(rs.getString(2));
-			svo.setId(rs.getString(3));
-		}
-		
-		rs.close();
-		st.close();
-		con.close();
-		
-		return svo;
+	/*로그인*/
+	public SessionVO getLogin(MemberVO vo) {		
+	     return sqlSession.selectOne(namespace +".login",vo);
 	}
-	@Override
+	
+	
 	/*아이디 중복 체크 */
 	public int getIdCheck(String did) throws ClassNotFoundException, SQLException {
-		int result = 0;
-		String sql ="select count(*) from dmember where did=?";
-		
-		Connection con = dataSource.getConnection();
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, did);
-		ResultSet rs = st.executeQuery();
-		
-		while(rs.next()) {
-			result = rs.getInt(1);
-		}
-		
-		rs.close();
-		st.close();
-		con.close();
-		
-		return result;
+		return sqlSession.selectOne(namespace +".idCheck",did);
 	}
 	
-	@Override
 	/*아이디 찾기 */
 	public String getFindId(MemberVO vo) throws ClassNotFoundException, SQLException {
-		String id = "";
-		String sql ="select did from dmember where dname=? and dphone=?";
-		
-		Connection con = dataSource.getConnection();
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, vo.getDname());
-		st.setString(2, vo.getDphone());
-		ResultSet rs = st.executeQuery();
-		
-		while(rs.next()) {
-			id = rs.getString(1);
-		}
-		
-		rs.close();
-		st.close();
-		con.close();
-		
-		return id;
+		return sqlSession.selectOne(namespace +".findId",vo);
 	}
 	
-	@Override
 	/*비밀번호 찾기 */
 	public String getFindPass(MemberVO vo) throws ClassNotFoundException, SQLException {
-		String id = "";
-		String sql ="select dpass from dmember where did=? and dname=? and dphone=?";
-		
-		Connection con = dataSource.getConnection();
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, vo.getDid());
-		st.setString(2, vo.getDname());
-		st.setString(3, vo.getDphone());
-		ResultSet rs = st.executeQuery();
-		
-		while(rs.next()) {
-			id = rs.getString(1);
-		}
-		
-		rs.close();
-		st.close();
-		con.close();
-		
-		return id;
+		return sqlSession.selectOne(namespace +".findPass",vo);
 	}
 	
-	@Override
 	/* 회원 상세 정보 */
 	public MemberVO getMemberContent(String did) throws ClassNotFoundException, SQLException  {
-		String sql = "select did, dpass, dname, dphone, demail, darea, dchildren, to_char(ddate, 'yyyy.mm.dd') ddate"
-				+ " from dmember"
-				+ " where did=?";
-		
-		Connection con = dataSource.getConnection();
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, did);
-		ResultSet rs = st.executeQuery();
-		
-		MemberVO vo = new MemberVO();
-		while(rs.next()) {
-			vo.setDid(rs.getString(1));
-			vo.setDpass(rs.getString(2));
-			vo.setDname(rs.getString(3));
-			vo.setDphone(rs.getString(4));
-			vo.setDemail(rs.getString(5));
-			vo.setDarea(rs.getString(6));
-			vo.setDchildren(rs.getString(7));
-			vo.setDdate(rs.getString(8));
-		}
-		
-		rs.close();
-		st.close();
-		con.close();
-		
-		return vo;
+		return sqlSession.selectOne(namespace +".content",did);
 	}
 	
-	@Override
 	/* 회원 정보 수정 */
 	public boolean updateMember(MemberVO vo) throws ClassNotFoundException, SQLException  {
-		String sql = "update dmember"
-				+ " set dname=?, dphone=?, demail=?, darea=?, dchildren=?"
-				+ " where did=?";
-		
-		Connection con = dataSource.getConnection();
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, vo.getDname());
-		st.setString(2, vo.getDphone());
-		st.setString(3, vo.getDemail());
-		st.setString(4, vo.getDarea());
-		st.setString(5, vo.getDchildren());
-		st.setString(6, vo.getDid());
-		
 		boolean result = false;
-		
-		int val = st.executeUpdate();
-		
-		if(val != 0) {
-			result = true;
-		}
-		
-		st.close();
-		con.close();
-		
-		return result;
+		int value = sqlSession.update(namespace+".update", vo);
+		if(value != 0) result = true;
+		return result; 
 	}
 	
-	@Override
 	/* 회원 탈퇴 */
 	public boolean deleteMember(String did) throws ClassNotFoundException, SQLException  {
-		String sql = "delete from dmember where did=?";
-		
-		Connection con = dataSource.getConnection();
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, did);
-		
 		boolean result = false;
-		
-		int val = st.executeUpdate();
-		
-		if(val != 0) {
-			result = true;
-		}
-		
-		st.close();
-		con.close();
-		
+		int value = sqlSession.delete(namespace+".delete", did);
+		if(value != 0) result = true;
 		return result;
 	}
 	
-	@Override
 	/* 비밀번호 변경 */
 	public boolean passEdit(MemberVO vo) throws ClassNotFoundException, SQLException  {
-		String sql = "update dmember set dpass=? where did=?";
-		
-		Connection con = dataSource.getConnection();
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, vo.getDpass());
-		st.setString(2, vo.getDid());
-		
 		boolean result = false;
-		
-		int val = st.executeUpdate();
-		
-		if(val != 0) {
-			result = true;
-		}
-		
-		st.close();
-		con.close();
-		
+		int value = sqlSession.update(namespace+".passEdit", vo);
+		if(value != 0) result = true;
 		return result;
 	}
 

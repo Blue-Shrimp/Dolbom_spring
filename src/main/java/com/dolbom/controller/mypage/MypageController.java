@@ -25,25 +25,7 @@ public class MypageController {
 	
 	@RequestMapping(value="detail", method=RequestMethod.GET)
 	public String list(Model model,HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
-		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("svo");
-		
-		SessionVO svo = (SessionVO)obj;
-		
-		String result = "";
-		
-		if (obj == null) {
-			rttr.addFlashAttribute("msg3", true);
-			result = "redirect:/login";
-		} else {
-			MemberVO vo = memberService.getMemberContent(svo.getId());
-			
-			model.addAttribute("vo", vo);
-			model.addAttribute("did",svo.getId());
-			result = "customer/mypage/detail";
-		}
-		
-		return result;
+		return memberService.getMemberContent(model, request, rttr);
 	}
 	
 	@RequestMapping(value="delete", method=RequestMethod.GET)
@@ -68,30 +50,7 @@ public class MypageController {
 	
 	@RequestMapping(value="memberDeleteProc.do", method=RequestMethod.POST)
 	public String memberDeleteProc(Model model,HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
-		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("svo");
-		
-		SessionVO svo = (SessionVO)obj;
-		
-		String result = "";
-		
-		if (obj == null) {
-			rttr.addFlashAttribute("msg3", true);
-			result = "redirect:/login";
-		} else {
-			boolean delete_result = memberService.deleteMember(svo.getId());
-			
-			if(delete_result) {
-				rttr.addFlashAttribute("msg5", true);
-				result = "redirect:/login";				
-			} else { 
-				rttr.addFlashAttribute("msg1", true); 
-				String referer = request.getHeader("Referer");
-				result = "redirect:" + referer; 
-			}
-		}
-		
-		return result;
+		return memberService.deleteMember(model, request, rttr);
 	}
 	
 	@RequestMapping(value="passEdit", method=RequestMethod.GET)
@@ -116,81 +75,17 @@ public class MypageController {
 	
 	@RequestMapping(value="passEditProc.do", method=RequestMethod.POST)
 	public String passEditProc(MemberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
-		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("svo");
-		
-		SessionVO svo = (SessionVO)obj;
-		
-		String result = "";
-		
-		if (obj == null) {
-			rttr.addFlashAttribute("msg3", true);
-			result = "redirect:/login";
-		} else {
-			boolean update_result = memberService.passEdit(vo);
-			
-			if(update_result) {
-				rttr.addFlashAttribute("msg1", true);
-				result = "redirect:/customer/mypage/detail";				
-			} else { 
-				rttr.addFlashAttribute("msg1", true); 
-				String referer = request.getHeader("Referer");
-				result = "redirect:" + referer; 
-			}
-		}
-		
-		return result;
+		return memberService.passEdit(vo, request, rttr);
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.GET)
 	public String update(Model model,HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
-		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("svo");
-		
-		SessionVO svo = (SessionVO)obj;
-		
-		String result = "";
-		
-		if (obj == null) {
-			rttr.addFlashAttribute("msg3", true);
-			result = "redirect:/login";
-		} else {
-			MemberVO vo = memberService.getMemberContent(svo.getId());
-			
-			model.addAttribute("vo", vo);
-			model.addAttribute("did",svo.getId());
-			result = "customer/mypage/update";
-		}
-		
-		return result;
+		return memberService.getMemberUpdateContent(model, request, rttr);
 	}
 	
 	@RequestMapping(value="memberUpdateProc.do", method=RequestMethod.POST)
 	public String memberUpdateProc(MemberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
-		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("svo");
-		
-		SessionVO svo = (SessionVO)obj;
-		
-		String result = "";
-		
-		if (obj == null) {
-			rttr.addFlashAttribute("msg3", true);
-			result = "redirect:/login";
-		} else {
-			boolean update_result = memberService.updateMember(vo);
-			
-			if(update_result) {
-				rttr.addFlashAttribute("msg2", true);
-				result = "redirect:/customer/mypage/detail";				
-			} else { 
-				rttr.addFlashAttribute("msg1", true); 
-				String referer = request.getHeader("Referer");
-				result = "redirect:" + referer; 
-			}
-		}
-		
-		return result;
+		return memberService.updateMember(vo, request, rttr);
 	}
 
 }

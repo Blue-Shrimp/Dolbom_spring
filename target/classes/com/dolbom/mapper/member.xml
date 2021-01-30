@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="mapper.member">
+    <select id="login" 
+		parameterType="com.dolbom.vo.MemberVO" 
+		resultType="com.dolbom.vo.SessionVO"> 
+		select count(*) result, dname, did
+			from dmember 
+				 where did=#{did} and dpass=#{dpass} group by dname, did
+	</select>
+	
+	<select id="findId" 
+		parameterType="com.dolbom.vo.MemberVO" 
+		resultType="String"> 
+		select did from dmember where dname=#{dname} and dphone=#{dphone}
+	</select>
+	
+	<select id="findPass" 
+		parameterType="com.dolbom.vo.MemberVO" 
+		resultType="String"> 
+		select dpass from dmember where did=#{did} and dname=#{dname} and dphone=#{dphone}
+	</select>
+	
+	<select id="idCheck" 
+		parameterType="java.lang.String" 
+		resultType="int"> 
+		select count(*) from dmember where did=#{did}
+	</select>
+	
+	<insert id="join" 
+		parameterType="com.dolbom.vo.MemberVO"> 
+		insert into dmember 
+		values(#{did},#{dpass},#{dname},#{dphone},#{demail},#{darea},#{dchildren},sysdate)
+	</insert>
+	
+	<select id="content" 
+		parameterType="java.lang.String" 
+		resultType="com.dolbom.vo.MemberVO"> 
+		select did, dpass, dname, dphone, demail, darea, dchildren, to_char(ddate, 'yyyy.mm.dd') ddate
+		from dmember
+		where did=#{did}
+	</select>
+	
+	<update id="update" 
+		parameterType="com.dolbom.vo.MemberVO"> 
+		update dmember
+		set dname=#{dname}, dphone=#{dphone}, demail=#{demail}, darea=#{darea}, dchildren=#{dchildren}
+		where did=#{did}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from dmember where did=#{did}
+	</delete>
+	
+	<update id="passEdit" 
+		parameterType="com.dolbom.vo.MemberVO"> 
+		update dmember set dpass=#{dpass} where did=#{did}
+	</update>
+	
+</mapper>
+

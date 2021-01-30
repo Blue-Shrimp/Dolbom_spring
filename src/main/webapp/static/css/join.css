@@ -14,10 +14,9 @@
 	    margin: 0 auto;
 	}
 	.join {
-	    overflow: hidden;
 	    position: relative;
 	    background-color: #f1f1f1;
-	    min-height: 937px;
+	    min-height: 1000px;
 	}
 	.join-content {
 	    position: absolute;

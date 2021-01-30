@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dolbom.service.MemberService;
-import com.dolbom.service.dao.MemberDAO;
 import com.dolbom.vo.MemberVO;
 import com.dolbom.vo.SessionVO;
 
@@ -72,18 +71,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/login/findId_proc.do", method=RequestMethod.POST)
 	public String findId_proc(MemberVO vo, Model model, RedirectAttributes rttr, HttpSession session) throws ClassNotFoundException, SQLException {
-		String id = memberService.getFindId(vo);
-		String result = "";
-		
-		if(id.equals("")) {
-			rttr.addFlashAttribute("msg", true);
-			result = "redirect:/login/findId";				
-		}else {
-			model.addAttribute("id", id);
-			result = "login/findId_success";
-		}
-		
-		return result;
+		return memberService.getFindId(vo, model, rttr, session);
 	}
 	
 	@RequestMapping(value="/login/findId_success", method=RequestMethod.GET)
@@ -98,18 +86,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/login/findPass_proc.do", method=RequestMethod.POST)
 	public String findPass_proc(MemberVO vo, Model model, RedirectAttributes rttr, HttpSession session) throws ClassNotFoundException, SQLException {
-		String pass = memberService.getFindPass(vo);
-		String result = "";
-		
-		if(pass.equals("")) {
-			rttr.addFlashAttribute("msg", true);
-			result = "redirect:/login/findPass";				
-		}else {
-			model.addAttribute("pass", pass);
-			result = "login/findPass_success";
-		}
-		
-		return result;
+		return memberService.getFindPass(vo, model, rttr, session);
 	}
 	
 	@RequestMapping(value="/login/findPass_success", method=RequestMethod.GET)

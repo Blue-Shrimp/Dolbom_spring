@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="mapper.review">
+    <select id="count" 
+    	parameterType="java.lang.String" 
+		resultType="int"> 
+		select count(*) cnt
+		from review
+		where fid=#{fid}
+	</select>
+	
+	<select id="score" 
+    	parameterType="java.lang.String" 
+		resultType="double"> 
+		select round(avg(rservice),1) rservice
+		from review
+		where fid=#{fid}
+	</select>
+	
+	<select id="list" 
+    	parameterType="java.lang.String" 
+		resultType="com.dolbom.vo.ReviewVO"> 
+		select dname, r.did, rservice, rcontent, to_char(rdate, 'yyyy.mm.dd') rdate
+		from review r, dmember d
+		where d.did = r.did and rstatus=1 and fid=#{fid}
+		order by rdate desc
+	</select>
+	
+	<select id="myReviewList" 
+    	parameterType="java.lang.String" 
+		resultType="com.dolbom.vo.ReviewVO"> 
+		select rid, fid, dname, r.did did, rservice, rcontent, to_char(rdate, 'yyyy.mm.dd') rdate
+		from review r, dmember d
+		where d.did = r.did and r.did=#{did}
+	</select>
+	
+	<insert id="insertReview" 
+		parameterType="com.dolbom.vo.ReviewVO"> 
+		insert into review
+		values('R_'|| seq_review.nextval,#{fid},#{did},#{rservice},#{rcontent},1,sysdate)
+	</insert>
+	
+	<update id="update" 
+		parameterType="com.dolbom.vo.ReviewVO"> 
+		update review
+		set rservice=#{rservice}, rcontent=#{rcontent}
+		where rid=#{rid}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from review where rid=#{rid}
+	</delete>
+	
+</mapper>
+
