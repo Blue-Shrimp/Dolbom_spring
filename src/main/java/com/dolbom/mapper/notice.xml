@@ -6,5 +6,31 @@
     
 <mapper namespace="mapper.notice">
 	
+	<select id="list" 
+    	parameterType="map" 
+		resultType="com.dolbom.vo.NoticeVO"> 
+		select *
+		from (select rownum rno, bid, btitle, bcharge, to_char(bdate,'yyyy.mm.dd') bdate
+			  from (select * from board order by bdate desc)
+			  where btitle like '%'||#{keyword}||'%')
+		where rno between #{start} and #{end}
+	</select>
+	
+	<select id="count" 
+    	parameterType="java.lang.String" 
+		resultType="int"> 
+		select count(*) cnt
+		from board
+		where btitle like '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="content" 
+    	parameterType="java.lang.String" 
+		resultType="com.dolbom.vo.NoticeVO"> 
+		select bid, btitle, bcontent, bcharge, bfile, bsfile, to_char(bdate,'yyyy.mm.dd') bdate
+		from board
+		where bid=#{bid}
+	</select>
+	
 </mapper>
 

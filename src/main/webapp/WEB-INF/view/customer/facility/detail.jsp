@@ -70,7 +70,7 @@
 								<th scope="row">시설사진</th>
 								<td colspan="3">
 									<c:forTokens items="${detail.fsimg  }" delims="," var="item">
-									    <img src="../../images/facility/${item }">
+									    <img src="../../images/${item }">
 									</c:forTokens>
 								</td>
 							</tr>

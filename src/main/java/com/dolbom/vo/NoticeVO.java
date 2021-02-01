@@ -1,12 +1,40 @@
 package com.dolbom.vo;
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 public class NoticeVO {
-	private String bid, btitle, bcontent, bcharge, bfile, bsfile, bdate;
+	private String bid, btitle, bcontent, bcharge, bfile, bsfile, bdate, savepath;
+	private int rno;
+	CommonsMultipartFile file1;
 	
 	public NoticeVO() {
 		
 	}
 	
+	public String getSavepath() {
+		return savepath;
+	}
+
+	public void setSavepath(String savepath) {
+		this.savepath = savepath;
+	}
+
+	public CommonsMultipartFile getFile1() {
+		return file1;
+	}
+
+	public void setFile1(CommonsMultipartFile file1) {
+		this.file1 = file1;
+	}
+	
+	public int getRno() {
+		return rno;
+	}
+
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
+
 	public String getBid() {
 		return bid;
 	}
