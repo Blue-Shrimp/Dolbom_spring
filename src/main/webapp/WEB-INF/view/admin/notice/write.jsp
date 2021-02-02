@@ -18,7 +18,7 @@
 		<div class="main">
 			<div class="contents">
 				<div class="subHeader">
-					<h3 id="srcTopTitle">공지사항 수정</h3>
+					<h3 id="srcTopTitle">공지사항 작성</h3>
 				</div>
 			</div>
 		</div>

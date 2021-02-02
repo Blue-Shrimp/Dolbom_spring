@@ -1,22 +1,24 @@
 package com.dolbom.controller.admin;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dolbom.vo.SessionVO;
 
-@Controller("adminHomeController")
-@RequestMapping("/admin/")
-public class HomeController {
+@Controller("adminReviewController")
+@RequestMapping("/admin/review/")
+public class ReviewController {
 	
-	@RequestMapping(value="index", method=RequestMethod.GET)
-	public String index(HttpServletRequest request, RedirectAttributes rttr) {
+	@RequestMapping(value="list", method= RequestMethod.GET)
+	public String list(Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("svo");
 		SessionVO svo = (SessionVO) obj;
@@ -27,27 +29,30 @@ public class HomeController {
 			rttr.addFlashAttribute("msg3", true);
 			result = "redirect:/login";
 		} else if(svo.getName().equals("관리자")) {
-			result = "admin/index";
+			result = "admin/review/list";
 		} else {
 			rttr.addFlashAttribute("msg2", true);
 			result = "redirect:/index";
 		}
 		
 		return result;
-		
 	}
 	
-	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
-	public String logout(HttpSession session, RedirectAttributes rttr) {
-		SessionVO svo = (SessionVO)session.getAttribute("svo");
+	@RequestMapping(value="detail", method= RequestMethod.GET)
+	public String detail(Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		SessionVO svo = (SessionVO) obj;
+		
 		String result = "";
 		
-		if(svo != null) {
-			session.invalidate();
-			rttr.addFlashAttribute("msg2", true);
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
 			result = "redirect:/login";
-		}else {
-			rttr.addFlashAttribute("msg1", true);
+		} else if(svo.getName().equals("관리자")) {
+			result = "admin/review/detail";
+		} else {
+			rttr.addFlashAttribute("msg2", true);
 			result = "redirect:/index";
 		}
 		

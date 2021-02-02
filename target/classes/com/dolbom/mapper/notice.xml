@@ -32,5 +32,13 @@
 		where bid=#{bid}
 	</select>
 	
+	<select id="listIndex" 
+		resultType="com.dolbom.vo.NoticeVO"> 
+		select *
+		from(select rownum rno, bid, btitle, to_char(bdate,'yyyy.mm.dd') bdate
+		     from (select * from board order by bdate desc))
+		where rno between 1 and 5
+	</select>
+	
 </mapper>
 

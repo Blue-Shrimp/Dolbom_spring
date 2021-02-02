@@ -42,6 +42,12 @@ public class NoticeDAO {
 		return sqlSession.selectOne(namespace +".content",bid);
 	}
 	
+	/* 공지사항 상위 5개(인덱스) */
+	public ArrayList<NoticeVO> getIndexNotice(){
+		List<NoticeVO> list = sqlSession.selectList(namespace+".listIndex");
+		return (ArrayList<NoticeVO>)list;
+	}
+	
 	/* 공지사항 등록 */
 	public boolean insertNotice(NoticeVO vo) throws ClassNotFoundException, SQLException {
 		boolean result = false;

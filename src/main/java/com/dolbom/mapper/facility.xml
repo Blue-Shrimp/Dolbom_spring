@@ -31,5 +31,15 @@
 		where f.fid=r.fid(+) and f.fid=#{fid}
 	</select>
 	
+	<select id="listIndex" 
+		resultType="com.dolbom.vo.FacilityVO"> 
+		select *
+		from (select rownum rno, fid, fpname, fservice
+		      from (select fid, fpname, nvl(rservice, 0.0) fservice 
+		            from facility_list 
+		            order by fservice desc))
+		where rno between 1 and 5
+	</select>
+	
 </mapper>
 

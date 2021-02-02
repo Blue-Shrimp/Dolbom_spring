@@ -1,0 +1,56 @@
+	*{
+      box-sizing: border-box;
+   }
+   body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, form, fieldset , button, pre {
+       margin: 0;
+       padding: 0;
+       font-size: 14px;
+       color: #111;
+       font-family: 'Noto Sans KR';
+       font-weight: 400;
+   }
+   a {
+	    text-decoration: none;
+	}
+	ul, ol {
+	    list-style: none;
+	}
+	
+	/* 바디 */
+	.admin_main { 
+		width:190px; 
+		height:710px;
+		display: inline-block;
+		float:left;
+		border-left: 3px solid #1c5a94;
+		border-right: 3px solid #1c5a94;
+	}
+	.admin_main .aside_title { 
+		height:100px;
+		background-color: #1c5a94;
+		color: #fff;
+		font-weight: bold;
+		text-align: center;
+		padding: 25px 20px;
+		font-size: 18px;
+	}
+	.admin_main ul { 
+		padding: 0 20px;
+	}
+	.admin_main ul .subTitle { 
+		padding-top: 30px;
+		border-bottom: 1px solid black;
+		font-size: 16px;
+		font-weight: bold;
+		cursor: pointer;
+	}
+	.admin_main ul .sub li { 
+		list-style: circle;
+		padding: 10px 0;
+	}
+	.admin_main ul .sub li a { 
+		color: #333;
+	}
+	.admin_main ul .sub li a:hover { 
+		text-decoration: underline;
+	}

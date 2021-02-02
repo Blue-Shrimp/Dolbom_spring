@@ -49,6 +49,12 @@ public class FacilityDAO {
 		return sqlSession.selectOne(namespace +".content",fid);
 	}
 	
+	/* 시설 평점순 상위 5개(인덱스) */
+	public ArrayList<FacilityVO> getIndexFacility(){
+		List<FacilityVO> list = sqlSession.selectList(namespace+".listIndex");
+		return (ArrayList<FacilityVO>)list;
+	}
+	
 	/* 시설 등록 */
 	public boolean insertFacility(FacilityVO vo) throws ClassNotFoundException, SQLException  {
 		boolean result = false;

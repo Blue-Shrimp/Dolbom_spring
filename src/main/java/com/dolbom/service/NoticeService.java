@@ -18,7 +18,13 @@ public interface NoticeService {
 			@RequestParam(value="nowPage", required=false)String nowPage,
 			@RequestParam(value="cntPerPage", required=false)String cntPerPage,
 			HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
+	String getNoticeListAdmin(PagingVO pvo, Model model,
+			@RequestParam(defaultValue = "")String keyword,
+			@RequestParam(value="nowPage", required=false)String nowPage,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage,
+			HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
 	String getNoticeContent(@RequestParam(value = "bid") String bid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
+	String getNoticeContentAdmin(@RequestParam(value = "bid") String bid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
 	boolean insertNotice(NoticeVO vo) throws ClassNotFoundException, SQLException;
 	boolean updateNotice(NoticeVO vo) throws ClassNotFoundException, SQLException;
 	boolean deleteNotice(String bid) throws ClassNotFoundException, SQLException;
