@@ -51,21 +51,24 @@ public class NoticeDAO {
 	/* 공지사항 등록 */
 	public boolean insertNotice(NoticeVO vo) throws ClassNotFoundException, SQLException {
 		boolean result = false;
-		
-		return result;
+		int value = sqlSession.insert(namespace+".write", vo);
+		if(value != 0) result = true;
+		return result; 
 	}
 	
 	/* 공지사항 수정 */
 	public boolean updateNotice(NoticeVO vo) throws ClassNotFoundException, SQLException {
 		boolean result = false;
-		
+		int value = sqlSession.update(namespace+".update", vo);
+		if(value != 0) result = true;
 		return result;
 	}
 	
 	/* 공지사항 삭제 */
 	public boolean deleteNotice(String bid) throws ClassNotFoundException, SQLException {
 		boolean result = false;
-		
+		int value = sqlSession.delete(namespace+".delete", bid);
+		if(value != 0) result = true;
 		return result;
 	}
 

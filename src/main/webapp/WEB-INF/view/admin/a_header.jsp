@@ -14,7 +14,7 @@
 		<div id="header" style="height:38px; background: url(../../images/bg_header.gif) repeat-x left top;">
 			<ul class="utileMenu2">
 				<li>${svo.name }님 반갑습니다!</li>
-				<li><a href="logout.do">로그아웃</a></li>
+				<li><a href="../logout.do">로그아웃</a></li>
 			</ul>
 		</div>
 	</header>

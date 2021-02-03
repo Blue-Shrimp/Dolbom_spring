@@ -67,6 +67,51 @@ public class FacilityServiceImpl implements FacilityService {
 		
 		return result;
 	}
+	
+	@Override
+	public String getFacilityListAdmin(PagingVO pvo, Model model, 
+			@RequestParam(defaultValue = "")String sido,
+			@RequestParam(defaultValue = "")String gugun,
+			@RequestParam(defaultValue = "")String keyword,
+			@RequestParam(value="nowPage", required=false)String nowPage,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage, 
+			HttpServletRequest request, RedirectAttributes rttr)
+			throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		SessionVO svo = (SessionVO) obj;
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else if (svo.getName().equals("관리자")) {
+			int total = facilityDAO.getCountFacility(sido, gugun, keyword);
+			if (nowPage == null && cntPerPage == null) {
+				nowPage = "1";
+				cntPerPage = "10";
+			} else if (nowPage == null) {
+				nowPage = "1";
+			} else if (cntPerPage == null) { 
+				cntPerPage = "10";
+			}
+			
+			pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			ArrayList<FacilityVO> facility_list = facilityDAO.getFacilityList(sido, gugun, keyword, pvo);
+			model.addAttribute("sido", sido);
+			model.addAttribute("gugun", gugun);
+			model.addAttribute("keyword", keyword);
+			model.addAttribute("paging", pvo);
+			model.addAttribute("list",facility_list);
+			result = "admin/facility/list";
+		} else {
+			rttr.addFlashAttribute("msg2", true);
+			result = "redirect:/index";
+		}
+		
+		return result;
+	}
 
 	@Override
 	public String getFacilityContent(@RequestParam(value = "fid") String fid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
@@ -93,6 +138,38 @@ public class FacilityServiceImpl implements FacilityService {
 			model.addAttribute("fid", fid);
 			model.addAttribute("did", svo.getId());
 			result = "customer/facility/detail";
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public String getFacilityContentAdmin(@RequestParam(value = "fid") String fid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		SessionVO svo = (SessionVO) obj;
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else if (svo.getName().equals("관리자")) {
+			FacilityVO vo = facilityDAO.getFacilityContent(fid);
+			ArrayList<ReviewVO> review_list = reviewDAO.getReviewList(fid);
+			int review_cnt = reviewDAO.getReviewCnt(fid);
+			double review_score = reviewDAO.getReviewScore(fid);
+			
+			model.addAttribute("cnt", review_cnt);
+			model.addAttribute("score", review_score);
+			model.addAttribute("list", review_list);
+			model.addAttribute("detail", vo);
+			model.addAttribute("fid", fid);
+			model.addAttribute("did", svo.getId());
+			result = "admin/facility/detail";
+		} else {
+			rttr.addFlashAttribute("msg2", true);
+			result = "redirect:/index";
 		}
 		
 		return result;

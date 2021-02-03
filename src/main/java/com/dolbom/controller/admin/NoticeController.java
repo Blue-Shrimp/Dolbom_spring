@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dolbom.service.NoticeService;
+import com.dolbom.service.dao.NoticeDAO;
 import com.dolbom.utils.PagingVO;
+import com.dolbom.vo.NoticeVO;
 import com.dolbom.vo.SessionVO;
 
 @Controller("adminNoticeController")
@@ -27,6 +29,9 @@ public class NoticeController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	
+	@Autowired
+	private NoticeDAO noticeDAO;
 	
 	@RequestMapping(value="list", method={RequestMethod.GET, RequestMethod.POST})
 	public String list(PagingVO pvo, Model model,
@@ -81,8 +86,19 @@ public class NoticeController {
 		return result;
 	}
 	
+	@RequestMapping(value="writeProc.do", method= RequestMethod.POST)
+	public String writeProc(NoticeVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		
+		String path1 = request.getSession().getServletContext().getRealPath("/");
+		String path2 = "/static/images/";
+		
+		vo.setSavepath(path1+path2);
+		
+		return noticeService.insertNotice(vo, request, rttr);
+	}
+	
 	@RequestMapping(value="update", method= RequestMethod.GET)
-	public String update(Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+	public String update(@RequestParam(value = "bid") String bid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("svo");
 		SessionVO svo = (SessionVO) obj;
@@ -93,6 +109,9 @@ public class NoticeController {
 			rttr.addFlashAttribute("msg3", true);
 			result = "redirect:/login";
 		} else if(svo.getName().equals("관리자")) {
+			NoticeVO vo = noticeDAO.getNoticeContent(bid);
+			
+			model.addAttribute("vo", vo);
 			result = "admin/notice/update";
 		} else {
 			rttr.addFlashAttribute("msg2", true);
@@ -102,25 +121,19 @@ public class NoticeController {
 		return result;
 	}
 	
-	@RequestMapping(value="delete", method= RequestMethod.GET)
-	public String delete(Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
-		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("svo");
-		SessionVO svo = (SessionVO) obj;
+	@RequestMapping(value="updateProc.do", method= RequestMethod.POST)
+	public String updateProc(NoticeVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		String path1 = request.getSession().getServletContext().getRealPath("/");
+		String path2 = "/static/images/";
 		
-		String result = "";
+		vo.setSavepath(path1+path2);
 		
-		if (obj == null) {
-			rttr.addFlashAttribute("msg3", true);
-			result = "redirect:/login";
-		} else if(svo.getName().equals("관리자")) {
-			result = "admin/notice/delete";
-		} else {
-			rttr.addFlashAttribute("msg2", true);
-			result = "redirect:/index";
-		}
-		
-		return result;
+		return noticeService.updateNotice(vo, request, rttr);
+	}
+	
+	@RequestMapping(value="deleteProc.do", method= RequestMethod.GET)
+	public String deleteProc(@RequestParam(value = "bid") String bid, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		return noticeService.deleteNotice(bid, request, rttr);
 	}
 
 }

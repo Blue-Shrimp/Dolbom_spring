@@ -323,3 +323,35 @@
 	    float: right;
 	    margin-left:10px;
 	}
+	
+	/*글쓰기 */
+	.board_view th {
+		vertical-align: middle;
+	    box-sizing: border-box;
+	    background: #f9f9f9;
+	    text-align: left;
+	    padding: 15px 5px 15px 20px;
+	    border-bottom: 1px solid #e2e2e2;
+	    font-size: 16px;
+	    color: #111;
+	}
+	.board_view .wdp_90{
+		border: 1px solid #333;
+		width: 688px;
+	}
+	.board_view textarea{
+		resize: none;
+	}
+	.rightArea{
+		margin-right: 30px;
+		margin-top: 10px;
+		text-align: right;
+	}
+	span#fname {
+		display:inline-block;
+		width: 500px;
+		margin-left:-177px; 
+		font-size:13px;
+		background-color:white;
+		padding:2px 0 0 2px;
+	}

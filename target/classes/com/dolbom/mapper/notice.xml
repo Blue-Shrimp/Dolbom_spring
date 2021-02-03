@@ -40,5 +40,31 @@
 		where rno between 1 and 5
 	</select>
 	
+	<insert id="write" 
+		parameterType="com.dolbom.vo.NoticeVO"> 
+		insert into board values
+		<choose>
+			<when test="bfile != null">
+				('B_'|| seq_board.nextval, #{btitle},#{bcontent},'관리자',#{bfile},#{bsfile},sysdate)
+			</when>
+			<otherwise>
+				('B_'|| seq_board.nextval, #{btitle},#{bcontent},'관리자','','',sysdate)
+			</otherwise>
+		</choose>
+	</insert>
+	
+	<update id="update" parameterType="com.dolbom.vo.NoticeVO">
+		update board 
+		set btitle=#{btitle}, bcontent=#{bcontent} 
+		<if test="bfile != null">
+			,bfile=#{bfile}, bsfile=#{bsfile}
+		</if>
+		where bid=#{bid}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from board where bid=#{bid}
+	</delete>
+	
 </mapper>
 

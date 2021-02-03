@@ -25,8 +25,8 @@ public interface NoticeService {
 			HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
 	String getNoticeContent(@RequestParam(value = "bid") String bid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
 	String getNoticeContentAdmin(@RequestParam(value = "bid") String bid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
-	boolean insertNotice(NoticeVO vo) throws ClassNotFoundException, SQLException;
-	boolean updateNotice(NoticeVO vo) throws ClassNotFoundException, SQLException;
-	boolean deleteNotice(String bid) throws ClassNotFoundException, SQLException;
+	String insertNotice(NoticeVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
+	String updateNotice(NoticeVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
+	String deleteNotice(@RequestParam(value = "bid") String bid, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
 	
 }

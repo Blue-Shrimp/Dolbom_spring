@@ -32,12 +32,12 @@
 							<dd><span>${detail.bdate }</span></dd>							
 						</dl>
 					</div>
-					<c:if test="${detail.bsfile != null }">
+					<c:if test="${detail.bfile != null }">
 					<div class="detailAddFile">
 						<div>
 							<ul>
 								<li>
-									<a href="fileDown?FILE_NAME=${detail.bsfile }"  class="fileDown" style="background: url(../../images/ico_file.png) no-repeat left 50%">${detail.bsfile }</a>
+									<a href="fileDown?FILE_NAME=${detail.bsfile }"  class="fileDown" style="background: url(../../images/ico_file.png) no-repeat left 50%">${detail.bfile }</a>
 								</li>
 							</ul>
 						</div>

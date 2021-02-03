@@ -1,7 +1,9 @@
 package com.dolbom.service;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -150,21 +152,120 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public boolean insertNotice(NoticeVO vo) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	public String insertNotice(NoticeVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		SessionVO svo = (SessionVO) obj;
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else if(svo.getName().equals("관리자")) {
+			if(vo.getFile1().getSize() != 0) {
+				UUID uuid = UUID.randomUUID();
+				vo.setBfile(vo.getFile1().getOriginalFilename());
+				vo.setBsfile(uuid+"_"+vo.getFile1().getOriginalFilename());
+			}
+			
+			boolean insert_result = noticeDAO.insertNotice(vo);
+			
+			if(insert_result) {
+				File file = new File(vo.getSavepath()+vo.getBsfile());
+				try {
+					vo.getFile1().transferTo(file);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				rttr.addFlashAttribute("msg1", true);
+				result = "redirect:/admin/notice/list";
+			} else {
+				rttr.addFlashAttribute("msg1", true); 
+				String referer = request.getHeader("Referer");
+				result = "redirect:" + referer; 
+			}
+		} else {
+			rttr.addFlashAttribute("msg2", true);
+			result = "redirect:/index";
+		}
+		
+		return result;
 	}
 
 	@Override
-	public boolean updateNotice(NoticeVO vo) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	public String updateNotice(NoticeVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		SessionVO svo = (SessionVO) obj;
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else if(svo.getName().equals("관리자")) {
+			if(vo.getFile1().getSize() != 0) {
+				UUID uuid = UUID.randomUUID();
+				vo.setBfile(vo.getFile1().getOriginalFilename());
+				vo.setBsfile(uuid+"_"+vo.getFile1().getOriginalFilename());
+			}
+			
+			boolean update_result = noticeDAO.updateNotice(vo);
+			
+			if(update_result) {
+				File file = new File(vo.getSavepath()+vo.getBsfile());
+				try {
+					vo.getFile1().transferTo(file);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				rttr.addFlashAttribute("msg2", true);
+				result = "redirect:/admin/notice/list";
+			} else {
+				rttr.addFlashAttribute("msg1", true); 
+				String referer = request.getHeader("Referer");
+				result = "redirect:" + referer; 
+			}
+			
+		} else {
+			rttr.addFlashAttribute("msg2", true);
+			result = "redirect:/index";
+		}
+		
+		return result;
 	}
 
 	@Override
-	public boolean deleteNotice(String bid) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	public String deleteNotice(@RequestParam(value = "bid") String bid, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		SessionVO svo = (SessionVO) obj;
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else if(svo.getName().equals("관리자")) {
+			boolean delete_result = noticeDAO.deleteNotice(bid);
+			
+			if(delete_result) {
+				rttr.addFlashAttribute("msg3", true);
+				result = "redirect:/admin/notice/list";
+			} else {
+				rttr.addFlashAttribute("msg1", true); 
+				String referer = request.getHeader("Referer");
+				result = "redirect:" + referer; 
+			}
+		} else {
+			rttr.addFlashAttribute("msg2", true);
+			result = "redirect:/index";
+		}
+		
+		return result;
 	}
 
 }

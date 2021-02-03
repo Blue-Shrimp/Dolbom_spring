@@ -10,6 +10,11 @@
 <link rel="stylesheet" href="../../css/admin/notice.css">
 <script src="../../js/jquery-3.5.1.min.js"></script>
 <script src="../../js/admin/notice.js"></script>
+<script>
+	if("${msg1}"){
+		alert("글 삭제가 실패되었습니다.");	
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="../a_header.jsp" />
@@ -34,12 +39,12 @@
 							<dd><span>${detail.bdate }</span></dd>							
 						</dl>
 					</div>
-					<c:if test="${detail.bsfile != null }">
+					<c:if test="${detail.bfile != null }">
 					<div class="detailAddFile">
 						<div>
 							<ul>
 								<li>
-									<a href="fileDown?FILE_NAME=${detail.bsfile }"  class="fileDown" style="background: url(../../images/ico_file.png) no-repeat left 50%">${detail.bsfile }</a>
+									<a href="fileDown?FILE_NAME=${detail.bsfile }"  class="fileDown" style="background: url(../../images/ico_file.png) no-repeat left 50%">${detail.bfile }</a>
 								</li>
 							</ul>
 						</div>
@@ -52,8 +57,8 @@
 					</div>
 					<div class="btnArea2">
 						<a href="list"><button type="button" class="btnWhite">목록</button></a>
-						<a href=""><button type="button" class="btnWhite">삭제</button></a>
-						<a href="update"><button type="button" class="btnWhite">수정</button></a>
+						<a href="deleteProc.do?bid=${bid }"><button type="button" class="btnWhite">삭제</button></a>
+						<a href="update?bid=${bid }"><button type="button" class="btnWhite">수정</button></a>
 					</div>
 				</div>
 			</div>

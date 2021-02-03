@@ -10,6 +10,15 @@
 <link rel="stylesheet" href="../../css/admin/notice.css">
 <script src="../../js/jquery-3.5.1.min.js"></script>
 <script src="../../js/admin/notice.js"></script>
+<script>
+	if("${msg1}"){
+		alert("글 작성이 완료되었습니다.");	
+	} else if("${msg2}"){
+		alert("글 수정이 완료되었습니다.");	
+	} else if("${msg3}"){
+		alert("글 삭제가 완료되었습니다.");	
+	} 
+</script>
 </head>
 <body>
 

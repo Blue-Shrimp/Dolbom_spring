@@ -19,7 +19,15 @@ public interface FacilityService {
 			@RequestParam(value="nowPage", required=false)String nowPage,
 			@RequestParam(value="cntPerPage", required=false)String cntPerPage, 
 			HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
+	String getFacilityListAdmin(PagingVO pvo, Model model, 
+			@RequestParam(defaultValue = "")String sido,
+			@RequestParam(defaultValue = "")String gugun,
+			@RequestParam(defaultValue = "")String keyword,
+			@RequestParam(value="nowPage", required=false)String nowPage,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage, 
+			HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
 	String getFacilityContent(@RequestParam(value = "fid") String fid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
+	String getFacilityContentAdmin(@RequestParam(value = "fid") String fid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
 	boolean insertFacility(FacilityVO vo) throws ClassNotFoundException, SQLException;
 	boolean updateFacility(FacilityVO vo) throws ClassNotFoundException, SQLException;
 	boolean deleteFacility(String fid) throws ClassNotFoundException, SQLException;

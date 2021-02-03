@@ -19,21 +19,19 @@
 	/* 바디 */
 	#f_container {
 	    position: relative;
-	    width: 1100px;
+	    width: 1030px;
 	    margin: 0 auto;
 	}
 	#f_container .main {
-	    position: relative;
 	    background: #fff;
-	    margin-right: 50px;
+	    width: 840px;
+	    margin-left: 190px;
 	}
 	.main .contents {
 	    min-height: 600px;
-	    padding-bottom: 50px;
+	    padding-bottom: 10px;
 	}
 	.contents .subHeader {
-	    border-bottom: 1px solid #ddd;
-	    margin-bottom: 20px;
 	    width: 100%;
 	    box-sizing: border-box;
 	    padding: 25px 0 35px;
@@ -63,21 +61,21 @@
 	    height: 30px;
 	    min-height: 30px;
 	}
+	.search-sort .sch-rgt {
+	    float: right;
+	}
 	.search-sort .search-full {
 	    width: 100%;
 	}
-	.search-sort .sch-rgt {
-	    float: right;
+	.search-sort .sch-rgt select {
+	    width: auto;
+	    min-width: 200px;
 	}
 	.sch-rgt select {
 	    border: 1px solid rgb(204, 204, 204);
 	    height: 40px;
 	    padding: 0px 0px 0px 10px;
 	    line-height: 40px;
-	}
-	.search-sort .sch-rgt select {
-	    width: auto;
-	    min-width: 200px;
 	}
 	.search-sort .sch-rgt select + input[type="text"] {
 	    padding: 0px 0px 0px 10px;
@@ -90,34 +88,27 @@
 	    margin-right: 0px;
 	    border-color: rgb(14, 59, 100);
 	}
-	.sch-rgt .ibtn.form * {
-	    height: 38px;
-	    line-height: 38px;
-	}
-	.ibtn button {
-	    font-weight: bold;
-	    font-size: 14px;
-	    width: 100%;
-	    min-width: 70px;
-    	padding: 0px;
-	}
-	.ibtn.form {
-	    padding: 0px;
-	}
-	.search-box .ibtn {
-	    margin-left: 10px;
+	.ibtn.navy {
+	    background: rgb(14, 59, 100);
 	}
 	.search-box .ibtn {
 	    width: auto !important;
 	}
-	.ibtn.navy {
-	    background: rgb(14, 59, 100);
+	.search-box .ibtn {
+	    margin-left: 10px;
 	}
-	.ibtn * {
+	.ibtn.form {
+	    padding: 0px;
+	}
+	.ibtn {
+	    width: 100px;
+	    height: 40px;
+	    border-color: #1c5a94;
+	    color: #fff;
+	    background-color: #1c5a94;
+	    font-size: 16px;
+	    font-weight: bold;
 	    cursor: pointer;
-	    margin: 0px;
-	    background: transparent;
-	    border: 0px;
 	}
 	.ibtn, .ibtn * {
 	    position: relative;
@@ -133,17 +124,54 @@
 	    text-align: center;
 	    text-decoration: none !important;
 	}
+	.sch-rgt .ibtn.form * {
+	    height: 38px;
+	    line-height: 38px;
+	}
+	.ibtn button {
+	    font-weight: bold;
+	    font-size: 14px;
+	    width: 100%;
+	    min-width: 70px;
+	    padding: 0px;
+	}
+	.ibtn * {
+	    cursor: pointer;
+	    margin: 0px;
+	    background: transparent;
+	    border: 0px;
+	}
 	.facilityList {
 	    position: relative;
 	    margin-top: 10px;
 	    margin-bottom: 10px;
 	    width: 100%;
 	    border-top: 2px solid #666;
-	    margin-bottom: 30px !important;
 	}
 	.facilityList table {
 	    width: 100%;
 	    table-layout: fixed;
+	}
+	.w40 {
+	    width: 40px !important;
+	}
+	.w250 {
+	    width: 250px !important;
+	}
+	.w300 {
+	    width: 300px !important;
+	}
+	.w140 {
+	    width: 140px !important;
+	}
+	.w80 {
+	    width: 80px !important;
+	}
+	.w210 {
+	    width: 210px !important;
+	}
+	.w830 {
+	    width: 830px !important;
 	}
 	.facilityList table thead th:first-child, .facilityList table tbody td:first-child {
 	    border-left: 0;
@@ -161,7 +189,7 @@
 	}
 	.facilityList table tbody td {
 	    padding: 9px 10px;
-	    height: 50px;
+	    height: 40px;
 	    background: #fff;
 	    vertical-align: middle;
 	    border-bottom: 1px solid #e2e2e2;
@@ -169,47 +197,22 @@
 	    line-height: 100%;
 	    text-align: center;
 	    letter-spacing: -1px;
-	    word-break: break-word;
 	    white-space: nowrap;
 	    overflow: hidden;
 	    text-overflow: ellipsis;
 	}
-	.facilityList table tbody td a {
-		color: #333;
-	}
-	.facilityList table tbody td a:hover {
-		text-decoration: underline;
-	}
 	.facilityList table tbody td:nth-child(3) {
 	    text-align: left;
 	}
-	.w40 {
-	    width: 40px !important;
+	.facilityList table tbody td a {
+	    color: #333;
 	}
-	.w100 {
-	  width: 100px !important;
-	}
-	.w300 {
-	    width: 300px !important;
-	}
-	.w400 {
-	    width: 400px !important;
-	}
-	.w140 {
-	    width: 140px !important;
-	}
-	.w80 {
-	    width: 80px !important;
-	}
-	.w210 {
-	    width: 210px !important;
-	}
-	.w830 {
-	    width: 830px !important;
+	.facilityList table tbody td a:hover {
+	    text-decoration: underline;
 	}
 	.paging {
 	    padding-top: 10px;
-	    margin-bottom: 45px;
+	    margin-bottom: 5px;
 	    width: 100%;
 	    text-align: center;
 	}
@@ -272,17 +275,12 @@
 	    border: 1px solid #ccc;
 	}
 	
-	/* 시설 상세페이지 */
-	.subTitle01 {
-	    padding-top: 15px;
-	    color: #444;
-	    font-size: 24px;
-	    font-weight: bold;
-	}
+	/* 시설 상세 정보 */
 	.facilityDetail {
 	    position: relative;
 	    margin-top: 10px;
 	    border-top: 2px solid #666;
+	    margin-bottom: 20px;
 	}
 	.facilityDetail tbody th {
 	    vertical-align: middle;
@@ -306,44 +304,9 @@
 	    white-space: normal;
 	}
 	.facilityDetail tbody td img {
-	    width: 400px;
-	    height: 250px;
+	    width: 280px;
+	    height: 200px;
 	    margin-right: 30px;
-	}
-	.btn_apply  {
-		position: relative;
-	    text-align: center;
-	    min-height: 56px;
-	    margin: 40px auto 50px;
-	    vertical-align: top;
-	    overflow: hidden;
-	    padding-bottom: 3px;
-	}
-	.ibtn {
-	    width: 100px;
-	    height: 40px;
-	    border-color: #1c5a94;
-	    color: #fff;
-	    background-color: #1c5a94;
-	    font-size: 16px;
-	    font-weight: bold;
-	    cursor: pointer;
-	}
-	.rightBtn {
-	    position: absolute;
-	    right: 0;
-	    top: 0;
-	}
-	.btnWhite {
-		display: inline-block;
-	    background: #fff;
-	    color: #1c5a94;
-	    font-size: 16px;
-	    height: 40px;
-	    width: 100px;
-	    border: 1px solid #bababa;
-	    font-weight: bold;
-	    padding-top: 5px;
 	}
 	.navyBtn {
 	    position: relative;
@@ -361,6 +324,29 @@
 	    line-height: 28px;
 	    padding: 0 10px;
 	    min-width: 60px;
+	}
+	.rightBtn{
+		text-align: right;
+	}
+	.nBtn{
+	    width: 100px;
+	    height: 40px;
+	    border-color: #1c5a94;
+	    color: #fff;
+	    background-color: #1c5a94;
+	    font-size: 16px;
+	    font-weight: bold;
+	    cursor: pointer;
+	    position: relative;
+	    margin: 0px;
+	    padding: 0px;
+	    display: inline-block;
+	    border: 0px;
+	    white-space: nowrap;
+	    vertical-align: top;
+	    overflow: visible;
+	    text-align: center;
+	    text-decoration: none !important;
 	}
 	._formStyle-layer-wrap {
 	    overflow-x: hidden;
@@ -566,12 +552,79 @@
 		height:440px;
 	}
 	
-	
-	/* 시설 신청 페이지*/
-	.applySubTitle{
-		font-size: 18px;
-		font-weight: bold;
+	/* 시설 등록 */
+	.tbl-list {
+	    border-top: 1px solid #3b3b3b;
+	    border-bottom: 1px solid #3b3b3b;
+	    margin-top: 10px;
+	    margin-bottom: 20px;
 	}
-	.fapplication table tbody td:nth-child(3) {
+	.tbl-list.form tbody th, .tbl-list.form tbody td {
+	    padding-left: 20px;
+	    padding-right: 20px;
+	    text-align: left;
+	}
+	.tbl-list th {
+	    color: #333;
+	    padding: 9px 0;
+	    background: #f5f5f5;
+	    border-bottom: 1px solid #d3d3d3;
+	}
+	.tbl-list td {
+	    border-top: 1px solid #e9e9e9;
+	    padding: 7px 0;
+	    background: #fff;
+	    border-bottom: 1px solid #d3d3d3;
+	}
+	.tbl-list.form td .inbox {
+	    width: 500px;
+	}
+	.inbox, input[type=text].inbox {
+	    font-size: 14px;
+	    margin: 0;
+	    padding: 0 5px 0 5px;
+	    border: 1px solid #898989;
+	    background: #fff;
+	    color: #333;
+	    line-height: 30px;
+	    height: 30px;
+	    box-sizing: border-box;
+	}
+	.tbl-list.form tbody td.input-num.type1 .inbox {
+	    width: 89px;
+	}
+	.tbl-list.form tbody td.input-num select + span, .tbl-list.form tbody td.input-num .inbox + span, .tbl-list.form tbody td.input-email select + span, .tbl-list.form tbody td.input-email .inbox + span {
+	    display: inline-block;
+	    width: 20px;
 	    text-align: center;
+	}
+	.tbl-list.form tbody td.input-num.type2 .inbox {
+	    width: 150px;
+	}
+	.tbl-list.form td.addr .inbox {
+	    width: 500px;
+	}
+	.contents .red {
+	    color: red;
+	    font-weight: bold;
+	    font-size: 18px;
+	}
+	.graybtn {
+	    position: relative;
+	    margin: 0;
+	    display: inline-block;
+	    text-decoration: none !important;
+	    vertical-align: top;
+	    color: #fff;
+	    text-align: center;
+	    margin-right: 4px;
+	    border: 1px solid #ddd;
+	    background: #616161;
+	    cursor: pointer;
+	    line-height: 28px;
+	    padding: 0 10px;
+	    min-width: 60px;
+	}
+	.week{
+		font-size: 16px;
 	}
