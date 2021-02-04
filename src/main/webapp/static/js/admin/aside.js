@@ -31,4 +31,8 @@ $(document).ready(function(){
 		$("#n_sub").css('display','none');
 		$("#n_manageOn").attr('id','n_manage');
 	});
+	
+	$(".aside_title").click(function(){
+		location.href = '/admin/index';
+	});
 });

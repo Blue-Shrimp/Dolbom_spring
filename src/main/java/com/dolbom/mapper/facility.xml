@@ -26,7 +26,7 @@
 	<select id="content" 
     	parameterType="java.lang.String" 
 		resultType="com.dolbom.vo.FacilityVO"> 
-		select fpname, rservice fservice, fname, flocation, fphone, fstime, fetime, fweek, fprogram, fimg, fsimg, fpeople
+		select f.fid, fpname, rservice fservice, fname, fsido, fgugun, flocation, fphone, fstime, fetime, fweek, fprogram, fimg, fsimg, fpeople
 		from facility f, (select fid, round(avg(rservice),1) rservice from review group by fid) r
 		where f.fid=r.fid(+) and f.fid=#{fid}
 	</select>
@@ -40,6 +40,32 @@
 		            order by fservice desc))
 		where rno between 1 and 5
 	</select>
+	
+	<insert id="write" 
+		parameterType="com.dolbom.vo.FacilityVO"> 
+		insert into facility values
+		<choose>
+			<when test="fimg != null">
+				('F_'|| seq_facility.nextval, #{fname}, #{fpname}, #{fphone},#{fsido},#{fgugun},#{flocation},
+        		#{fpeople}, TO_DATE('01-01-2021','MM-DD-YYYY'), TO_DATE('01-01-9999','MM-DD-YYYY'), #{fstime}, #{fetime}, #{fweek}, #{fprogram},#{fimg},#{fsimg})
+			</when>
+			<otherwise>
+				('F_'|| seq_facility.nextval, #{fname}, #{fpname}, #{fphone},#{fsido},#{fgugun},#{flocation},
+        		#{fpeople}, TO_DATE('01-01-2021','MM-DD-YYYY'), TO_DATE('01-01-9999','MM-DD-YYYY'), #{fstime}, #{fetime}, #{fweek}, #{fprogram},'','')
+			</otherwise>
+		</choose>
+	</insert>
+	
+	<update id="update" parameterType="com.dolbom.vo.FacilityVO">
+		update facility 
+		set fname=#{fname}, fpname=#{fpname}, fphone=#{fphone}, fsido=#{fsido}, fgugun=#{fgugun}, flocation=#{flocation},
+		fpeople=#{fpeople}, fstime=#{fstime}, fetime=#{fetime}, fweek=#{fweek}, fprogram=#{fprogram}
+		where fid=#{fid}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from facility where fid=#{fid}
+	</delete>
 	
 </mapper>
 

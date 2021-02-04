@@ -10,6 +10,11 @@
 <link rel="stylesheet" href="../../css/admin/facility.css">
 <script src="../../js/jquery-3.5.1.min.js"></script>
 <script src="../../js/admin/facility.js"></script>
+<script>
+	if("${msg1}"){
+		alert("시설 등록이 실패되었습니다.");	
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="../a_header.jsp" />
@@ -96,7 +101,7 @@
 		                                </td>
 		                            </tr>
 		                            <tr>
-		                                <th>프로그램</th>
+		                                <th><span class="red">*</span>프로그램</th>
 		                                <td>
 		                                    <span class="input-btn type1">
 		                                        <input type="text" class="inbox" name="fprogram" id="fprogram">
@@ -106,11 +111,11 @@
 		                            <tr>
 		                                <th>시설사진<br>(최대 4개)</th>
 		                                <td>
-		                                    <span class="input-btn type1">
-		                                        <input type="file" id="file1" name="file1" accept="image/*">
-		                                        <input type="file" id="file2" name="file2" accept="image/*">
-		                                        <input type="file" id="file3" name="file3" accept="image/*">
-		                                        <input type="file" id="file4" name="file4" accept="image/*">
+		                                    <span class="fileGp">
+		                                        <div>1. <input type="file" id="file1" name="file1" accept="image/*"></div>
+		                                        <div>2. <input type="file" id="file2" name="file2" accept="image/*"></div>
+		                                        <div>3. <input type="file" id="file3" name="file3" accept="image/*"></div>
+		                                        <div>4. <input type="file" id="file4" name="file4" accept="image/*"></div>
 		                                    </span>
 		                                </td>
 		                            </tr>
@@ -118,7 +123,7 @@
 		                    </table>
 		                </div>
 		                <div class="rightBtn">
-							<button type="submit" class="nBtn" id="btnInsert">등록하기</button>
+							<button type="button" class="nBtn" id="btnInsert">등록하기</button>
 							<button type="reset" class="nBtn">취소</button>
 						</div>
 					</form>

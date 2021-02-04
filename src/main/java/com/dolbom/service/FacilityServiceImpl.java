@@ -1,7 +1,9 @@
 package com.dolbom.service;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -176,21 +178,229 @@ public class FacilityServiceImpl implements FacilityService {
 	}
 
 	@Override
-	public boolean insertFacility(FacilityVO vo) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	public String insertFacility(FacilityVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		SessionVO svo = (SessionVO) obj;
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else if(svo.getName().equals("관리자")) {
+			if(vo.getFile1().getSize() != 0 && vo.getFile2().getSize() == 0 && vo.getFile3().getSize() == 0 && vo.getFile4().getSize() == 0) {
+				UUID uuid = UUID.randomUUID();
+				
+				vo.setFimg(vo.getFile1().getOriginalFilename());
+				vo.setFsimg(uuid+"_"+vo.getFile1().getOriginalFilename());
+				
+				File file = new File(vo.getSavepath()+vo.getFsimg());
+				try {
+					vo.getFile1().transferTo(file);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (vo.getFile1().getSize() != 0 && vo.getFile2().getSize() != 0 && vo.getFile3().getSize() == 0 && vo.getFile4().getSize() == 0) {
+				UUID uuid = UUID.randomUUID();
+				UUID uuid2 = UUID.randomUUID();
+				
+				vo.setFimg(vo.getFile1().getOriginalFilename()+","+vo.getFile2().getOriginalFilename());
+				vo.setFsimg(uuid+"_"+vo.getFile1().getOriginalFilename()+","+uuid2+"_"+vo.getFile2().getOriginalFilename());
+				
+				File file = new File(vo.getSavepath()+uuid+"_"+vo.getFile1().getOriginalFilename());
+				File file2 = new File(vo.getSavepath()+uuid2+"_"+vo.getFile2().getOriginalFilename());
+				try {
+					vo.getFile1().transferTo(file);
+					vo.getFile2().transferTo(file2);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (vo.getFile1().getSize() != 0 && vo.getFile2().getSize() != 0 && vo.getFile3().getSize() != 0 && vo.getFile4().getSize() == 0) {
+				UUID uuid = UUID.randomUUID();
+				UUID uuid2 = UUID.randomUUID();
+				UUID uuid3 = UUID.randomUUID();
+				
+				vo.setFimg(vo.getFile1().getOriginalFilename()+","+vo.getFile2().getOriginalFilename()+","+vo.getFile3().getOriginalFilename());
+				vo.setFsimg(uuid+"_"+vo.getFile1().getOriginalFilename()+","+uuid2+"_"+vo.getFile2().getOriginalFilename()+","+uuid3+"_"+vo.getFile3().getOriginalFilename());
+				
+				File file = new File(vo.getSavepath()+uuid+"_"+vo.getFile1().getOriginalFilename());
+				File file2 = new File(vo.getSavepath()+uuid2+"_"+vo.getFile2().getOriginalFilename());
+				File file3 = new File(vo.getSavepath()+uuid3+"_"+vo.getFile3().getOriginalFilename());
+				try {
+					vo.getFile1().transferTo(file);
+					vo.getFile2().transferTo(file2);
+					vo.getFile3().transferTo(file3);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (vo.getFile1().getSize() != 0 && vo.getFile2().getSize() != 0 && vo.getFile3().getSize() != 0 && vo.getFile4().getSize() != 0) {
+				UUID uuid = UUID.randomUUID();
+				UUID uuid2 = UUID.randomUUID();
+				UUID uuid3 = UUID.randomUUID();
+				UUID uuid4 = UUID.randomUUID();
+				
+				vo.setFimg(vo.getFile1().getOriginalFilename()+","+vo.getFile2().getOriginalFilename()+","+vo.getFile3().getOriginalFilename()+","+vo.getFile4().getOriginalFilename());
+				vo.setFsimg(uuid+"_"+vo.getFile1().getOriginalFilename()+","+uuid2+"_"+vo.getFile2().getOriginalFilename()+","+uuid3+"_"+vo.getFile3().getOriginalFilename()+","+uuid4+"_"+vo.getFile4().getOriginalFilename());
+				
+				File file = new File(vo.getSavepath()+uuid+"_"+vo.getFile1().getOriginalFilename());
+				File file2 = new File(vo.getSavepath()+uuid2+"_"+vo.getFile2().getOriginalFilename());
+				File file3 = new File(vo.getSavepath()+uuid3+"_"+vo.getFile3().getOriginalFilename());
+				File file4 = new File(vo.getSavepath()+uuid4+"_"+vo.getFile4().getOriginalFilename());
+				try {
+					vo.getFile1().transferTo(file);
+					vo.getFile2().transferTo(file2);
+					vo.getFile3().transferTo(file3);
+					vo.getFile4().transferTo(file4);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			boolean insert_result = facilityDAO.insertFacility(vo);
+			
+			if(insert_result) {
+				rttr.addFlashAttribute("msg1", true);
+				result = "redirect:/admin/facility/list";
+			} else {
+				rttr.addFlashAttribute("msg1", true); 
+				String referer = request.getHeader("Referer");
+				result = "redirect:" + referer; 
+			}
+		} else {
+			rttr.addFlashAttribute("msg2", true);
+			result = "redirect:/index";
+		}
+		
+		return result;
 	}
 
 	@Override
-	public boolean updateFacility(FacilityVO vo) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	public String updateFacility(FacilityVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		SessionVO svo = (SessionVO) obj;
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else if(svo.getName().equals("관리자")) {
+			/*if(vo.getFile1().getSize() != 0 && vo.getFile2().getSize() == 0 && vo.getFile3().getSize() == 0 && vo.getFile4().getSize() == 0) {
+				UUID uuid = UUID.randomUUID();
+				
+				vo.setFimg(vo.getFile1().getOriginalFilename());
+				vo.setFsimg(uuid+"_"+vo.getFile1().getOriginalFilename());
+				
+				File file = new File(vo.getSavepath()+vo.getFsimg());
+				try {
+					vo.getFile1().transferTo(file);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (vo.getFile1().getSize() != 0 && vo.getFile2().getSize() != 0 && vo.getFile3().getSize() == 0 && vo.getFile4().getSize() == 0) {
+				UUID uuid = UUID.randomUUID();
+				UUID uuid2 = UUID.randomUUID();
+				
+				vo.setFimg(vo.getFile1().getOriginalFilename()+","+vo.getFile2().getOriginalFilename());
+				vo.setFsimg(uuid+"_"+vo.getFile1().getOriginalFilename()+","+uuid2+"_"+vo.getFile2().getOriginalFilename());
+				
+				File file = new File(vo.getSavepath()+uuid+"_"+vo.getFile1().getOriginalFilename());
+				File file2 = new File(vo.getSavepath()+uuid2+"_"+vo.getFile2().getOriginalFilename());
+				try {
+					vo.getFile1().transferTo(file);
+					vo.getFile2().transferTo(file2);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (vo.getFile1().getSize() != 0 && vo.getFile2().getSize() != 0 && vo.getFile3().getSize() != 0 && vo.getFile4().getSize() == 0) {
+				UUID uuid = UUID.randomUUID();
+				UUID uuid2 = UUID.randomUUID();
+				UUID uuid3 = UUID.randomUUID();
+				
+				vo.setFimg(vo.getFile1().getOriginalFilename()+","+vo.getFile2().getOriginalFilename()+","+vo.getFile3().getOriginalFilename());
+				vo.setFsimg(uuid+"_"+vo.getFile1().getOriginalFilename()+","+uuid2+"_"+vo.getFile2().getOriginalFilename()+","+uuid3+"_"+vo.getFile3().getOriginalFilename());
+				
+				File file = new File(vo.getSavepath()+uuid+"_"+vo.getFile1().getOriginalFilename());
+				File file2 = new File(vo.getSavepath()+uuid2+"_"+vo.getFile2().getOriginalFilename());
+				File file3 = new File(vo.getSavepath()+uuid3+"_"+vo.getFile3().getOriginalFilename());
+				try {
+					vo.getFile1().transferTo(file);
+					vo.getFile2().transferTo(file2);
+					vo.getFile3().transferTo(file3);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (vo.getFile1().getSize() != 0 && vo.getFile2().getSize() != 0 && vo.getFile3().getSize() != 0 && vo.getFile4().getSize() != 0) {
+				UUID uuid = UUID.randomUUID();
+				UUID uuid2 = UUID.randomUUID();
+				UUID uuid3 = UUID.randomUUID();
+				UUID uuid4 = UUID.randomUUID();
+				
+				vo.setFimg(vo.getFile1().getOriginalFilename()+","+vo.getFile2().getOriginalFilename()+","+vo.getFile3().getOriginalFilename()+","+vo.getFile4().getOriginalFilename());
+				vo.setFsimg(uuid+"_"+vo.getFile1().getOriginalFilename()+","+uuid2+"_"+vo.getFile2().getOriginalFilename()+","+uuid3+"_"+vo.getFile3().getOriginalFilename()+","+uuid4+"_"+vo.getFile4().getOriginalFilename());
+				
+				File file = new File(vo.getSavepath()+uuid+"_"+vo.getFile1().getOriginalFilename());
+				File file2 = new File(vo.getSavepath()+uuid2+"_"+vo.getFile2().getOriginalFilename());
+				File file3 = new File(vo.getSavepath()+uuid3+"_"+vo.getFile3().getOriginalFilename());
+				File file4 = new File(vo.getSavepath()+uuid4+"_"+vo.getFile4().getOriginalFilename());
+				try {
+					vo.getFile1().transferTo(file);
+					vo.getFile2().transferTo(file2);
+					vo.getFile3().transferTo(file3);
+					vo.getFile4().transferTo(file4);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}*/
+			
+			boolean update_result = facilityDAO.updateFacility(vo);
+			
+			if(update_result) {
+				rttr.addFlashAttribute("msg2", true);
+				result = "redirect:/admin/facility/list";
+			} else {
+				rttr.addFlashAttribute("msg1", true); 
+				String referer = request.getHeader("Referer");
+				result = "redirect:" + referer; 
+			}
+		} else {
+			rttr.addFlashAttribute("msg2", true);
+			result = "redirect:/index";
+		}
+		
+		return result;
 	}
 
 	@Override
-	public boolean deleteFacility(String fid) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	public String deleteFacility(@RequestParam(value = "fid") String fid, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		SessionVO svo = (SessionVO) obj;
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else if(svo.getName().equals("관리자")) {
+			boolean delete_result = facilityDAO.deleteFacility(fid);
+			
+			if(delete_result) {
+				rttr.addFlashAttribute("msg3", true);
+				result = "redirect:/admin/facility/list";
+			} else {
+				rttr.addFlashAttribute("msg1", true); 
+				String referer = request.getHeader("Referer");
+				result = "redirect:" + referer; 
+			}
+		} else {
+			rttr.addFlashAttribute("msg2", true);
+			result = "redirect:/index";
+		}
+		
+		return result;
 	}
 
 }

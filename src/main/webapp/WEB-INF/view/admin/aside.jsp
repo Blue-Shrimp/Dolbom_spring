@@ -13,7 +13,7 @@
 					<ul>
 						<li><a href="facility/list">시설조회</a></li>
 						<li><a href="facility/write">시설등록</a></li>
-						<li><a href="review/list">시설리뷰 관리</a></li>
+						<li><a href="review/list">시설후기 관리</a></li>
 					</ul>
 				</div>
 			</li>

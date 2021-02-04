@@ -62,38 +62,5 @@ public class NoticeController {
 		response.getOutputStream().write(fileByte);
 		response.getOutputStream().flush();
 		response.getOutputStream().close();
-	}
-
-	
-	/* 파일 업로드 할때 이용 */
-	@RequestMapping(value="file_upload", method= RequestMethod.GET)
-	public String file_upload(NoticeVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
-		return "customer/notice/file_upload";
-	}
-	
-	@RequestMapping(value="upload", method= RequestMethod.POST)
-	public String upload(Model model, NoticeVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
-		if(vo.getFile1().getSize() != 0) {
-			UUID uuid = UUID.randomUUID();
-			vo.setBfile(vo.getFile1().getOriginalFilename());
-			vo.setBsfile(uuid+"_"+vo.getFile1().getOriginalFilename());
-		}
-		
-		String path1 = request.getSession().getServletContext().getRealPath("/");
-		String path2 = "/static/images/";
-		
-		vo.setSavepath(path1+path2);
-		
-		File file = new File(vo.getSavepath()+vo.getBsfile());
-		try {
-			vo.getFile1().transferTo(file);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		model.addAttribute("path",vo.getSavepath());
-		model.addAttribute("file",vo.getBsfile());
-		return "customer/notice/file_upload";
-	}
-	
+	}	
 }

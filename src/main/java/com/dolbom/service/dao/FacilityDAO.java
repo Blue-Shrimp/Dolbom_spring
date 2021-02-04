@@ -58,21 +58,24 @@ public class FacilityDAO {
 	/* 시설 등록 */
 	public boolean insertFacility(FacilityVO vo) throws ClassNotFoundException, SQLException  {
 		boolean result = false;
-		
-		return result;
+		int value = sqlSession.insert(namespace+".write", vo);
+		if(value != 0) result = true;
+		return result; 
 	}
 	
 	/* 시설 수정 */
 	public boolean updateFacility(FacilityVO vo) throws ClassNotFoundException, SQLException  {
 		boolean result = false;
-		
+		int value = sqlSession.update(namespace+".update", vo);
+		if(value != 0) result = true;
 		return result;
 	}
 	
 	/* 시설 삭제 */
 	public boolean deleteFacility(String fid) throws ClassNotFoundException, SQLException  {
 		boolean result = false;
-		
+		int value = sqlSession.delete(namespace+".delete", fid);
+		if(value != 0) result = true;
 		return result;
 	}
 

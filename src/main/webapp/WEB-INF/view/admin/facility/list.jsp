@@ -10,6 +10,15 @@
 <link rel="stylesheet" href="../../css/admin/facility.css">
 <script src="../../js/jquery-3.5.1.min.js"></script>
 <script src="../../js/admin/facility.js"></script>
+<script>
+	if("${msg1}"){
+		alert("시설 등록이 완료되었습니다.");	
+	} else if("${msg2}"){
+		alert("시설 수정이 완료되었습니다.");	
+	} else if("${msg3}"){
+		alert("시설 삭제가 완료되었습니다.");	
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="../a_header.jsp" />

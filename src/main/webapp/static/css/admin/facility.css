@@ -628,3 +628,12 @@
 	.week{
 		font-size: 16px;
 	}
+	.fname {
+		display:inline-block;
+		position: absolute;
+		width: 500px;
+		margin-left:-175px;
+		font-size:13px;
+		background-color:white;
+		padding:2px 0 0 2px;
+	}

@@ -84,6 +84,10 @@ $(document).ready(function(){
 		 } else if($("input[name='fweek_list']:checked").length == 0){
 			 alert("돌봄요일을 입력하세요.");
 			 return false;
+		 } else if($("#fprogram").val() == ""){
+			 alert("프로그램을 입력하세요.");
+			 $("#fprogram").focus();
+			 return false;
 		 } else {
 			 facilityInsertForm.submit();
 		 }

@@ -28,7 +28,7 @@ public interface FacilityService {
 			HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
 	String getFacilityContent(@RequestParam(value = "fid") String fid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
 	String getFacilityContentAdmin(@RequestParam(value = "fid") String fid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
-	boolean insertFacility(FacilityVO vo) throws ClassNotFoundException, SQLException;
-	boolean updateFacility(FacilityVO vo) throws ClassNotFoundException, SQLException;
-	boolean deleteFacility(String fid) throws ClassNotFoundException, SQLException;
+	String insertFacility(FacilityVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
+	String updateFacility(FacilityVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
+	String deleteFacility(@RequestParam(value = "fid") String fid, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
 }
