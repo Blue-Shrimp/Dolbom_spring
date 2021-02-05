@@ -1,17 +1,32 @@
 package com.dolbom.vo;
 
 public class ReviewVO {
-	private String rid, fid, did, rcontent, rdate, dname;
-	private int rservice, rstatus;
+	private String rid, fid, did, rcontent, rdate, dname, fpname;
+	private int rservice, rstatus, rno;
 	
 	public ReviewVO() {
 		
 	}
 	
+	public String getFpname() {
+		return fpname;
+	}
+
+	public void setFpname(String fpname) {
+		this.fpname = fpname;
+	}
+
+	public int getRno() {
+		return rno;
+	}
+
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
+
 	public String getDname() {
 		return dname;
 	}
-	
 	public void setDname(String dname) {
 		this.dname = dname;
 	}

@@ -2,12 +2,15 @@ package com.dolbom.service.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dolbom.utils.PagingVO;
 import com.dolbom.vo.ReviewVO;
 
 @Service
@@ -72,17 +75,40 @@ public class ReviewDAO {
 		return result;
 	}
 	
+	/* 리뷰 전체 목록 개수 (검색) */
+	public int getReviewCntSearch(String keyword) throws ClassNotFoundException, SQLException {
+		return sqlSession.selectOne(namespace +".countSearch",keyword);
+	}
+	
+	/* 리뷰 전체 리스트(검색 + 페이징) */
+	public ArrayList<ReviewVO> getReviewListSearch(String keyword, PagingVO pvo){
+		Map<String,String> param = new HashMap<String,String>();
+		param.put("keyword", keyword);
+		param.put("start", String.valueOf(pvo.getStart()));
+		param.put("end", String.valueOf(pvo.getEnd()));
+		
+		List<ReviewVO> list = sqlSession.selectList(namespace+".listSearch", param);
+		return (ArrayList<ReviewVO>)list;
+	}
+	
 	/* 리뷰 상세 정보 */
 	public ReviewVO getReviewContent(String rid) throws ClassNotFoundException, SQLException {
-		ReviewVO vo = new ReviewVO();
-		
-		return vo;
+		return sqlSession.selectOne(namespace +".content",rid);
 	}
 	
 	/* 리뷰 숨기기 */
 	public boolean hideReivew(String rid) throws ClassNotFoundException, SQLException {
 		boolean result = false;
-		
+		int value = sqlSession.update(namespace+".hide", rid);
+		if(value != 0) result = true;
+		return result;
+	}
+	
+	/* 리뷰 숨기기 */
+	public boolean hideCancelReivew(String rid) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		int value = sqlSession.update(namespace+".hideCancel", rid);
+		if(value != 0) result = true;
 		return result;
 	}
 

@@ -10,7 +10,7 @@
 		resultType="int"> 
 		select count(*) cnt
 		from review
-		where fid=#{fid}
+		where fid=#{fid} and rstatus=1
 	</select>
 	
 	<select id="score" 
@@ -18,7 +18,7 @@
 		resultType="double"> 
 		select round(avg(rservice),1) rservice
 		from review
-		where fid=#{fid}
+		where fid=#{fid} and rstatus=1
 	</select>
 	
 	<select id="list" 
@@ -55,5 +55,47 @@
 		delete from review where rid=#{rid}
 	</delete>
 	
+	<select id="countSearch" 
+    	parameterType="java.lang.String" 
+		resultType="int"> 
+		select count(*) cnt
+		from review r, dmember d
+		where r.did = d.did and (rcontent like '%'||#{keyword}||'%' or dname like '%'||#{keyword}||'%')
+	</select>
+	
+	<select id="listSearch" 
+    	parameterType="map" 
+		resultType="com.dolbom.vo.ReviewVO"> 
+		select *
+		from (select rownum rno, rid, dname, fpname, rcontent, rstatus, to_char(rdate,'yyyy.mm.dd') rdate
+		      from (select rid, dname, fpname, rcontent, rstatus, rdate 
+		            from review r, facility f, dmember d
+		            where r.fid=f.fid and r.did=d.did
+		            order by rdate desc)
+		      where rcontent like '%'||#{keyword}||'%' or dname like '%'||#{keyword}||'%')
+		where rno between #{start} and #{end}
+	</select>
+	
+	<select id="content" 
+    	parameterType="java.lang.String" 
+		resultType="com.dolbom.vo.ReviewVO"> 
+		select rid, dname, fpname, rcontent, rstatus, to_char(rdate,'yyyy.mm.dd') rdate
+		from review r, facility f, dmember d
+		where r.fid=f.fid and r.did=d.did and rid=#{rid}
+	</select>
+	
+	<update id="hide" 
+		parameterType="java.lang.String"> 
+		update review
+		set rstatus = 0
+		where rid=#{rid}
+	</update>
+	
+	<update id="hideCancel" 
+		parameterType="java.lang.String"> 
+		update review
+		set rstatus = 1
+		where rid=#{rid}
+	</update>
 </mapper>
 
