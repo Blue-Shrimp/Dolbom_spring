@@ -2,12 +2,15 @@ package com.dolbom.service.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dolbom.utils.PagingVO;
 import com.dolbom.vo.ApplyMemberVO;
 
 @Service
@@ -21,6 +24,11 @@ public class ApplyMemberDAO{
 	/* 각 시설의 신청한 사람의 수 */
 	public int getApplyPeople(String fid) throws ClassNotFoundException, SQLException {
 		return sqlSession.selectOne(namespace +".applyPeople",fid);
+	}
+	
+	/* 신청할 때 동일한 정보 확인 */
+	public int getCheckApply(ApplyMemberVO vo) throws ClassNotFoundException, SQLException {
+		return sqlSession.selectOne(namespace +".checkApply",vo);
 	}
 	
 	/* 돌봄 신청 등록 */
@@ -50,24 +58,37 @@ public class ApplyMemberDAO{
 		return result;
 	}
 	
-	/* 돌봄 신청 아동 목록 */
-	public ArrayList<ApplyMemberVO> getApplyList() throws ClassNotFoundException, SQLException {
-		ArrayList<ApplyMemberVO> list_apply = new ArrayList<ApplyMemberVO>();
+	/* 돌봄 신청 아동 수(검색) */
+	public int getApplyCountSearch(String status, String keyword) {
+		Map<String,String> param = new HashMap<String,String>();
+		param.put("status", status);
+		param.put("keyword", keyword);
 		
-		return list_apply;
+		return sqlSession.selectOne(namespace +".cntSearch",param);
 	}
 	
-	/* 돌봄 신청 아동 승인 */
-	public boolean approvalApply(String aid) throws ClassNotFoundException, SQLException {
-		boolean result = false;
+	/* 돌봄 신청 아동 목록 (페이징 + 검색)*/
+	public ArrayList<ApplyMemberVO> getApplyList(String status, String keyword, PagingVO pvo) throws ClassNotFoundException, SQLException {
+		Map<String,String> param = new HashMap<String,String>();
+		param.put("status", status);
+		param.put("keyword", keyword);
+		param.put("start", String.valueOf(pvo.getStart()));
+		param.put("end", String.valueOf(pvo.getEnd()));
 		
-		return result;
+		List<ApplyMemberVO> list = sqlSession.selectList(namespace+".listSearch", param);
+		return (ArrayList<ApplyMemberVO>)list;
 	}
 	
-	/* 돌봄 신청 아동 미승인 */
-	public boolean rejectApply(String aid) throws ClassNotFoundException, SQLException {
+	/* 돌봄 신청 상세 정보(관리자) */
+	public ApplyMemberVO getApplyContentAdmin(String aid) throws ClassNotFoundException, SQLException {
+		return sqlSession.selectOne(namespace +".applyContentAdmin",aid);
+	}
+	
+	/* 돌봄 신청 아동 상태 처리 */
+	public boolean updateApply(ApplyMemberVO vo) throws ClassNotFoundException, SQLException {
 		boolean result = false;
-		
+		int value = sqlSession.update(namespace+".update", vo);
+		if(value != 0) result = true;
 		return result;
 	}
 	

@@ -13,6 +13,14 @@
 		where astatus=1 and fid=#{fid}
 	</select>
 	
+	<select id="checkApply" 
+    	parameterType="com.dolbom.vo.ApplyMemberVO" 
+		resultType="int"> 
+		select count(*) cnt
+		from apply_member
+		where did=#{did} and fid=#{fid} and aperson=#{aperson}
+	</select>
+	
 	<insert id="insertApply" 
 		parameterType="com.dolbom.vo.ApplyMemberVO"> 
 		insert into apply_member
@@ -39,6 +47,44 @@
 	<delete id="delete" parameterType="java.lang.String">
 		delete from apply_member where aid=#{aid}
 	</delete>
+	
+	<select id="cntSearch" 
+    	parameterType="map" 
+		resultType="int"> 
+		select count(*) cnt
+		from (select rownum rno, adate, astatus
+		      from (select adate, astatus
+		            from apply_member a, dmember d, facility f
+		            where a.did = d.did and a.fid = f.fid
+		            order by adate desc))
+		where astatus like '%'||#{status}||'%' and rno like '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="listSearch" 
+    	parameterType="map" 
+		resultType="com.dolbom.vo.ApplyMemberVO"> 
+		select *
+		from (select rownum rno, aid, to_char(adate,'yyyy.mm.dd') adate, dname, fpname, astatus
+		      from (select aid, adate, dname, fpname, astatus
+		            from apply_member a, dmember d, facility f
+		            where a.did = d.did and a.fid = f.fid
+		            order by adate desc))
+		where rno between #{start} and #{end} and astatus like '%'||#{status}||'%' and rno like '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="applyContentAdmin" 
+    	parameterType="java.lang.String" 
+		resultType="com.dolbom.vo.ApplyMemberVO"> 
+		select aid, astatus, fpname, to_char(adate,'yyyy.mm.dd') adate, fstime, fetime, fweek, dname, dphone, darea, aperson
+		from apply_member a, facility f, dmember d
+		where a.did = d.did and a.fid = f.fid and aid=#{aid}
+	</select>
+	
+	<update id="update" parameterType="com.dolbom.vo.ApplyMemberVO">
+		update apply_member
+		set astatus = #{astatus}
+		where aid = #{aid}
+	</update>
 	
 </mapper>
 

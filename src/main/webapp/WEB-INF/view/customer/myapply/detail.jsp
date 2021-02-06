@@ -56,7 +56,7 @@
 										<td>승인</td>
 									</c:when>
 									<c:when test="${vo.astatus == 2 }">
-										<td>취소</td>
+										<td>미승인</td>
 									</c:when>
 								</c:choose>
 							</tr>

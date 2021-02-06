@@ -78,7 +78,7 @@
 												<td>승인</td>
 											</c:when>
 											<c:when test="${a.astatus == 2 }">
-												<td>취소</td>
+												<td>미승인</td>
 											</c:when>
 										</c:choose>
 										<c:choose>

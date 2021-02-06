@@ -1,13 +1,37 @@
 package com.dolbom.vo;
 
 public class ApplyMemberVO {
-	private String aid, fid, did, aperson, adate, fpname, fstime, fetime, fweek, dname, rid;
-	private int astatus;
+	private String aid, fid, did, aperson, adate, fpname, fstime, fetime, fweek, dname, rid, dphone, darea;
+	private int astatus, rno;
 	
 	public ApplyMemberVO() {
 
 	}
 	
+	public String getDphone() {
+		return dphone;
+	}
+
+	public void setDphone(String dphone) {
+		this.dphone = dphone;
+	}
+
+	public String getDarea() {
+		return darea;
+	}
+
+	public void setDarea(String darea) {
+		this.darea = darea;
+	}
+
+	public int getRno() {
+		return rno;
+	}
+
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
+
 	public String getRid() {
 		return rid;
 	}

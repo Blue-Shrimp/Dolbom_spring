@@ -10,6 +10,11 @@
 <link rel="stylesheet" href="../../css/facility.css">
 <script src="../../js/jquery-3.5.1.min.js"></script>
 <script src="../../js/facility.js"></script>
+<script>
+	if("${msg2}"){
+		alert("이미 신청한 아동입니다.");	
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="../c_header.jsp" />

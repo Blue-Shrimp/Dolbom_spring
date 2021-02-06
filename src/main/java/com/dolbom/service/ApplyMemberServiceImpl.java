@@ -16,6 +16,7 @@ import com.dolbom.service.dao.ApplyMemberDAO;
 import com.dolbom.service.dao.FacilityDAO;
 import com.dolbom.service.dao.MemberDAO;
 import com.dolbom.service.dao.ReviewDAO;
+import com.dolbom.utils.PagingVO;
 import com.dolbom.vo.ApplyMemberVO;
 import com.dolbom.vo.FacilityVO;
 import com.dolbom.vo.MemberVO;
@@ -84,17 +85,25 @@ public class ApplyMemberServiceImpl implements ApplyMemberService {
 			rttr.addFlashAttribute("msg3", true);
 			result = "redirect:/login";
 		} else {
-			boolean apply_result = applyMemberDAO.insertApply(vo);
+			int check_apply = applyMemberDAO.getCheckApply(vo);
 			
-			if(apply_result) {
-				rttr.addFlashAttribute("msg1", true);
-				result = "redirect:/customer/myapply/list";				
-			} else { 
-				rttr.addFlashAttribute("msg1", true); 
-				String referer = request.getHeader("Referer");
-				result = "redirect:" + referer; 
+			if(check_apply == 0) {
+				boolean apply_result = applyMemberDAO.insertApply(vo);
+				
+				if(apply_result) {
+					rttr.addFlashAttribute("msg1", true);
+					result = "redirect:/customer/myapply/list";				
+				} else { 
+					rttr.addFlashAttribute("msg1", true); 
+					String referer = request.getHeader("Referer");
+					result = "redirect:" + referer; 
+				}
+				
+			} else {
+				rttr.addFlashAttribute("msg2", true);
+				result = "redirect:/customer/facility/list";
 			}
-				 
+			
 		}
 		
 		return result;
@@ -177,21 +186,103 @@ public class ApplyMemberServiceImpl implements ApplyMemberService {
 	}
 
 	@Override
-	public ArrayList<ApplyMemberVO> getApplyList() throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public String getApplyContentAdmin(@RequestParam(value = "aid") String aid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		SessionVO svo = (SessionVO) obj;
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else if(svo.getName().equals("관리자")) {
+			ApplyMemberVO vo = applyMemberDAO.getApplyContentAdmin(aid);
+			
+			model.addAttribute("detail", vo);
+			model.addAttribute("aid",aid);
+			result = "admin/applicationMember/detail";
+		} else {
+			rttr.addFlashAttribute("msg2", true);
+			result = "redirect:/index";
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public String getApplyList(PagingVO pvo, Model model, 
+			@RequestParam(defaultValue = "")String status,
+			@RequestParam(defaultValue = "")String keyword,
+			@RequestParam(value="nowPage", required=false)String nowPage,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage, 
+			HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		SessionVO svo = (SessionVO) obj;
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else if(svo.getName().equals("관리자")) {
+			int total = applyMemberDAO.getApplyCountSearch(status, keyword);
+			if (nowPage == null && cntPerPage == null) {
+				nowPage = "1";
+				cntPerPage = "10";
+			} else if (nowPage == null) {
+				nowPage = "1";
+			} else if (cntPerPage == null) { 
+				cntPerPage = "10";
+			}
+			
+			pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			ArrayList<ApplyMemberVO> apply_list = applyMemberDAO.getApplyList(status, keyword, pvo);
+			model.addAttribute("status", status);
+			model.addAttribute("keyword", keyword);
+			model.addAttribute("paging", pvo);
+			model.addAttribute("list",apply_list);
+			result = "admin/applicationMember/list";
+		} else {
+			rttr.addFlashAttribute("msg2", true);
+			result = "redirect:/index";
+		}
+		
+		return result;
 	}
 
 	@Override
-	public boolean approvalApply(String aid) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean rejectApply(String aid) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	public String updateApply(ApplyMemberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		SessionVO svo = (SessionVO) obj;
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else if(svo.getName().equals("관리자")) {
+			boolean update_result = applyMemberDAO.updateApply(vo);
+			
+			if(update_result) {
+				rttr.addFlashAttribute("msg1", true);
+				result = "redirect:/admin/applicationMember/list";	
+			} else {
+				rttr.addFlashAttribute("msg1", true); 
+				String referer = request.getHeader("Referer");
+				result = "redirect:" + referer;
+			}
+			
+		} else {
+			rttr.addFlashAttribute("msg2", true);
+			result = "redirect:/index";
+		}
+		
+		return result;
 	}
 
 	@Override
