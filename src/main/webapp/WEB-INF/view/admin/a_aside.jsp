@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="../../css/admin/aside.css">
-<script src="../../js/admin/aside.js"></script>
+<script src="../../js/admin/a_aside.js"></script>
 <body>
 	<aside class="admin_main">
 		<div class="aside_title">

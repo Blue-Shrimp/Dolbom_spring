@@ -55,9 +55,9 @@
 		from (select rownum rno, adate, astatus
 		      from (select adate, astatus
 		            from apply_member a, dmember d, facility f
-		            where a.did = d.did and a.fid = f.fid
+		            where a.did = d.did and a.fid = f.fid and astatus like '%'||#{status}||'%' and astatus not like '%'||3||'%'
 		            order by adate desc))
-		where astatus like '%'||#{status}||'%' and rno like '%'||#{keyword}||'%'
+		where rno like '%'||#{keyword}||'%'
 	</select>
 	
 	<select id="listSearch" 
@@ -67,9 +67,9 @@
 		from (select rownum rno, aid, to_char(adate,'yyyy.mm.dd') adate, dname, fpname, astatus
 		      from (select aid, adate, dname, fpname, astatus
 		            from apply_member a, dmember d, facility f
-		            where a.did = d.did and a.fid = f.fid
+		            where a.did = d.did and a.fid = f.fid and astatus like '%'||#{status}||'%' and astatus not like '%'||3||'%'
 		            order by adate desc))
-		where rno between #{start} and #{end} and astatus like '%'||#{status}||'%' and rno like '%'||#{keyword}||'%'
+		where rno between #{start} and #{end} and rno like '%'||#{keyword}||'%'
 	</select>
 	
 	<select id="applyContentAdmin" 
@@ -81,6 +81,43 @@
 	</select>
 	
 	<update id="update" parameterType="com.dolbom.vo.ApplyMemberVO">
+		update apply_member
+		set astatus = #{astatus}
+		where aid = #{aid}
+	</update>
+	
+	<select id="benefitCnt" 
+    	parameterType="map" 
+		resultType="int"> 
+		select count(*) cnt
+		from (select rownum rno, adate, astatus, fpname, aperson
+		      from (select adate, astatus, fpname, aperson
+		            from apply_member a, dmember d, facility f
+		            where a.did = d.did and a.fid = f.fid and fpname like '%'||#{facility}||'%' and aperson like '%'||#{name}||'%' and astatus like '%'||#{status}||'%' and astatus not like '%'||0||'%' and astatus not like '%'||2||'%'
+		            order by adate desc))
+	</select>
+	
+	<select id="listBenefit" 
+    	parameterType="map" 
+		resultType="com.dolbom.vo.ApplyMemberVO"> 
+		select *
+		from (select rownum rno, aid, aperson, fpname, astatus
+		      from (select aid, aperson, fpname, astatus
+		            from apply_member a, dmember d, facility f
+		            where a.did = d.did and a.fid = f.fid and fpname like '%'||#{facility}||'%' and aperson like '%'||#{name}||'%' and astatus like '%'||#{status}||'%' and astatus not like '%'||0||'%' and astatus not like '%'||2||'%'
+		            order by adate desc))
+		where rno between #{start} and #{end}
+	</select>
+	
+	<select id="benefitContent" 
+    	parameterType="java.lang.String" 
+		resultType="com.dolbom.vo.ApplyMemberVO"> 
+		select aid, astatus, fpname, fstime, fetime, fweek, aperson
+		from apply_member a, facility f, dmember d
+		where a.did = d.did and a.fid = f.fid and aid=#{aid}
+	</select>
+	
+	<update id="updateBenefit" parameterType="com.dolbom.vo.ApplyMemberVO">
 		update apply_member
 		set astatus = #{astatus}
 		where aid = #{aid}

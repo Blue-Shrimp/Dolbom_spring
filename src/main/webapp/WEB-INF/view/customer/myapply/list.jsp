@@ -57,7 +57,7 @@
 								<th scope="col">신청일시</th>
 								<th scope="col">신청시설</th>
 								<th scope="col">돌봄시간</th>
-								<th scope="col">신청상태</th>
+								<th scope="col">처리상태</th>
 								<th scope="col">후기관리</th>
 							</tr>
 						</thead>
@@ -80,6 +80,9 @@
 											<c:when test="${a.astatus == 2 }">
 												<td>미승인</td>
 											</c:when>
+											<c:when test="${a.astatus == 3 }">
+												<td>퇴소</td>
+											</c:when>
 										</c:choose>
 										<c:choose>
 											<c:when test="${a.astatus == 0 }">
@@ -95,6 +98,14 @@
 											</c:when>
 											<c:when test="${a.astatus == 2 }">
 												<td>-</td>
+											</c:when>
+											<c:when test="${a.astatus == 3 }">
+												<c:if test="${!empty a.rid }">
+													<td><button class="navyBtn" type="button" id="readReivew" onclick="readReview(this,'${a.rid }')">내가 쓴 후기</button></td>
+												</c:if>
+												<c:if test="${empty a.rid }">
+													<td><button class="navyBtn" type="button" id="writeReivew" onclick="writeReview(this,'${a.fid }')">후기작성</button></td>
+												</c:if>
 											</c:when>
 										</c:choose>
 									</tr>

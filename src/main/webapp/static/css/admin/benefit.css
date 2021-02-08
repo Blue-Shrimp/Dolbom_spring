@@ -55,9 +55,20 @@
 	    display: inline-block;
 	    position: relative;
 	}
-	input[type=text] {
+	.nameInput {
 	    height: 36px;
-	    width: 320px;
+	    width: 120px;
+	    line-height: 20px;
+	    border: 1px solid #e2e2e2;
+	    background: #fff;
+	    color: #000;
+	    font-size: 16px;
+	    box-sizing: border-box;
+	    padding: 8px 15px;
+	}
+	.facilityInput {
+	    height: 36px;
+	    width: 300px;
 	    line-height: 20px;
 	    border: 1px solid #e2e2e2;
 	    background: #fff;
@@ -420,7 +431,7 @@
 	}
 	.search-sort .sch-rgt select {
 	    width: auto;
-	    min-width: 200px;
+	    min-width: 100px;
 	}
 	.sch-rgt select {
 	    border: 1px solid rgb(204, 204, 204);
@@ -511,7 +522,7 @@
 		margin-left: 10px;
 	}
 	.org_s{
-		margin-right: 30px;
+		margin-right: 10px;
 	}
 	.applySubTitle {
 	    font-size: 18px;

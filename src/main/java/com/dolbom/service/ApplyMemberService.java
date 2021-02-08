@@ -26,8 +26,14 @@ public interface ApplyMemberService {
 			HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
 	String getApplyContentAdmin(@RequestParam(value = "aid") String aid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
 	String updateApply(ApplyMemberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
-	ArrayList<ApplyMemberVO> getBenefitList() throws ClassNotFoundException, SQLException;
-	boolean endBenefit(String aid) throws ClassNotFoundException, SQLException;
-	ApplyMemberVO getBenefitContent(String aid) throws ClassNotFoundException, SQLException;
+	String getBenefitList(PagingVO pvo, Model model, 
+			@RequestParam(defaultValue = "")String status,
+			@RequestParam(defaultValue = "")String facility,
+			@RequestParam(defaultValue = "")String name,
+			@RequestParam(value="nowPage", required=false)String nowPage,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage, 
+			HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
+	String getBenefitContent(@RequestParam(value = "aid") String aid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
+	String updateBenefit(ApplyMemberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException;
 	
 }

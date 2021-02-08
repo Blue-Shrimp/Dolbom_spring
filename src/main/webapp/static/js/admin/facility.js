@@ -41,13 +41,6 @@ $(document).ready(function(){
 	  }
 	 });
 	 
-	 $("#btnLocation").click(function(){
-		$("#osCareMap").css('display','block');
-	 });
-	 $("#btnLocationClose").click(function(){
-		$("#osCareMap").css('display','none');
-	 });
-	 
 	 $("#btnInsert").click(function(){
 		 if($("#fpname").val() == ""){
 			 alert("시설명을 입력하세요.");
@@ -93,13 +86,6 @@ $(document).ready(function(){
 		 }
 	 });
 });
-
-function relayout() {    
-	setTimeout(function(){ 
-		map.relayout();
-		map.setCenter(new kakao.maps.LatLng(y,x));
-		}, 0);
-}
 
 function goPopup(){
 	var pop = window.open("../../popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 

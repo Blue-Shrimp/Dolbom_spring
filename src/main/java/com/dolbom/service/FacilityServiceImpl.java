@@ -180,6 +180,12 @@ public class FacilityServiceImpl implements FacilityService {
 	@Override
 	public String insertFacility(FacilityVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
 		HttpSession session = request.getSession();
+		
+		SessionVO svo2 = new SessionVO();
+		svo2.setId("admin");
+		svo2.setName("관리자");
+		session.setAttribute("svo", svo2);
+		
 		Object obj = session.getAttribute("svo");
 		SessionVO svo = (SessionVO) obj;
 		

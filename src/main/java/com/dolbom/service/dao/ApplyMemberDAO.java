@@ -92,25 +92,41 @@ public class ApplyMemberDAO{
 		return result;
 	}
 	
-	/* 수혜자 아동 목록 */
-	public ArrayList<ApplyMemberVO> getBenefitList() throws ClassNotFoundException, SQLException {
-		ArrayList<ApplyMemberVO> list_apply = new ArrayList<ApplyMemberVO>();
+	/* 수혜자 아동 수 */
+	public int getBenefitCount(String status, String facility, String name) {
+		Map<String,String> param = new HashMap<String,String>();
+		param.put("status", status);
+		param.put("facility", facility);
+		param.put("name", name);
 		
-		return list_apply;
+		return sqlSession.selectOne(namespace +".benefitCnt",param);
 	}
 	
-	/* 수혜자 아동 퇴소 */
-	public boolean endBenefit(String aid) throws ClassNotFoundException, SQLException {
-		boolean result = false;
+	/* 수혜자 아동 목록 */
+	public ArrayList<ApplyMemberVO> getBenefitList(String status, String facility, String name, PagingVO pvo) throws ClassNotFoundException, SQLException {
+		Map<String,String> param = new HashMap<String,String>();
+		param.put("status", status);
+		param.put("facility", facility);
+		param.put("name", name);
+		param.put("start", String.valueOf(pvo.getStart()));
+		param.put("end", String.valueOf(pvo.getEnd()));
 		
-		return result;
+		List<ApplyMemberVO> list = sqlSession.selectList(namespace+".listBenefit", param);
+		return (ArrayList<ApplyMemberVO>)list;
 	}
 	
 	/* 수혜자 아동 상세 정보 */
 	public ApplyMemberVO getBenefitContent(String aid) throws ClassNotFoundException, SQLException {
-		ApplyMemberVO vo = new ApplyMemberVO();
-		
-		return vo;
+		return sqlSession.selectOne(namespace +".benefitContent",aid);
 	}
+
+	/* 수혜자 아동 상태 변경 */
+	public boolean updateBenefit(ApplyMemberVO vo) throws ClassNotFoundException, SQLException {
+		boolean result = false;
+		int value = sqlSession.update(namespace+".updateBenefit", vo);
+		if(value != 0) result = true;
+		return result;
+	}
+	
 
 }

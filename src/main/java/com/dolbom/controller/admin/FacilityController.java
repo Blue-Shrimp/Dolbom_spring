@@ -67,7 +67,7 @@ public class FacilityController {
 		return result;
 	}
 	
-	@RequestMapping(value="insertProc.do", method= RequestMethod.POST)
+	@RequestMapping(value="insertProc.do", method= {RequestMethod.POST, RequestMethod.GET})
 	public String insertProc(FacilityVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
 		String path1 = request.getSession().getServletContext().getRealPath("/");
 		String path2 = "/static/images/";

@@ -69,3 +69,15 @@ $(document).ready(function(){
 		}
 	});
 });
+
+function goPopup(){
+	var pop = window.open("../../popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+}
+
+function jusoCallBack(roadFullAddr){
+	var strArray = roadFullAddr.split(" ");
+	
+	document.facilityUpdateForm.fsido.value = strArray[0];		
+	document.facilityUpdateForm.fgugun.value = strArray[1];
+	document.facilityUpdateForm.flocation.value = roadFullAddr;
+}

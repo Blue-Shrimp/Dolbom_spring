@@ -286,21 +286,105 @@ public class ApplyMemberServiceImpl implements ApplyMemberService {
 	}
 
 	@Override
-	public ArrayList<ApplyMemberVO> getBenefitList() throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public String getBenefitList(PagingVO pvo, Model model, 
+			@RequestParam(defaultValue = "")String status,
+			@RequestParam(defaultValue = "")String facility,
+			@RequestParam(defaultValue = "")String name,
+			@RequestParam(value="nowPage", required=false)String nowPage,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage, 
+			HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		SessionVO svo = (SessionVO) obj;
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else if(svo.getName().equals("관리자")) {
+			int total = applyMemberDAO.getBenefitCount(status, facility, name);
+			if (nowPage == null && cntPerPage == null) {
+				nowPage = "1";
+				cntPerPage = "10";
+			} else if (nowPage == null) {
+				nowPage = "1";
+			} else if (cntPerPage == null) { 
+				cntPerPage = "10";
+			}
+			
+			pvo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			ArrayList<ApplyMemberVO> benefit_list = applyMemberDAO.getBenefitList(status, facility, name, pvo);
+			model.addAttribute("status", status);
+			model.addAttribute("facility", facility);
+			model.addAttribute("name", name);
+			model.addAttribute("paging", pvo);
+			model.addAttribute("list",benefit_list);
+			
+			result = "admin/benefitMember/list";
+		} else {
+			rttr.addFlashAttribute("msg2", true);
+			result = "redirect:/index";
+		}
+		
+		return result;
 	}
 
 	@Override
-	public boolean endBenefit(String aid) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	public String getBenefitContent(@RequestParam(value = "aid") String aid, Model model, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		SessionVO svo = (SessionVO) obj;
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else if(svo.getName().equals("관리자")) {
+			ApplyMemberVO vo = applyMemberDAO.getBenefitContent(aid);
+			
+			model.addAttribute("detail", vo);
+			model.addAttribute("aid",aid);
+			result = "admin/benefitMember/detail";
+		} else {
+			rttr.addFlashAttribute("msg2", true);
+			result = "redirect:/index";
+		}
+		
+		return result;
 	}
 
 	@Override
-	public ApplyMemberVO getBenefitContent(String aid) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public String updateBenefit(ApplyMemberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("svo");
+		SessionVO svo = (SessionVO) obj;
+		
+		String result = "";
+		
+		if (obj == null) {
+			rttr.addFlashAttribute("msg3", true);
+			result = "redirect:/login";
+		} else if(svo.getName().equals("관리자")) {
+			boolean update_result = applyMemberDAO.updateBenefit(vo);
+			
+			if(update_result) {
+				rttr.addFlashAttribute("msg1", true);
+				result = "redirect:/admin/benefitMember/list";	
+			} else {
+				rttr.addFlashAttribute("msg1", true); 
+				String referer = request.getHeader("Referer");
+				result = "redirect:" + referer;
+			}
+			
+		} else {
+			rttr.addFlashAttribute("msg2", true);
+			result = "redirect:/index";
+		}
+		
+		return result;
 	}
+
 
 }
