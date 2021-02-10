@@ -67,5 +67,13 @@
 		delete from facility where fid=#{fid}
 	</delete>
 	
+	<select id="facilityCount" 
+		resultType="com.dolbom.vo.FacilityVO"> 
+		select fsido, count(*) fcnt
+		from facility
+		group by fsido
+		order by fcnt desc
+	</select>
+	
 </mapper>
 

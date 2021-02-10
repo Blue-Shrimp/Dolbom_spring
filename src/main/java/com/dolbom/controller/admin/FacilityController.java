@@ -103,10 +103,6 @@ public class FacilityController {
 	
 	@RequestMapping(value="updateProc.do", method= RequestMethod.POST)
 	public String updateProc(FacilityVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
-		/*String path1 = request.getSession().getServletContext().getRealPath("/");
-		String path2 = "/static/images/";
-		
-		vo.setSavepath(path1+path2);*/
 		
 		return facilityService.updateFacility(vo, request, rttr);
 	}

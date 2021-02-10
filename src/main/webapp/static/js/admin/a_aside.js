@@ -31,4 +31,15 @@ $(document).ready(function(){
 		$("#n_sub").css('display','none');
 		$("#n_manageOn").attr('id','n_manage');
 	});
+	
+	$(document).on("click","#s_manage", function(){
+		$("#s_manage").css('background','url(../../images/minus.png) no-repeat 130px 37px');
+		$("#s_sub").css('display','block');
+		$("#s_manage").attr('id','s_manageOn');
+	});
+	$(document).on("click","#s_manageOn", function(){
+		$("#s_manageOn").css('background','url(../../images/icon_more_plus.png) no-repeat 130px 37px');
+		$("#s_sub").css('display','none');
+		$("#s_manageOn").attr('id','s_manage');
+	});
 });

@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.dolbom.service.MemberService;
 import com.dolbom.service.dao.FacilityDAO;
 import com.dolbom.service.dao.NoticeDAO;
 import com.dolbom.vo.FacilityVO;

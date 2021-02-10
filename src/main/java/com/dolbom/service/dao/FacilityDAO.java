@@ -78,5 +78,11 @@ public class FacilityDAO {
 		if(value != 0) result = true;
 		return result;
 	}
+	
+	/* 시설 평점순 상위 5개(인덱스) */
+	public ArrayList<FacilityVO> getFacilityCount(){
+		List<FacilityVO> list = sqlSession.selectList(namespace+".facilityCount");
+		return (ArrayList<FacilityVO>)list;
+	}
 
 }

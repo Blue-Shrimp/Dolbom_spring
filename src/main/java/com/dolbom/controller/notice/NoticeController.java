@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.SQLException;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dolbom.service.NoticeService;
-import com.dolbom.service.dao.NoticeDAO;
 import com.dolbom.utils.PagingVO;
-import com.dolbom.vo.NoticeVO;
 
 @Controller
 @RequestMapping("/customer/notice/")
@@ -28,9 +25,6 @@ public class NoticeController {
 	
 	@Autowired
 	private NoticeService noticeService;
-	
-	@Autowired
-	private NoticeDAO noticeDAO;
 	
 	@RequestMapping(value="list", method={RequestMethod.GET, RequestMethod.POST})
 	public String list(PagingVO pvo, Model model,

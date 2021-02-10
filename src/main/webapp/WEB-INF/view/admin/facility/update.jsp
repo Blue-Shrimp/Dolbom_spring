@@ -159,49 +159,6 @@
 		                                    </span>
 		                                </td>
 		                            </tr>
-		                            <%-- <tr>
-		                                <th>시설사진<br>(최대 4개)</th>
-		                                <td>
-		                                    <span class="fileGp">
-			                                	<c:choose>
-			                                		<c:when test="${vo.fimg ne null}">
-			                                			<c:if test="${fn:length(imgs) == 1 }">
-				                                			<c:forTokens items="${vo.fimg }" delims="," var="img" varStatus="f">
-				                                			<div>${f.count }. <input type="file" id="file${f.count }" name="file${f.count }" accept="image/*"><span class="fname" id="fname${f.count }">${img}</span></div>
-				                                			</c:forTokens>
-				                                			<div>2. <input type="file" id="file2" name="file2" accept="image/*"></div>
-					                                        <div>3. <input type="file" id="file3" name="file3" accept="image/*"></div>
-					                                        <div>4. <input type="file" id="file4" name="file4" accept="image/*"></div>
-			                                			</c:if>
-			                                			<c:if test="${fn:length(imgs) == 2 }">
-				                                			<c:forTokens items="${vo.fimg }" delims="," var="img" varStatus="f">
-				                                			<div>${f.count }. <input type="file" id="file${f.count }" name="file${f.count }" accept="image/*"><span class="fname" id="fname${f.count }">${img}</span></div>
-				                                			</c:forTokens>
-					                                        <div>3. <input type="file" id="file3" name="file3" accept="image/*"></div>
-					                                        <div>4. <input type="file" id="file4" name="file4" accept="image/*"></div>
-			                                			</c:if>
-			                                			<c:if test="${fn:length(imgs) == 3 }">
-				                                			<c:forTokens items="${vo.fimg }" delims="," var="img" varStatus="f">
-				                                			<div>${f.count }. <input type="file" id="file${f.count }" name="file${f.count }" accept="image/*"><span class="fname" id="fname${f.count }">${img}</span></div>
-				                                			</c:forTokens>
-					                                        <div>4. <input type="file" id="file4" name="file4" accept="image/*"></div>
-			                                			</c:if>
-			                                			<c:if test="${fn:length(imgs) == 4 }">
-				                                			<c:forTokens items="${vo.fimg }" delims="," var="img" varStatus="f">
-				                                			<div>${f.count }. <input type="file" id="file${f.count }" name="file${f.count }" accept="image/*"><span class="fname" id="fname${f.count }">${img}</span></div>
-				                                			</c:forTokens>
-			                                			</c:if>
-			                                		</c:when>
-			                                		<c:otherwise>
-				                                		<div>1. <input type="file" id="file1" name="file1" accept="image/*"></div>
-				                                        <div>2. <input type="file" id="file2" name="file2" accept="image/*"></div>
-				                                        <div>3. <input type="file" id="file3" name="file3" accept="image/*"></div>
-				                                        <div>4. <input type="file" id="file4" name="file4" accept="image/*"></div>
-			                                		</c:otherwise>
-			                                	</c:choose>
-		                                    </span>
-		                                </td>
-		                            </tr> --%>
 		                        </tbody>
 		                    </table>
 		                </div>

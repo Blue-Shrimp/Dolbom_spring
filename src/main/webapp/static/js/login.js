@@ -7,7 +7,7 @@ function ruleCheck(obj){
 		return false;
 	}else{
 		if(regExp.test(obj.val())){
-			return true;	//이메일 형식에 맞는 경우
+			return true;
 		}else{
 			alert("5~20자의 영소문자와 숫자 형식으로 입력해주세요");
 			obj.focus();
@@ -27,7 +27,6 @@ $(document).ready(function(){
 			$("#dpass").focus();
 			return false;
 		}else{
-			//서버 전송:폼이름.submit();
 			loginForm.submit();
 		}		
 	});

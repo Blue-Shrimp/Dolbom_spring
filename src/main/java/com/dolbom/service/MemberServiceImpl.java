@@ -157,9 +157,6 @@ public class MemberServiceImpl implements MemberService {
 	public String updateMember(MemberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("svo");
-		
-		SessionVO svo = (SessionVO)obj;
-		
 		String result = "";
 		
 		if (obj == null) {
@@ -213,9 +210,6 @@ public class MemberServiceImpl implements MemberService {
 	public String passEdit(MemberVO vo, HttpServletRequest request, RedirectAttributes rttr) throws ClassNotFoundException, SQLException {
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("svo");
-		
-		SessionVO svo = (SessionVO)obj;
-		
 		String result = "";
 		
 		if (obj == null) {

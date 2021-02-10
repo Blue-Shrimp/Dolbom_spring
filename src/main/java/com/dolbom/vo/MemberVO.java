@@ -1,7 +1,5 @@
 package com.dolbom.vo;
 
-import java.util.ArrayList;
-
 public class MemberVO {
 	private String did, dpass, dname, dphone, demail, darea, dchildren, ddate;
 	private String cname, cyear, cmonth, cday, cgender;

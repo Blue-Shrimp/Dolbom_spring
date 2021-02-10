@@ -49,6 +49,18 @@
 								<li><a href="notice/list">공지사항 관리</a></li>
 							</ul>
 						</li>
+						<li class="mapTitle">
+							<div class="cap" style="border: 0"></div>
+							<ul>
+								<li style="list-style: none"><br></li>
+							</ul>
+						</li>
+						<li class="mapTitle">
+							<div class="cap">통계관리</div>
+							<ul>
+								<li><a href="statistics/facility">시설 통계</a></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 			</div>

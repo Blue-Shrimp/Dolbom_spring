@@ -32,6 +32,13 @@
 					</ul>
 				</div>
 			</li>
+			<li class="subTitle" id="s_manage" style="background: url(../images/icon_more_plus.png) no-repeat 130px 37px">통계관리
+				<div class="sub" id="s_sub" style="display: none">
+					<ul>
+						<li><a href="statistics/facility">시설 통계</a></li>
+					</ul>
+				</div>
+			</li>
 		</ul>
 	</aside>
 </body>
