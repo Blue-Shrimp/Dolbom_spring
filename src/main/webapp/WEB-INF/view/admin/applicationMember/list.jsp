@@ -33,10 +33,32 @@
 							<div class="sch-rgt search-full" id="location">
 								<span class="schTitle">처리상태</span>
 								<select name="status" id="status" class="org_s">
-									<option value="">전체</option>
-									<option value="0">접수</option>
-									<option value="1">승인</option>
-									<option value="2">미승인</option>
+									<c:choose>
+										<c:when test="${status == '' }">
+										<option value="" selected="selected">전체</option>
+										<option value="0">접수</option>
+										<option value="1">승인</option>
+										<option value="2">미승인</option>
+										</c:when>
+										<c:when test="${status == 0 }">
+										<option value="">전체</option>
+										<option value="0" selected="selected">접수</option>
+										<option value="1">승인</option>
+										<option value="2">미승인</option>
+										</c:when>
+										<c:when test="${status == 1 }">
+										<option value="">전체</option>
+										<option value="0">접수</option>
+										<option value="1" selected="selected">승인</option>
+										<option value="2">미승인</option>
+										</c:when>
+										<c:when test="${status == 2 }">
+										<option value="">전체</option>
+										<option value="0">접수</option>
+										<option value="1">승인</option>
+										<option value="2" selected="selected">미승인</option>
+										</c:when>
+									</c:choose>
 								</select>
 								<span class="schTitle">신청번호</span>
 								<input type="text" name="keyword" id="keyword" value="" placeholder="신청번호를 입력해주세요">
@@ -90,7 +112,7 @@
 				</div>
 				<div id="pagingNav" class="paging">		
 					<c:if test="${paging.startPage != 1 }">
-						<a href="list?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}" class="linkPrevPage" style="background: url(../../images/btn_prev.png) no-repeat 50% 50%;"></a>
+						<a href="list?status=${status }&keyword=${keyword }&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}" class="linkPrevPage" style="background: url(../../images/btn_prev.png) no-repeat 50% 50%;"></a>
 					</c:if>
 					<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 						<c:choose>
@@ -98,12 +120,12 @@
 								<b>${p }</b>
 							</c:when>
 							<c:when test="${p != paging.nowPage }">
-								<a href="list?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+								<a href="list?status=${status }&keyword=${keyword }&nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
 							</c:when>
 						</c:choose>
 					</c:forEach>
 					<c:if test="${paging.endPage != paging.lastPage}">
-						<a href="list?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}" class="linkNextPage" style="background: url(../../images/btn_next.png) no-repeat 50% 50%;"></a>
+						<a href="list?status=${status }&keyword=${keyword }&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}" class="linkNextPage" style="background: url(../../images/btn_next.png) no-repeat 50% 50%;"></a>
 					</c:if>
 				</div>
 			</div>

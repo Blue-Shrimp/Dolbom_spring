@@ -33,14 +33,28 @@
 							<div class="sch-rgt search-full" id="location">
 								<span class="schTitle">처리상태</span>
 								<select name="status" id="status" class="org_s">
-									<option value="">전체</option>
-									<option value="1">입소</option>
-									<option value="3">퇴소</option>
+									<c:choose>
+										<c:when test="${status == '' }">
+										<option value="" selected="selected">전체</option>
+										<option value="1">입소</option>
+										<option value="3">퇴소</option>
+										</c:when>
+										<c:when test="${status == 1 }">
+										<option value="">전체</option>
+										<option value="1" selected="selected">입소</option>
+										<option value="3">퇴소</option>
+										</c:when>
+										<c:when test="${status == 3 }">
+										<option value="">전체</option>
+										<option value="1">입소</option>
+										<option value="3" selected="selected">퇴소</option>
+										</c:when>
+									</c:choose>
 								</select>
 								<span class="schTitle">시설명</span>
-								<input type="text" class="facilityInput" name="facility" id="facility" value="" placeholder="시설명을 입력해주세요">
+								<input type="text" class="facilityInput" name="facility" id="facility" value="${facility }" placeholder="시설명을 입력해주세요">
 								<span class="schTitle">성명</span>
-								<input type="text" class="nameInput" name="name" id="name" value="" placeholder="성명">
+								<input type="text" class="nameInput" name="name" id="name" value="${name }" placeholder="성명">
 								<span class="ibtn form navy" id="lifecycleAreaSearchBtn">
 									<button type="submit" id="btnSearch">검색</button>
 								</span>
@@ -99,7 +113,7 @@
 				</div>
 				<div id="pagingNav" class="paging">		
 					<c:if test="${paging.startPage != 1 }">
-						<a href="list?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}" class="linkPrevPage" style="background: url(../../images/btn_prev.png) no-repeat 50% 50%;"></a>
+						<a href="list?status=${status }&facility=${facility }&name=${name }&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}" class="linkPrevPage" style="background: url(../../images/btn_prev.png) no-repeat 50% 50%;"></a>
 					</c:if>
 					<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 						<c:choose>
@@ -107,12 +121,12 @@
 								<b>${p }</b>
 							</c:when>
 							<c:when test="${p != paging.nowPage }">
-								<a href="list?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+								<a href="list?status=${status }&facility=${facility }&name=${name }&nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
 							</c:when>
 						</c:choose>
 					</c:forEach>
 					<c:if test="${paging.endPage != paging.lastPage}">
-						<a href="list?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}" class="linkNextPage" style="background: url(../../images/btn_next.png) no-repeat 50% 50%;"></a>
+						<a href="list?status=${status }&facility=${facility }&name=${name }&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}" class="linkNextPage" style="background: url(../../images/btn_next.png) no-repeat 50% 50%;"></a>
 					</c:if>
 				</div>
 			</div>

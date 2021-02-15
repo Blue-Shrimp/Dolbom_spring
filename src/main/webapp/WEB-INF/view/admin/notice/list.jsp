@@ -77,7 +77,7 @@
 				</div>
 				<div id="pagingNav" class="paging">		
 					<c:if test="${paging.startPage != 1 }">
-						<a href="list?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}" class="linkPrevPage" style="background: url(../../images/btn_prev.png) no-repeat 50% 50%;"></a>
+						<a href="list?keyword=${keyword }&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}" class="linkPrevPage" style="background: url(../../images/btn_prev.png) no-repeat 50% 50%;"></a>
 					</c:if>
 					<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 						<c:choose>
@@ -85,12 +85,12 @@
 								<b>${p }</b>
 							</c:when>
 							<c:when test="${p != paging.nowPage }">
-								<a href="list?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+								<a href="list?keyword=${keyword }&nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
 							</c:when>
 						</c:choose>
 					</c:forEach>
 					<c:if test="${paging.endPage != paging.lastPage}">
-						<a href="list?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}" class="linkNextPage" style="background: url(../../images/btn_next.png) no-repeat 50% 50%;"></a>
+						<a href="list?keyword=${keyword }&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}" class="linkNextPage" style="background: url(../../images/btn_next.png) no-repeat 50% 50%;"></a>
 					</c:if>
 				</div>
 			</div>
