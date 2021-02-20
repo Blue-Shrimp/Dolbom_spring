@@ -15,6 +15,7 @@ import com.dolbom.vo.FacilityVO;
 
 @Service
 public class FacilityDAO {
+	
 	@Autowired
 	private SqlSessionTemplate sqlSession; 
 	
