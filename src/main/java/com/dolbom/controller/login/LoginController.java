@@ -32,7 +32,7 @@ public class LoginController {
 		String result = "";
 		
 		if(svo.getResult() != 0) {
-			if(vo.getDid().equals("admin")) {
+			if(vo.getDid().equals("ITCEN1234")) {
 				session.setAttribute("svo", svo);
 				result = "redirect:/admin/index";	
 			} else {
